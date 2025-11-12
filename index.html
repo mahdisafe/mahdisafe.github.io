@@ -1,120 +1,110 @@
 <!-- /index.html -->
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>eng mahdi — صفحة شخصية</title>
-  <meta name="description" content="صفحة شخصية بسيطة قابلة للنشر على GitHub Pages لعرض النبذة، المهارات، والمشاريع." />
+  <title>eng mahdi — Personal Page</title>
+  <meta name="description" content="A simple, fast personal page for GitHub Pages: about, skills, projects, resume, and contact." />
   <link rel="canonical" href="https://mahdisafe.github.io/" />
-  <!-- Favicon as embedded SVG to avoid extra files -->
   <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="0.9em" font-size="90">🚀</text></svg>' />
-  <meta property="og:title" content="eng mahdi — صفحة شخصية" />
-  <meta property="og:description" content="نبذة سريعة، مهارات، ومشاريع." />
+  <meta property="og:title" content="eng mahdi — Personal Page" />
+  <meta property="og:description" content="Quick bio, selected skills, resume, projects, and ways to reach me." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mahdisafe.github.io/" />
   <meta name="theme-color" content="#0ea5e9" />
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@type":"Person",
-    "name":"eng mahdi",
-    "url":"https://mahdisafe.github.io/",
-    "jobTitle":"Software Developer",
-    "sameAs":[
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "eng mahdi",
+    "url": "https://mahdisafe.github.io/",
+    "jobTitle": "Senior .NET Full Stack Developer",
+    "email": "mahdisafe@gmail.com",
+    "telephone": ["+97334020096", "+966571855189"],
+    "address": [
+      {"@type":"PostalAddress","addressLocality":"Hidd","addressCountry":"Bahrain"},
+      {"@type":"PostalAddress","addressLocality":"Dammam","addressCountry":"Saudi Arabia"}
+    ],
+    "sameAs": [
       "https://github.com/mahdisafe",
-      "https://www.linkedin.com/in/YOUR-LINKEDIN"
+      "https://www.linkedin.com/in/mahdi-safealdeen-896836108/"
     ]
   }
   </script>
   <style>
-    /* Why inline CSS? Keep deploy to a single file on GitHub Pages (no build). */
-    :root {
-      --bg: #0b1220;
-      --bg-soft: #0f172a;
-      --text: #e5e7eb;
-      --muted: #9aa3b2;
-      --brand: #0ea5e9;
-      --card: #0f172a;
-      --ring: rgba(14, 165, 233, 0.35);
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    :root { --bg:#0b1220; --bg-soft:#0f172a; --text:#e5e7eb; --muted:#9aa3b2; --brand:#0ea5e9; --card:#0f172a; --ring:rgba(14,165,233,.35); --shadow:0 10px 30px rgba(0,0,0,.35) }
+    html[data-theme="light"] { --bg:#f8fafc; --bg-soft:#fff; --text:#0f172a; --muted:#4b5563; --brand:#0ea5e9; --card:#fff; --ring:rgba(14,165,233,.25); --shadow:0 8px 24px rgba(2,6,23,.08) }
+    @media (prefers-color-scheme: light){ :root { --bg:#f8fafc; --bg-soft:#fff; --text:#0f172a; --muted:#4b5563; --card:#fff; --ring:rgba(14,165,233,.25); --shadow:0 8px 24px rgba(2,6,23,.08) } }
+    *{ box-sizing:border-box } html,body{ height:100% }
+    body{ margin:0; font:16px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans","Apple Color Emoji","Segoe UI Emoji"; background:var(--bg); color:var(--text); scroll-behavior:smooth }
+    .container{ max-width:1080px; margin:0 auto; padding:24px }
+    header{ position:sticky; top:0; backdrop-filter:saturate(160%) blur(8px); background:color-mix(in oklab,var(--bg) 70%,transparent); border-bottom:1px solid color-mix(in oklab,var(--text) 15%,transparent); z-index:20 }
+    .nav{ display:flex; gap:16px; align-items:center; justify-content:space-between }
+    .brand{ display:flex; gap:10px; align-items:center; font-weight:700 }
+    .brand .dot{ width:10px; height:10px; background:var(--brand); border-radius:999px; box-shadow:0 0 0 6px var(--ring) }
+    nav a{ color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:10px }
+    nav a.active, nav a:hover{ color:var(--text); background:color-mix(in oklab,var(--brand) 15%,transparent) }
+    .actions{ display:flex; gap:10px; align-items:center }
+    .btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid color-mix(in oklab,var(--text) 12%,transparent); background:var(--bg-soft); color:var(--text); text-decoration:none; box-shadow:var(--shadow); transition:transform .08s ease }
+    .btn:hover{ transform:translateY(-1px) }
+    .btn.primary{ background:var(--brand); color:#001018; border-color:transparent }
+    .hero{ display:grid; gap:20px; align-items:center; grid-template-columns:1.2fr .8fr; padding-block:56px }
+    .hero h1{ margin:0 0 10px; font-size:clamp(28px,5vw,46px); line-height:1.15 }
+    .hero p{ margin:0 0 16px; color:var(--muted) }
+    .badge{ display:inline-block; padding:6px 10px; font-size:12px; border-radius:999px; background:color-mix(in oklab,var(--brand) 18%,transparent); color:color-mix(in oklab,var(--text) 85%, #fff); border:1px dashed color-mix(in oklab,var(--brand) 55%,var(--bg)) }
+    .card{ background:var(--card); border:1px solid color-mix(in oklab,var(--text) 10%,transparent); border-radius:20px; padding:22px; box-shadow:var(--shadow) }
+    .grid{ display:grid; gap:16px } .grid.cols-3{ grid-template-columns:repeat(3,minmax(0,1fr)) } .grid.cols-2{ grid-template-columns:repeat(2,minmax(0,1fr)) }
+    @media (max-width:900px){ .hero{ grid-template-columns:1fr } .grid.cols-3,.grid.cols-2{ grid-template-columns:1fr } }
+    section{ padding-block:42px } h2{ font-size:clamp(22px,3.6vw,32px); margin:0 0 12px } .muted{ color:var(--muted) }
+    .skills{ display:flex; flex-wrap:wrap; gap:8px } .chip{ padding:8px 12px; border-radius:999px; border:1px solid color-mix(in oklab,var(--text) 12%,transparent); background:var(--bg-soft) }
+    .project{ display:flex; flex-direction:column; gap:10px } .project h3{ margin:0; font-size:18px } .project a{ text-decoration:none; color:var(--brand) }
+    footer{ padding:40px 24px; text-align:center; color:var(--muted); border-top:1px solid color-mix(in oklab,var(--text) 15%,transparent) }
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border-width:0 }
+    .contact-row{ display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr)) } @media (max-width:700px){ .contact-row{ grid-template-columns:1fr } }
+    .label{ font-weight:600 }
+    /* Resume styles */
+    .resume-grid{ display:grid; gap:16px; grid-template-columns:2fr 1fr }
+    @media (max-width:1000px){ .resume-grid{ grid-template-columns:1fr } }
+    .cv h3{ margin:16px 0 8px; font-size:20px }
+    .cv ul{ margin:8px 0 0 18px }
+    .cv li{ margin:4px 0 }
+    .job{ padding:16px; border:1px solid color-mix(in oklab,var(--text) 12%, transparent); border-radius:14px; background:var(--bg-soft) }
+    .job h4{ margin:0 0 4px; font-size:18px }
+    .job .where{ color:var(--muted); font-size:14px }
+    .job ul{ margin:8px 0 0 18px }
+    /* Print */
+    @media print {
+      :root, html[data-theme="light"] { --bg:#fff; --bg-soft:#fff; --text:#000; --muted:#333; --card:#fff; --ring:transparent; --shadow:none }
+      body{ background:#fff; color:#000 }
+      header, .hero, #projects, #contact, .actions .btn, .brand .dot { display:none !important }
+      section{ padding-block:10px }
+      .card{ border:none; box-shadow:none; padding:0 }
+      a{ color:#000; text-decoration:none }
+      .resume-grid{ grid-template-columns:1fr }
     }
-    html[data-theme="light"] {
-      --bg: #f8fafc;
-      --bg-soft: #ffffff;
-      --text: #0f172a;
-      --muted: #4b5563;
-      --brand: #0ea5e9;
-      --card: #ffffff;
-      --ring: rgba(14,165,233,.25);
-      --shadow: 0 8px 24px rgba(2, 6, 23, .08);
-    }
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f8fafc; --bg-soft:#ffffff; --text:#0f172a; --muted:#4b5563; --card:#ffffff; --ring: rgba(14,165,233,.25); --shadow: 0 8px 24px rgba(2,6,23,.08);
-      }
-    }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0; font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-      background: var(--bg); color: var(--text); scroll-behavior: smooth;
-    }
-    .container { max-width: 1080px; margin: 0 auto; padding: 24px; }
-    header {
-      position: sticky; top: 0; backdrop-filter: saturate(160%) blur(8px);
-      background: color-mix(in oklab, var(--bg) 70%, transparent);
-      border-bottom: 1px solid color-mix(in oklab, var(--text) 15%, transparent);
-      z-index: 20;
-    }
-    .nav { display: flex; gap: 16px; align-items: center; justify-content: space-between; }
-    .brand { display: flex; gap: 10px; align-items: center; font-weight: 700; }
-    .brand .dot { width: 10px; height: 10px; background: var(--brand); border-radius: 999px; box-shadow: 0 0 0 6px var(--ring); }
-    nav a { color: var(--muted); text-decoration: none; padding: 8px 12px; border-radius: 10px; }
-    nav a.active, nav a:hover { color: var(--text); background: color-mix(in oklab, var(--brand) 15%, transparent); }
-    .actions { display: flex; gap: 10px; align-items: center; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; border: 1px solid color-mix(in oklab, var(--text) 12%, transparent); background: var(--bg-soft); color: var(--text); text-decoration: none; box-shadow: var(--shadow);
-      transition: transform .08s ease; }
-    .btn:hover { transform: translateY(-1px); }
-    .btn.primary { background: var(--brand); color: #001018; border-color: transparent; }
-    .hero { display: grid; gap: 20px; align-items: center; grid-template-columns: 1.2fr .8fr; padding-block: 56px; }
-    .hero h1 { margin: 0 0 10px; font-size: clamp(28px, 5vw, 46px); line-height: 1.15; }
-    .hero p { margin: 0 0 16px; color: var(--muted); }
-    .badge { display:inline-block; padding: 6px 10px; font-size: 12px; border-radius: 999px; background: color-mix(in oklab, var(--brand) 18%, transparent); color: color-mix(in oklab, var(--text) 85%, #fff); border: 1px dashed color-mix(in oklab, var(--brand) 55%, var(--bg)); }
-    .card { background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius: 20px; padding: 22px; box-shadow: var(--shadow); }
-    .grid { display: grid; gap: 16px; }
-    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
-    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    @media (max-width: 900px){ .hero { grid-template-columns: 1fr; } .grid.cols-3, .grid.cols-2 { grid-template-columns: 1fr; } }
-    section { padding-block: 42px; }
-    h2 { font-size: clamp(22px, 3.6vw, 32px); margin: 0 0 12px; }
-    .muted { color: var(--muted); }
-    .skills { display:flex; flex-wrap: wrap; gap: 8px; }
-    .chip { padding: 8px 12px; border-radius: 999px; border: 1px solid color-mix(in oklab, var(--text) 12%, transparent); background: var(--bg-soft); }
-    .project { display:flex; flex-direction: column; gap: 10px; }
-    .project h3 { margin: 0; font-size: 18px; }
-    .project a { text-decoration: none; color: var(--brand); }
-    footer { padding: 40px 24px; text-align: center; color: var(--muted); border-top: 1px solid color-mix(in oklab, var(--text) 15%, transparent); }
-    .sr-only{ position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0 }
   </style>
 </head>
 <body>
-  <a class="sr-only" href="#about">تخطَّ إلى المحتوى</a>
+  <a class="sr-only" href="#resume">Skip to resume</a>
   <header>
     <div class="container nav">
       <div class="brand">
         <span class="dot" aria-hidden="true"></span>
         <span>eng mahdi</span>
       </div>
-      <nav aria-label="روابط الصفحة">
-        <a href="#about">نبذة</a>
-        <a href="#skills">مهارات</a>
-        <a href="#projects">مشاريع</a>
-        <a href="#contact">تواصل</a>
+      <nav aria-label="Page sections">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
       </nav>
       <div class="actions">
-        <button id="theme-toggle" class="btn" type="button" aria-label="تبديل السمة">🌗</button>
-        <a class="btn primary" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer">GitHub</a>
+        <button id="theme-toggle" class="btn" type="button" aria-label="Toggle theme">🌗</button>
+        <a class="btn primary" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/mahdi-safealdeen-896836108/" target="_blank" rel="noreferrer noopener">LinkedIn</a>
+        <button id="print-resume" class="btn" type="button" title="Save as PDF">🖨️ Save PDF</button>
       </div>
     </div>
   </header>
@@ -122,89 +112,172 @@
   <main class="container">
     <section class="hero">
       <div>
-        <span class="badge">متاح للتعاون</span>
-        <h1>مطوّر برمجيات — أبني حلولًا واضحة وبسيطة.</h1>
-        <p>أركّز على كتابة كود نظيف، قابل للصيانة، بأداء عالٍ. هنا أشارك نبذة عني وبعض المشاريع المفتوحة المصدر.</p>
-        <div class="actions" style="margin-top: 14px;">
-          <a class="btn primary" href="#projects">استعراض المشاريع</a>
-          <a class="btn" href="#contact">التواصل</a>
+        <span class="badge">Open to collaborate</span>
+        <h1>Senior .NET Full Stack Developer</h1>
+        <p>Based in Hidd, Bahrain & Dammam, Saudi Arabia. I build scalable, high‑quality web, mobile, and cloud solutions.</p>
+        <div class="actions" style="margin-top:14px">
+          <a class="btn primary" href="#resume">View resume</a>
+          <a class="btn" href="#contact">Get in touch</a>
         </div>
       </div>
       <div class="card">
         <div class="grid cols-2">
           <div>
-            <h3 style="margin:0 0 6px">ملخّص سريع</h3>
-            <p class="muted" style="margin:0">خبرة في الواجهات الخلفية والواجهات الأمامية، مع اهتمام بالبنية، القابلية للاختبار، والتجربة.</p>
+            <h3 style="margin:0 0 6px">Quick summary</h3>
+            <p class="muted" style="margin:0">10+ years across Microsoft stack, cloud, APIs, and data. Strong in architecture, performance, and reporting.</p>
           </div>
           <div>
-            <h3 style="margin:0 0 6px">تقنيات محبّبة</h3>
-            <p class="muted" style="margin:0">TypeScript, Node.js, React, Next.js, Python, FastAPI, PostgreSQL, Docker.</p>
+            <h3 style="margin:0 0 6px">Favorite stack</h3>
+            <p class="muted" style="margin:0">ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.</p>
           </div>
         </div>
       </div>
     </section>
 
     <section id="about">
-      <h2>نبذة</h2>
-      <p class="muted">أنا eng mahdi، مطوّر برمجيات. أحب حلّ المشكلات عبر تصميم بسيط وواجهات بديهية. هدفي بناء منتجات يمكن توسيعها بسهولة مع المحافظة على الجودة.</p>
+      <h2>About</h2>
+      <p class="muted">Experienced Full Stack .NET developer delivering reliable products, leading teams, and driving digital transformation with measurable results.</p>
     </section>
 
     <section id="skills">
-      <h2>مهارات مختارة</h2>
+      <h2>Selected skills</h2>
       <div class="skills">
-        <span class="chip">TypeScript</span>
-        <span class="chip">React</span>
-        <span class="chip">Next.js</span>
-        <span class="chip">Node.js</span>
-        <span class="chip">Express</span>
-        <span class="chip">Python</span>
-        <span class="chip">FastAPI</span>
-        <span class="chip">PostgreSQL</span>
-        <span class="chip">Docker</span>
-        <span class="chip">CI/CD</span>
-        <span class="chip">Testing</span>
-        <span class="chip">Clean Architecture</span>
+        <span class="chip">C#</span><span class="chip">ASP.NET Core</span><span class="chip">MVC</span><span class="chip">Web API</span>
+        <span class="chip">.NET MAUI</span><span class="chip">JavaScript</span><span class="chip">HTML5</span><span class="chip">CSS3</span>
+        <span class="chip">Bootstrap</span><span class="chip">SQL Server</span><span class="chip">Azure</span><span class="chip">GCP</span><span class="chip">AWS</span>
+        <span class="chip">Kendo UI</span><span class="chip">DevExpress</span><span class="chip">Crystal Reports</span>
+        <span class="chip">Git</span><span class="chip">GitHub</span>
+        <span class="chip">System Architecture</span><span class="chip">Agile</span><span class="chip">Team Leadership</span>
       </div>
     </section>
 
     <section id="projects">
-      <h2>مشاريع</h2>
+      <h2>Projects</h2>
       <div class="grid cols-3">
         <article class="card project">
           <h3>Awesome API</h3>
-          <p class="muted">خدمة REST بخط أنابيب CI وفحوصات شاملة. زمن استجابة منخفض وتصميم واضح.</p>
+          <p class="muted">REST service with CI pipeline and thorough tests. Low latency and clear design.</p>
           <div class="actions">
-            <a class="btn" href="https://github.com/mahdisafe/awesome-api" target="_blank" rel="noreferrer">المستودع</a>
-            <a class="btn" href="#" aria-disabled="true">الموقع التجريبي</a>
+            <a class="btn" href="https://github.com/mahdisafe/awesome-api" target="_blank" rel="noreferrer noopener">Repository</a>
+            <a class="btn" href="#" aria-disabled="true">Demo</a>
           </div>
         </article>
         <article class="card project">
           <h3>UI Kit</h3>
-          <p class="muted">مجموعة مكوّنات React خفيفة مع أمثلة وقصص (Storybook).</p>
+          <p class="muted">Lightweight React components with examples and Storybook.</p>
           <div class="actions">
-            <a class="btn" href="https://github.com/mahdisafe/ui-kit" target="_blank" rel="noreferrer">المستودع</a>
-            <a class="btn" href="#" aria-disabled="true">التوثيق</a>
+            <a class="btn" href="https://github.com/mahdisafe/ui-kit" target="_blank" rel="noreferrer noopener">Repository</a>
+            <a class="btn" href="#" aria-disabled="true">Docs</a>
           </div>
         </article>
         <article class="card project">
           <h3>Data Tools</h3>
-          <p class="muted">أدوات CLI لمعالجة البيانات وسير عمل ETL مبسّط.</p>
+          <p class="muted">CLI tools for data processing and a simplified ETL workflow.</p>
           <div class="actions">
-            <a class="btn" href="https://github.com/mahdisafe/data-tools" target="_blank" rel="noreferrer">المستودع</a>
-            <a class="btn" href="#" aria-disabled="true">حِزم</a>
+            <a class="btn" href="https://github.com/mahdisafe/data-tools" target="_blank" rel="noreferrer noopener">Repository</a>
+            <a class="btn" href="#" aria-disabled="true">Packages</a>
           </div>
         </article>
       </div>
     </section>
 
+    <section id="resume" class="cv">
+      <h2>Resume</h2>
+      <div class="resume-grid">
+        <div class="card">
+          <h3>Professional Summary</h3>
+          <p>Experienced Full Stack .NET developer (10+ years) delivering scalable, high‑quality web, mobile, and cloud solutions. Adept at leading teams, optimizing performance, and driving digital transformation. Strong in Microsoft technologies, cloud platforms, API integration, and database optimization. Recognized for analytical problem‑solving, continuous learning, and building solutions that support business growth.</p>
+
+          <h3>Professional Experience</h3>
+          <div class="job">
+            <h4>Senior Software Developer — Efifty Online, Bahrain <span class="where">(Nov 2019 – Present)</span></h4>
+            <ul>
+              <li>Led cloud migration on Google Cloud and Azure, increasing reliability by 25%.</li>
+              <li>Developed banking and medical insurance modules using Kendo UI and DevExpress with advanced reporting.</li>
+              <li>Designed and maintained secure enterprise APIs for external partners.</li>
+              <li>Built interactive dashboards and BI reports with Crystal Reports.</li>
+              <li>Mentored junior developers and improved team collaboration.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <h4>Senior Programmer — Gulf University, Bahrain <span class="where">(Nov 2018 – Oct 2019)</span></h4>
+            <ul>
+              <li>Automated academic and financial workflows.</li>
+              <li>Migrated legacy systems to web‑based cloud platforms using modern UI components and reporting tools.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <h4>Senior Programmer — MLS Bahrain, Bahrain <span class="where">(Apr 2016 – Nov 2018)</span></h4>
+            <ul>
+              <li>Enhanced system integration and reporting for enterprise clients in finance and healthcare.</li>
+              <li>Improved query performance and delivered dynamic reports using DevExpress and Crystal Reports.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <h4>Application Developer — National Health Insurance Fund, Sudan <span class="where">(Apr 2013 – Apr 2015)</span></h4>
+            <ul>
+              <li>Developed health insurance systems serving 50,000+ users.</li>
+              <li>Designed claims management modules and custom reporting with Crystal Reports.</li>
+            </ul>
+          </div>
+
+          <h3>Education</h3>
+          <p>B.Sc. in Information Technology — Sudan University of Science and Technology (2014)</p>
+
+          <h3>References</h3>
+          <p>Available upon request.</p>
+        </div>
+        <aside class="card">
+          <h3>Core Competencies</h3>
+          <ul>
+            <li><strong>Programming:</strong> C#, JavaScript</li>
+            <li><strong>Frameworks:</strong> ASP.NET Core, MVC, Web API, .NET MAUI</li>
+            <li><strong>Front‑End:</strong> HTML5, CSS3, Bootstrap</li>
+            <li><strong>Database:</strong> SQL Server</li>
+            <li><strong>Cloud:</strong> Google Cloud Platform (GCP), Microsoft Azure, AWS</li>
+            <li><strong>Tools:</strong> Kendo UI, DevExpress, Crystal Reports, Git, GitHub</li>
+            <li><strong>Professional:</strong> System Architecture & Code Quality, Agile, Team Leadership</li>
+          </ul>
+
+          <h3>Domain Expertise</h3>
+          <ul>
+            <li>Banking Systems</li>
+            <li>Medical Insurance Systems</li>
+            <li>Cloud Project Management</li>
+            <li>Enterprise System Integration</li>
+            <li>Reporting Solutions</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
     <section id="contact">
-      <h2>تواصل</h2>
+      <h2>Contact</h2>
       <div class="card">
-        <p style="margin-top:0" class="muted">أفضل طريقة: بريد إلكتروني. أيضًا تواصل عبر GitHub أو LinkedIn.</p>
-        <div class="actions">
-          <a class="btn primary" id="email-btn" href="mailto:YOUR-EMAIL@example.com">إرسال بريد</a>
-          <a class="btn" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noreferrer">LinkedIn</a>
+        <p class="muted" style="margin-top:0">Best ways to reach me. Calls, WhatsApp, and email are welcome.</p>
+        <div class="contact-row">
+          <div>
+            <div class="label">Bahrain</div>
+            <div class="actions" style="margin-top:8px">
+              <a class="btn primary" href="tel:+97334020096" aria-label="Call Bahrain number +973 3402 0096">Call</a>
+              <a class="btn" href="https://wa.me/97334020096" target="_blank" rel="noreferrer noopener" aria-label="WhatsApp Bahrain number">WhatsApp</a>
+              <span class="muted" style="align-self:center">+973 3402 0096</span>
+            </div>
+          </div>
+          <div>
+            <div class="label">Saudi Arabia</div>
+            <div class="actions" style="margin-top:8px">
+              <a class="btn primary" href="tel:+966571855189" aria-label="Call Saudi number +966 57 185 5189">Call</a>
+              <a class="btn" href="https://wa.me/966571855189" target="_blank" rel="noreferrer noopener" aria-label="WhatsApp Saudi number">WhatsApp</a>
+              <span class="muted" style="align-self:center">+966 57 185 5189</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions" style="margin-top:14px">
+          <a class="btn" href="mailto:mahdisafe@gmail.com" aria-label="Send email to mahdisafe@gmail.com">Email</a>
+          <a class="btn" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer noopener">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/mahdi-safealdeen-896836108/" target="_blank" rel="noreferrer noopener">LinkedIn</a>
         </div>
       </div>
     </section>
@@ -212,36 +285,23 @@
 
   <footer>
     <div class="container">
-      <small>© <span id="year"></span> eng mahdi — جميع الحقوق محفوظة.</small>
+      <small>© <span id="year"></span> eng mahdi — All rights reserved.</small>
     </div>
   </footer>
 
   <script>
-    // Why: Respect user theme + persist preference across reloads.
     (function() {
-      const key = 'theme';
-      const root = document.documentElement;
-      const saved = localStorage.getItem(key);
-      if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+      const key='theme', root=document.documentElement, saved=localStorage.getItem(key);
+      if (saved==='light' || saved==='dark') root.setAttribute('data-theme', saved);
       document.getElementById('theme-toggle').addEventListener('click', () => {
         const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-        root.setAttribute('data-theme', next);
-        localStorage.setItem(key, next);
+        root.setAttribute('data-theme', next); localStorage.setItem(key, next);
       });
+      document.getElementById('print-resume').addEventListener('click', () => window.print());
       document.getElementById('year').textContent = new Date().getFullYear();
-      // Why: highlight active nav link when scrolling for orientation.
-      const links = Array.from(document.querySelectorAll('nav a'));
-      const sections = links.map(a => document.querySelector(a.getAttribute('href')));
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          const i = sections.indexOf(entry.target);
-          if (i >= 0) {
-            const l = links[i];
-            entry.isIntersecting ? l.classList.add('active') : l.classList.remove('active');
-          }
-        });
-      }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
-      sections.forEach(s => s && io.observe(s));
+      const links=[...document.querySelectorAll('nav a')], sections=links.map(a=>document.querySelector(a.getAttribute('href')));
+      const io=new IntersectionObserver((es)=>{ es.forEach(e=>{ const i=sections.indexOf(e.target); if(i>=0){ const l=links[i]; e.isIntersecting?l.classList.add('active'):l.classList.remove('active') } }); }, { rootMargin:'-40% 0px -50% 0px', threshold:0 });
+      sections.forEach(s=>s&&io.observe(s));
     })();
   </script>
 </body>
