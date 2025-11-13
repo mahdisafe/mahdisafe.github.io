@@ -1,4 +1,8 @@
-<!-- /index.html -->
+# Write updated index.html with a personal photo slot (avatar.jpg) and i18n alt text
+from pathlib import Path
+import json
+
+html = r"""<!-- /index.html -->
 <!doctype html>
 <html lang="en" dir="ltr">
 <head>
@@ -14,10 +18,24 @@
   <meta property="og:url" content="https://mahdisafe.github.io/" />
   <meta name="theme-color" content="#0ea5e9" />
   <style>
-    :root { --bg:#0b1220; --bg-soft:#0f172a; --text:#e5e7eb; --muted:#9aa3b2; --brand:#0ea5e9; --card:#0f172a; --ring:rgba(14,165,233,.35); --shadow:0 10px 30px rgba(0,0,0,.35); --border: color-mix(in oklab,var(--text) 12%, transparent); --glass: color-mix(in oklab, var(--bg) 70%, transparent) }
-    html[data-theme="light"] { --bg:#f8fafc; --bg-soft:#fff; --text:#0f172a; --muted:#4b5563; --brand:#0ea5e9; --card:#fff; --ring:rgba(14,165,233,.25); --shadow:0 8px 24px rgba(2,6,23,.08); --border: color-mix(in oklab,var(--text) 10%, transparent); --glass: color-mix(in oklab, var(--bg) 70%, transparent) }
-    @media (prefers-color-scheme: light){ :root { --bg:#f8fafc; --bg-soft:#fff; --text:#0f172a; --muted:#4b5563; --card:#fff; --ring:rgba(14,165,233,.25); --shadow:0 8px 24px rgba(2,6,23,.08); --border: color-mix(in oklab,var(--text) 10%, transparent); --glass: color-mix(in oklab, var(--bg) 70%, transparent) } }
-    *{ box-sizing:border-box } html,body{ height:100% }
+    :root {
+      --bg:#0b1220; --bg-soft:#0f172a; --text:#e5e7eb; --muted:#9aa3b2; --brand:#0ea5e9;
+      --card:#0f172a; --ring:rgba(14,165,233,.35); --shadow:0 10px 30px rgba(0,0,0,.35);
+      --border: color-mix(in oklab,var(--text) 12%, transparent);
+      --glass: color-mix(in oklab, var(--bg) 70%, transparent);
+    }
+    html[data-theme="light"] {
+      --bg:#f8fafc; --bg-soft:#fff; --text:#0f172a; --muted:#4b5563; --brand:#0ea5e9;
+      --card:#fff; --ring:rgba(14,165,233,.25); --shadow:0 8px 24px rgba(2,6,23,.08);
+      --border: color-mix(in oklab,var(--text) 10%, transparent);
+      --glass: color-mix(in oklab, var(--bg) 70%, transparent);
+    }
+    @media (prefers-color-scheme: light){
+      :root { --bg:#f8fafc; --bg-soft:#fff; --text:#0f172a; --muted:#4b5563; --card:#fff; --ring:rgba(14,165,233,.25); --shadow:0 8px 24px rgba(2,6,23,.08); --border: color-mix(in oklab,var(--text) 10%, transparent); --glass: color-mix(in oklab, var(--bg) 70%, transparent); }
+    }
+
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
     body{
       margin:0; font:16px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
       background:
@@ -26,58 +44,160 @@
         var(--bg);
       color:var(--text); scroll-behavior:smooth
     }
+
     .container{ max-width:1080px; margin:0 auto; padding:16px 24px }
-    .progress { position: fixed; inset-inline:0; top:0; height:3px; z-index:50; background: linear-gradient(90deg, var(--brand) var(--p,0%), transparent 0); box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 35%, transparent); transform: translateZ(0) }
-    header{ position:sticky; top:0; z-index:40; backdrop-filter:saturate(160%) blur(8px); background:var(--glass); border-bottom:1px solid color-mix(in oklab,var(--text) 15%,transparent) }
+
+    /* Top progress bar */
+    .progress {
+      position: fixed; inset-inline:0; top:0; height:3px; z-index:50;
+      background: linear-gradient(90deg, var(--brand) var(--p,0%), transparent 0);
+      box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand) 35%, transparent);
+      transform: translateZ(0);
+    }
+
+    header{
+      position:sticky; top:0; z-index:40;
+      backdrop-filter:saturate(160%) blur(8px);
+      background:var(--glass);
+      border-bottom:1px solid color-mix(in oklab,var(--text) 15%,transparent);
+    }
     .nav{ display:flex; gap:12px; align-items:center; justify-content:space-between }
+
     .brand{ display:flex; gap:10px; align-items:center; font-weight:800; letter-spacing:.2px }
     .brand .dot{ width:10px; height:10px; background:var(--brand); border-radius:999px; box-shadow:0 0 0 6px var(--ring) }
+
+    /* Actions & buttons */
     .actions{ display:flex; gap:10px; align-items:center; flex-wrap:wrap }
     .btn{
       display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px;
       border:1px solid var(--border); background:var(--bg-soft); color:var(--text);
-      text-decoration:none; box-shadow:var(--shadow); transition:transform .08s ease, background .2s ease, border-color .2s ease
+      text-decoration:none; box-shadow:var(--shadow); transition:transform .08s ease, background .2s ease, border-color .2s ease;
     }
-    .btn:hover{ transform:translateY(-1px) } .btn:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
+    .btn:hover{ transform:translateY(-1px) }
+    .btn:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
     .btn.primary{ background:var(--brand); color:#001018; border-color:transparent }
     .btn[aria-disabled="true"]{ opacity:.6; pointer-events:none }
+
+    /* Desktop nav */
     nav.site-nav { display:flex; gap:4px; align-items:center }
-    nav.site-nav a{ color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:10px; white-space:nowrap }
+    nav.site-nav a{
+      color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:10px; white-space:nowrap;
+    }
     nav.site-nav a.active, nav.site-nav a:hover{ color:var(--text); background:color-mix(in oklab,var(--brand) 15%,transparent) }
-    .menu-toggle{ display:none; border:1px solid var(--border); background:var(--bg-soft); border-radius:12px; padding:10px 12px; box-shadow:var(--shadow); cursor:pointer }
+
+    /* Mobile menu toggle */
+    .menu-toggle{
+      display:none; border:1px solid var(--border); background:var(--bg-soft); border-radius:12px; padding:10px 12px;
+      box-shadow:var(--shadow); cursor:pointer;
+    }
     .menu-toggle:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
-    .menu-panel { position: fixed; inset-inline: 12px; top: 64px; z-index: 60; background: var(--bg-soft); border:1px solid var(--border); border-radius:16px; box-shadow: var(--shadow); padding:10px; display:none }
+
+    /* Mobile menu panel */
+    .menu-panel {
+      position: fixed; inset-inline: 12px; top: 64px; z-index: 60;
+      background: var(--bg-soft);
+      border:1px solid var(--border); border-radius:16px; box-shadow: var(--shadow);
+      padding:10px; display:none;
+    }
     .menu-panel.open{ display:block; animation:pop .16s ease-out }
     .menu-list { display:flex; flex-direction:column; gap:6px }
     .menu-list a{ padding:10px 12px; border-radius:10px; color:var(--muted); text-decoration:none }
     .menu-list a:hover, .menu-list a.active{ background:color-mix(in oklab,var(--brand) 15%,transparent); color:var(--text) }
+
     @keyframes pop { from{ transform: translateY(-6px); opacity:0 } to{ transform:none; opacity:1 } }
-    @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; scroll-behavior:auto !important } }
-    @media (max-width: 900px){ nav.site-nav{ display:none } .menu-toggle{ display:inline-flex } }
+    @media (prefers-reduced-motion: reduce){
+      *{ animation: none !important; transition: none !important; scroll-behavior: auto !important }
+    }
+
+    /* Responsive switches */
+    @media (max-width: 900px){
+      nav.site-nav{ display:none }
+      .menu-toggle{ display:inline-flex }
+    }
+
     .hero{ display:grid; gap:20px; align-items:center; grid-template-columns:1.2fr .8fr; padding-block:56px }
     .hero h1{ margin:0 0 10px; font-size:clamp(28px,5vw,46px); line-height:1.15; letter-spacing:.2px }
     .hero p{ margin:0 0 16px; color:var(--muted) }
-    .badge{ display:inline-block; padding:6px 10px; font-size:12px; border-radius:999px; background:color-mix(in oklab,var(--brand) 18%,transparent); color:color-mix(in oklab,var(--text) 85%, #fff); border:1px dashed color-mix(in oklab,var(--brand) 55%,var(--bg)) }
-    .card{ background:var(--card); border:1px solid var(--border); border-radius:20px; padding:22px; box-shadow:var(--shadow); transition: transform .2s ease, border-color .2s ease }
+    .badge{
+      display:inline-block; padding:6px 10px; font-size:12px; border-radius:999px;
+      background:color-mix(in oklab,var(--brand) 18%,transparent);
+      color:color-mix(in oklab,var(--text) 85%, #fff);
+      border:1px dashed color-mix(in oklab,var(--brand) 55%,var(--bg))
+    }
+    .card{
+      background:var(--card); border:1px solid var(--border);
+      border-radius:20px; padding:22px; box-shadow:var(--shadow);
+      transition: transform .2s ease, border-color .2s ease;
+    }
     .card:hover{ transform: translateY(-2px); border-color: color-mix(in oklab,var(--brand) 40%, var(--border)) }
-    .grid{ display:grid; gap:16px } .grid.cols-3{ grid-template-columns:repeat(3,minmax(0,1fr)) } .grid.cols-2{ grid-template-columns:repeat(2,minmax(0,1fr)) }
-    @media (max-width:1000px){ .hero{ grid-template-columns:1fr } } @media (max-width:900px){ .grid.cols-3,.grid.cols-2{ grid-template-columns:1fr } }
-    section{ padding-block:42px } h2{ font-size:clamp(22px,3.6vw,32px); margin:0 0 12px } .muted{ color:var(--muted) }
-    .skills{ display:flex; flex-wrap:wrap; gap:8px } .chip{ padding:8px 12px; border-radius:999px; border:1px solid var(--border); background:var(--bg-soft) }
-    .project{ display:flex; flex-direction:column; gap:10px } .project h3{ margin:0; font-size:18px } .project a{ text-decoration:none; color:var(--brand) }
-    footer{ padding:40px 24px; text-align:center; color:var(--muted); border-top:1px solid color-mix(in oklab,var(--text) 15%,transparent) }
+
+    .grid{ display:grid; gap:16px }
+    .grid.cols-3{ grid-template-columns:repeat(3,minmax(0,1fr)) }
+    .grid.cols-2{ grid-template-columns:repeat(2,minmax(0,1fr)) }
+    @media (max-width:1000px){ .hero{ grid-template-columns:1fr } }
+    @media (max-width:900px){ .grid.cols-3,.grid.cols-2{ grid-template-columns:1fr } }
+
+    section{ padding-block:42px }
+    h2{ font-size:clamp(22px,3.6vw,32px); margin:0 0 12px }
+    .muted{ color:var(--muted) }
+
+    .skills{ display:flex; flex-wrap:wrap; gap:8px }
+    .chip{ padding:8px 12px; border-radius:999px; border:1px solid var(--border); background:var(--bg-soft) }
+
+    .project{ display:flex; flex-direction:column; gap:10px }
+    .project h3{ margin:0; font-size:18px }
+    .project a{ text-decoration:none; color:var(--brand) }
+
+    footer{ padding:40px 24px; text-align:center; color:var(--muted);
+      border-top:1px solid color-mix(in oklab,var(--text) 15%,transparent) }
+
     .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border-width:0 }
-    .contact-row{ display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr)) } @media (max-width:700px){ .contact-row{ grid-template-columns:1fr } }
+
+    .contact-row{ display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr)) }
+    @media (max-width:700px){ .contact-row{ grid-template-columns:1fr } }
+
     .label{ font-weight:600 }
-    .resume-grid{ display:grid; gap:16px; grid-template-columns:2fr 1fr } @media(max-width:1000px){ .resume-grid{ grid-template-columns:1fr } }
-    .cv h3{ margin:16px 0 8px; font-size:20px } .cv ul{ margin:8px 0 0 18px } .cv li{ margin:4px 0 } .job{ padding:16px; border:1px solid var(--border); border-radius:14px; background:var(--bg-soft) } .job h4{ margin:0 0 4px; font-size:18px } .job .where{ color:var(--muted); font-size:14px } .job ul{ margin:8px 0 0 18px }
-    html[dir="rtl"] body{ font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Naskh Arabic", "Noto Sans Arabic", "Segoe UI Emoji" }
+
+    .resume-grid{ display:grid; gap:16px; grid-template-columns:2fr 1fr }
+    @media(max-width:1000px){ .resume-grid{ grid-template-columns:1fr } }
+
+    .cv h3{ margin:16px 0 8px; font-size:20px }
+    .cv ul{ margin:8px 0 0 18px }
+    .cv li{ margin:4px 0 }
+    .job{ padding:16px; border:1px solid var(--border); border-radius:14px; background:var(--bg-soft) }
+    .job h4{ margin:0 0 4px; font-size:18px }
+    .job .where{ color:var(--muted); font-size:14px }
+    .job ul{ margin:8px 0 0 18px }
+
+    /* Avatar styles */
+    .avatar-wrap{
+      display:grid; place-items:center; margin-block:6px 18px;
+    }
+    .avatar{
+      width:160px; height:160px; border-radius:999px; object-fit:cover;
+      border:2px solid color-mix(in oklab, var(--brand) 55%, var(--bg));
+      box-shadow: 0 12px 28px rgba(0,0,0,.35);
+      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      transition: transform .2s ease;
+      aspect-ratio:1/1;
+    }
+    .avatar:hover{ transform: translateY(-2px) }
+    @media (max-width:600px){ .avatar{ width:120px; height:120px } }
+
+    html[dir="rtl"] body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Naskh Arabic", "Noto Sans Arabic", "Segoe UI Emoji"
+    }
     html[dir="rtl"] .cv ul, html[dir="rtl"] .job ul{ margin:8px 18px 0 0 }
-    @media print { :root, html[data-theme="light"] { --bg:#fff; --bg-soft:#fff; --text:#000; --muted:#333; --card:#fff; --ring:transparent; --shadow:none } body{ background:#fff; color:#000 }
+
+    @media print {
+      :root, html[data-theme="light"] { --bg:#fff; --bg-soft:#fff; --text:#000; --muted:#333; --card:#fff; --ring:transparent; --shadow:none }
+      body{ background:#fff; color:#000 }
       header, .hero, #projects, #contact .actions .btn:not(.primary), .brand .dot, .menu-toggle, .menu-panel { display:none !important }
-      section{ padding-block:10px } .card{ border:none; box-shadow:none; padding:0 } a{ color:#000; text-decoration:none } .resume-grid{ grid-template-columns:1fr } }
-    /* Language select styled like a button */
-    select.lang-select{ appearance:none; -webkit-appearance:none; -moz-appearance:none; padding:10px 36px 10px 14px; border-radius:12px; border:1px solid var(--border); background:var(--bg-soft); color:var(--text); box-shadow:var(--shadow); background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%); background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%; background-size:6px 6px,6px 6px; background-repeat:no-repeat }
+      section{ padding-block:10px }
+      .card{ border:none; box-shadow:none; padding:0 }
+      a{ color:#000; text-decoration:none }
+      .resume-grid{ grid-template-columns:1fr }
+    }
   </style>
 </head>
 <body>
@@ -141,15 +261,21 @@
           <a class="btn" href="#contact" data-i18n="hero.btn.contact">Get in touch</a>
         </div>
       </div>
-      <div class="card">
-        <div class="grid cols-2">
-          <div>
-            <h3 style="margin:0 0 6px" data-i18n="quick.title">Quick summary</h3>
-            <p class="muted" style="margin:0" data-i18n="quick.text">10+ years across Microsoft stack, cloud, APIs, and data. Strong in architecture, performance, and reporting.</p>
-          </div>
-          <div>
-            <h3 style="margin:0 0 6px" data-i18n="stack.title">Favorite stack</h3>
-            <p class="muted" style="margin:0" data-i18n="stack.text">ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.</p>
+      <div>
+        <div class="avatar-wrap">
+          <!-- Replace avatar.jpg with your image file name or external URL -->
+          <img class="avatar" src="avatar.jpg" alt="eng mahdi portrait" loading="lazy" decoding="async" data-i18n-alt="avatar.alt" />
+        </div>
+        <div class="card">
+          <div class="grid cols-2">
+            <div>
+              <h3 style="margin:0 0 6px" data-i18n="quick.title">Quick summary</h3>
+              <p class="muted" style="margin:0" data-i18n="quick.text">10+ years across Microsoft stack, cloud, APIs, and data. Strong in architecture, performance, and reporting.</p>
+            </div>
+            <div>
+              <h3 style="margin:0 0 6px" data-i18n="stack.title">Favorite stack</h3>
+              <p class="muted" style="margin:0" data-i18n="stack.text">ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -320,8 +446,8 @@
       const langSelect = document.getElementById('lang-select');
 
       const translations = {
-        "en":{"skip":"Skip to resume","nav.about":"About","nav.skills":"Skills","nav.projects":"Projects","nav.resume":"Resume","nav.contact":"Contact","hero.badge":"Open to collaborate","hero.title":"Senior .NET Full Stack Developer","hero.desc":"Based in Hidd, Bahrain & Dammam, Saudi Arabia. I build scalable, high-quality web, mobile, and cloud solutions.","hero.btn.resume":"View resume","hero.btn.contact":"Get in touch","quick.title":"Quick summary","quick.text":"10+ years across Microsoft stack, cloud, APIs, and data. Strong in architecture, performance, and reporting.","stack.title":"Favorite stack","stack.text":"ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.","about.title":"About","about.text":"Experienced Full Stack .NET developer delivering reliable products, leading teams, and driving digital transformation with measurable results.","skills.title":"Selected skills","skill.arch":"System Architecture","skill.agile":"Agile","skill.lead":"Team Leadership","projects.title":"Projects","projects.repo":"Repository","projects.demo":"Demo","projects.docs":"Docs","projects.packages":"Packages","projects.api.desc":"REST service with CI pipeline and thorough tests. Low latency and clear design.","projects.uikit.desc":"Lightweight React components with examples and Storybook.","projects.tools.desc":"CLI tools for data processing and a simplified ETL workflow.","resume.title":"Resume","summary.title":"Professional Summary","summary.text":"Experienced Full Stack .NET developer (10+ years) delivering scalable, high-quality web, mobile, and cloud solutions. Adept at leading teams, optimizing performance, and driving digital transformation. Strong in Microsoft technologies, cloud platforms, API integration, and database optimization.","exp.title":"Professional Experience","exp.efifty.title":"Senior Software Developer — Efifty Online, Bahrain (Nov 2019 – Present)","exp.efifty.li1":"Led cloud migration on Google Cloud and Azure, increasing reliability by 25%.","exp.efifty.li2":"Built banking and medical insurance modules using Kendo UI and DevExpress with advanced reporting.","exp.efifty.li3":"Designed and maintained secure enterprise APIs for external partners.","exp.efifty.li4":"Developed dashboards and BI reports with Crystal Reports.","exp.efifty.li5":"Mentored junior developers and improved team collaboration.","exp.gulf.title":"Senior Programmer — Gulf University, Bahrain (Nov 2018 – Oct 2019)","exp.gulf.li1":"Automated academic and financial workflows.","exp.gulf.li2":"Migrated legacy systems to cloud-based web platforms with modern UI and reporting.","exp.mls.title":"Senior Programmer — MLS Bahrain, Bahrain (Apr 2016 – Nov 2018)","exp.mls.li1":"Improved integration and reporting for enterprise clients in finance and healthcare.","exp.mls.li2":"Optimized queries and delivered dynamic reports with DevExpress/Crystal Reports.","exp.nhif.title":"Application Developer — National Health Insurance Fund, Sudan (Apr 2013 – Apr 2015)","exp.nhif.li1":"Delivered health insurance systems serving 50,000+ users.","exp.nhif.li2":"Built claims management modules and custom reporting with Crystal Reports.","edu.title":"Education","edu.text":"B.Sc. in Information Technology — Sudan University of Science and Technology (2014)","ref.title":"References","ref.text":"Available upon request.","core.title":"Core Competencies","core.prog.k":"Programming:","core.prog.v":"C#, JavaScript","core.fw.k":"Frameworks:","core.fw.v":"ASP.NET Core, MVC, Web API, .NET MAUI","core.fe.k":"Front-End:","core.fe.v":"HTML5, CSS3, Bootstrap","core.db.k":"Database:","core.db.v":"SQL Server","core.cloud.k":"Cloud:","core.cloud.v":"GCP, Azure, AWS","core.tools.k":"Tools:","core.tools.v":"Kendo UI, DevExpress, Crystal Reports, Git, GitHub","core.prof.k":"Professional:","core.prof.v":"System Architecture & Code Quality, Agile, Team Leadership","domain.title":"Domain Expertise","domain.bank":"Banking Systems","domain.med":"Medical Insurance Systems","domain.cloudpm":"Cloud Project Management","domain.integr":"Enterprise System Integration","domain.reports":"Reporting Solutions","contact.title":"Contact","contact.desc":"Best ways to reach me. Calls, WhatsApp, and email are welcome.","contact.call":"Call","contact.bh.label":"Bahrain","contact.sa.label":"Saudi Arabia","footer.rights":"All rights reserved."},
-        "ar":{"skip":"تخطَّ إلى السيرة الذاتية","nav.about":"نبذة","nav.skills":"مهارات","nav.projects":"مشاريع","nav.resume":"السيرة الذاتية","nav.contact":"تواصل","hero.badge":"متاح للتعاون","hero.title":"مطوّر .NET متكامل — Senior","hero.desc":"مقيم في الحد – البحرين والدمام – السعودية. أبني حلول ويب وجوال وسحابة قابلة للتوسّع وبجودة عالية.","hero.btn.resume":"عرض السيرة الذاتية","hero.btn.contact":"للتواصل","quick.title":"ملخص سريع","quick.text":"أكثر من 10 سنوات عبر تقنيات مايكروسوفت والسحابة وواجهات البرمجة والبيانات. متمكّن من المعمارية والأداء والتقارير.","stack.title":"التقنيات المفضّلة","stack.text":"ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.","about.title":"نبذة","about.text":"مطوّر .NET متكامل يقدّم منتجات موثوقة، يقود الفرق، ويدفع التحول الرقمي بنتائج ملموسة.","skills.title":"مهارات مختارة","skill.arch":"معمارية الأنظمة","skill.agile":"أجايل","skill.lead":"قيادة الفرق","projects.title":"مشاريع","projects.repo":"المستودع","projects.demo":"تجريبي","projects.docs":"التوثيق","projects.packages":"الحِزم","projects.api.desc":"خدمة REST مع خط CI واختبارات شاملة. زمن استجابة منخفض وتصميم واضح.","projects.uikit.desc":"مكوّنات React خفيفة مع أمثلة وStorybook.","projects.tools.desc":"أدوات سطر أوامر لمعالجة البيانات وتبسيط سير ETL.","resume.title":"السيرة الذاتية","summary.title":"الملخص المهني","summary.text":"مطوّر .NET متكامل بخبرة تتجاوز 10 سنوات في حلول الويب والجوال والسحابة. بارع في قيادة الفرق، تحسين الأداء، والتحوّل الرقمي. متمرس في تقنيات مايكروسوفت، السحابة، تكامل الـ API، وتحسين قواعد البيانات.","exp.title":"الخبرات العملية","exp.efifty.title":"مطوّر برمجيات أول — Efifty Online، البحرين (نوفمبر 2019 – حتى الآن)","exp.efifty.li1":"قائد هجرة الأنظمة إلى Google Cloud وAzure مما رفع الاعتمادية 25%.","exp.efifty.li2":"تطوير وحدات بنكية وتأمين طبي باستخدام Kendo UI وDevExpress بتقارير متقدمة.","exp.efifty.li3":"تصميم وصيانة واجهات APIs مؤسسية آمنة للشركاء.","exp.efifty.li4":"بناء لوحات معلومات وتقارير ذكاء أعمال عبر Crystal Reports.","exp.efifty.li5":"إرشاد المطورين الجدد وتعزيز التعاون.","exp.gulf.title":"مبرمج أول — جامعة الخليج، البحرين (نوفمبر 2018 – أكتوبر 2019)","exp.gulf.li1":"أتمتة الإجراءات الأكاديمية والمالية.","exp.gulf.li2":"ترحيل الأنظمة القديمة إلى منصات ويب سحابية بواجهات وتقارير حديثة.","exp.mls.title":"مبرمج أول — MLS Bahrain، البحرين (أبريل 2016 – نوفمبر 2018)","exp.mls.li1":"تحسين التكامل والتقارير لعملاء قطاعات المالية والرعاية الصحية.","exp.mls.li2":"تحسين الاستعلامات وبناء تقارير ديناميكية عبر DevExpress/Crystal Reports.","exp.nhif.title":"مطوّر تطبيقات — التأمين الصحي القومي، السودان (أبريل 2013 – أبريل 2015)","exp.nhif.li1":"تطوير أنظمة تأمين صحي تخدم 50,000+ مستخدم.","exp.nhif.li2":"بناء وحدات مطالبات وتقارير مخصصة باستخدام Crystal Reports.","edu.title":"التعليم","edu.text":"بكالوريوس تقنية المعلومات — جامعة السودان للعلوم والتكنولوجيا (2014)","ref.title":"المراجع","ref.text":"متاحة عند الطلب.","core.title":"الكفاءات الأساسية","core.prog.k":"البرمجة:","core.prog.v":"C#‎، JavaScript","core.fw.k":"الأطر:","core.fw.v":"ASP.NET Core، MVC، Web API، ‎.NET MAUI","core.fe.k":"الواجهات الأمامية:","core.fe.v":"HTML5، CSS3، Bootstrap","core.db.k":"قواعد البيانات:","core.db.v":"SQL Server","core.cloud.k":"السحابة:","core.cloud.v":"GCP، Azure، AWS","core.tools.k":"الأدوات:","core.tools.v":"Kendo UI، DevExpress، Crystal Reports، Git، GitHub","core.prof.k":"المهني:","core.prof.v":"معمارية الشيفرة وجودتها، أجايل، قيادة الفرق","domain.title":"خبرات النطاق","domain.bank":"الأنظمة المصرفية","domain.med":"أنظمة التأمين الطبي","domain.cloudpm":"إدارة مشاريع السحابة","domain.integr":"تكامل الأنظمة المؤسسية","domain.reports":"حلول التقارير","contact.title":"التواصل","contact.desc":"أفضل طرق التواصل. مكالمات، واتساب، وبريد.","contact.call":"اتصال","contact.bh.label":"البحرين","contact.sa.label":"السعودية","footer.rights":"جميع الحقوق محفوظة."}
+        "en":{"skip":"Skip to resume","nav.about":"About","nav.skills":"Skills","nav.projects":"Projects","nav.resume":"Resume","nav.contact":"Contact","hero.badge":"Open to collaborate","hero.title":"Senior .NET Full Stack Developer","hero.desc":"Based in Hidd, Bahrain & Dammam, Saudi Arabia. I build scalable, high-quality web, mobile, and cloud solutions.","hero.btn.resume":"View resume","hero.btn.contact":"Get in touch","quick.title":"Quick summary","quick.text":"10+ years across Microsoft stack, cloud, APIs, and data. Strong in architecture, performance, and reporting.","stack.title":"Favorite stack","stack.text":"ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.","about.title":"About","about.text":"Experienced Full Stack .NET developer delivering reliable products, leading teams, and driving digital transformation with measurable results.","skills.title":"Selected skills","skill.arch":"System Architecture","skill.agile":"Agile","skill.lead":"Team Leadership","projects.title":"Projects","projects.repo":"Repository","projects.demo":"Demo","projects.docs":"Docs","projects.packages":"Packages","projects.api.desc":"REST service with CI pipeline and thorough tests. Low latency and clear design.","projects.uikit.desc":"Lightweight React components with examples and Storybook.","projects.tools.desc":"CLI tools for data processing and a simplified ETL workflow.","resume.title":"Resume","summary.title":"Professional Summary","summary.text":"Experienced Full Stack .NET developer (10+ years) delivering scalable, high-quality web, mobile, and cloud solutions. Adept at leading teams, optimizing performance, and driving digital transformation. Strong in Microsoft technologies, cloud platforms, API integration, and database optimization.","exp.title":"Professional Experience","exp.efifty.title":"Senior Software Developer — Efifty Online, Bahrain (Nov 2019 – Present)","exp.efifty.li1":"Led cloud migration on Google Cloud and Azure, increasing reliability by 25%.","exp.efifty.li2":"Built banking and medical insurance modules using Kendo UI and DevExpress with advanced reporting.","exp.efifty.li3":"Designed and maintained secure enterprise APIs for external partners.","exp.efifty.li4":"Developed dashboards and BI reports with Crystal Reports.","exp.efifty.li5":"Mentored junior developers and improved team collaboration.","exp.gulf.title":"Senior Programmer — Gulf University, Bahrain (Nov 2018 – Oct 2019)","exp.gulf.li1":"Automated academic and financial workflows.","exp.gulf.li2":"Migrated legacy systems to cloud-based web platforms with modern UI and reporting.","exp.mls.title":"Senior Programmer — MLS Bahrain, Bahrain (Apr 2016 – Nov 2018)","exp.mls.li1":"Improved integration and reporting for enterprise clients in finance and healthcare.","exp.mls.li2":"Optimized queries and delivered dynamic reports with DevExpress/Crystal Reports.","exp.nhif.title":"Application Developer — National Health Insurance Fund, Sudan (Apr 2013 – Apr 2015)","exp.nhif.li1":"Delivered health insurance systems serving 50,000+ users.","exp.nhif.li2":"Built claims management modules and custom reporting with Crystal Reports.","edu.title":"Education","edu.text":"B.Sc. in Information Technology — Sudan University of Science and Technology (2014)","ref.title":"References","ref.text":"Available upon request.","core.title":"Core Competencies","core.prog.k":"Programming:","core.prog.v":"C#, JavaScript","core.fw.k":"Frameworks:","core.fw.v":"ASP.NET Core, MVC, Web API, .NET MAUI","core.fe.k":"Front-End:","core.fe.v":"HTML5, CSS3, Bootstrap","core.db.k":"Database:","core.db.v":"SQL Server","core.cloud.k":"Cloud:","core.cloud.v":"GCP, Azure, AWS","core.tools.k":"Tools:","core.tools.v":"Kendo UI, DevExpress, Crystal Reports, Git, GitHub","core.prof.k":"Professional:","core.prof.v":"System Architecture & Code Quality, Agile, Team Leadership","domain.title":"Domain Expertise","domain.bank":"Banking Systems","domain.med":"Medical Insurance Systems","domain.cloudpm":"Cloud Project Management","domain.integr":"Enterprise System Integration","domain.reports":"Reporting Solutions","contact.title":"Contact","contact.desc":"Best ways to reach me. Calls, WhatsApp, and email are welcome.","contact.call":"Call","contact.bh.label":"Bahrain","contact.sa.label":"Saudi Arabia","footer.rights":"All rights reserved.","avatar.alt":"Portrait of eng mahdi"},
+        "ar":{"skip":"تخطَّ إلى السيرة الذاتية","nav.about":"نبذة","nav.skills":"مهارات","nav.projects":"مشاريع","nav.resume":"السيرة الذاتية","nav.contact":"تواصل","hero.badge":"متاح للتعاون","hero.title":"مطوّر .NET متكامل — Senior","hero.desc":"مقيم في الحد – البحرين والدمام – السعودية. أبني حلول ويب وجوال وسحابة قابلة للتوسّع وبجودة عالية.","hero.btn.resume":"عرض السيرة الذاتية","hero.btn.contact":"للتواصل","quick.title":"ملخص سريع","quick.text":"أكثر من 10 سنوات عبر تقنيات مايكروسوفت والسحابة وواجهات البرمجة والبيانات. متمكّن من المعمارية والأداء والتقارير.","stack.title":"التقنيات المفضّلة","stack.text":"ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.","about.title":"نبذة","about.text":"مطوّر .NET متكامل يقدّم منتجات موثوقة، يقود الفرق، ويدفع التحول الرقمي بنتائج ملموسة.","skills.title":"مهارات مختارة","skill.arch":"معمارية الأنظمة","skill.agile":"أجايل","skill.lead":"قيادة الفرق","projects.title":"مشاريع","projects.repo":"المستودع","projects.demo":"تجريبي","projects.docs":"التوثيق","projects.packages":"الحِزم","projects.api.desc":"خدمة REST مع خط CI واختبارات شاملة. زمن استجابة منخفض وتصميم واضح.","projects.uikit.desc":"مكوّنات React خفيفة مع أمثلة وStorybook.","projects.tools.desc":"أدوات سطر أوامر لمعالجة البيانات وتبسيط سير ETL.","resume.title":"السيرة الذاتية","summary.title":"الملخص المهني","summary.text":"مطوّر .NET متكامل بخبرة تتجاوز 10 سنوات في حلول الويب والجوال والسحابة. بارع في قيادة الفرق، تحسين الأداء، والتحوّل الرقمي. متمرس في تقنيات مايكروسوفت، السحابة، تكامل الـ API، وتحسين قواعد البيانات.","exp.title":"الخبرات العملية","exp.efifty.title":"مطوّر برمجيات أول — Efifty Online، البحرين (نوفمبر 2019 – حتى الآن)","exp.efifty.li1":"قائد هجرة الأنظمة إلى Google Cloud وAzure مما رفع الاعتمادية 25%.","exp.efifty.li2":"تطوير وحدات بنكية وتأمين طبي باستخدام Kendo UI وDevExpress بتقارير متقدمة.","exp.efifty.li3":"تصميم وصيانة واجهات APIs مؤسسية آمنة للشركاء.","exp.efifty.li4":"بناء لوحات معلومات وتقارير ذكاء أعمال عبر Crystal Reports.","exp.efifty.li5":"إرشاد المطورين الجدد وتعزيز التعاون.","exp.gulf.title":"مبرمج أول — جامعة الخليج، البحرين (نوفمبر 2018 – أكتوبر 2019)","exp.gulf.li1":"أتمتة الإجراءات الأكاديمية والمالية.","exp.gulf.li2":"ترحيل الأنظمة القديمة إلى منصات ويب سحابية بواجهات وتقارير حديثة.","exp.mls.title":"مبرمج أول — MLS Bahrain، البحرين (أبريل 2016 – نوفمبر 2018)","exp.mls.li1":"تحسين التكامل والتقارير لعملاء قطاعات المالية والرعاية الصحية.","exp.mls.li2":"تحسين الاستعلامات وبناء تقارير ديناميكية عبر DevExpress/Crystal Reports.","exp.nhif.title":"مطوّر تطبيقات — التأمين الصحي القومي، السودان (أبريل 2013 – أبريل 2015)","exp.nhif.li1":"تطوير أنظمة تأمين صحي تخدم 50,000+ مستخدم.","exp.nhif.li2":"بناء وحدات مطالبات وتقارير مخصصة باستخدام Crystal Reports.","edu.title":"التعليم","edu.text":"بكالوريوس تقنية المعلومات — جامعة السودان للعلوم والتكنولوجيا (2014)","ref.title":"المراجع","ref.text":"متاحة عند الطلب.","core.title":"الكفاءات الأساسية","core.prog.k":"البرمجة:","core.prog.v":"C#‎، JavaScript","core.fw.k":"الأطر:","core.fw.v":"ASP.NET Core، MVC، Web API، ‎.NET MAUI","core.fe.k":"الواجهات الأمامية:","core.fe.v":"HTML5، CSS3، Bootstrap","core.db.k":"قواعد البيانات:","core.db.v":"SQL Server","core.cloud.k":"السحابة:","core.cloud.v":"GCP، Azure، AWS","core.tools.k":"الأدوات:","core.tools.v":"Kendo UI، DevExpress، Crystal Reports، Git، GitHub","core.prof.k":"المهني:","core.prof.v":"معمارية الشيفرة وجودتها، أجايل، قيادة الفرق","domain.title":"خبرات النطاق","domain.bank":"الأنظمة المصرفية","domain.med":"أنظمة التأمين الطبي","domain.cloudpm":"إدارة مشاريع السحابة","domain.integr":"تكامل الأنظمة المؤسسية","domain.reports":"حلول التقارير","contact.title":"التواصل","contact.desc":"أفضل طرق التواصل. مكالمات، واتساب، وبريد.","contact.call":"اتصال","contact.bh.label":"البحرين","contact.sa.label":"السعودية","footer.rights":"جميع الحقوق محفوظة.","avatar.alt":"صورة شخصية لـ eng mahdi"}
       };
 
       function applyLang(lang){
@@ -330,12 +456,20 @@
         root.setAttribute('lang', lang);
         root.setAttribute('dir', rtl ? 'rtl' : 'ltr');
         document.title = lang === 'ar' ? "eng mahdi — صفحة شخصية" : "eng mahdi — Personal Page";
+        // text nodes
         $('[data-i18n]').forEach(el => {
           const key = el.getAttribute('data-i18n');
           const val = dict[key];
           if (typeof val === 'string') el.textContent = val;
         });
-        langSelect.value = lang; // keep UI in sync
+        // alt attributes
+        $('[data-i18n-alt]').forEach(el => {
+          const key = el.getAttribute('data-i18n-alt');
+          const val = dict[key];
+          if (typeof val === 'string') el.setAttribute('alt', val);
+        });
+        // sync selector
+        langSelect.value = lang;
         localStorage.setItem(langKey, lang);
       }
 
@@ -354,10 +488,12 @@
       document.getElementById('print-resume').addEventListener('click', () => window.print());
       yearEl.textContent = new Date().getFullYear();
 
+      // Active link sync (desktop)
       const links=[...document.querySelectorAll('nav.site-nav a')], sections=links.map(a=>document.querySelector(a.getAttribute('href')));
       const io=new IntersectionObserver((es)=>{ es.forEach(e=>{ const i=sections.indexOf(e.target); if(i>=0){ const l=links[i]; e.isIntersecting?l.classList.add('active'):l.classList.remove('active') } }); }, { rootMargin:'-40% 0px -50% 0px', threshold:0 });
       sections.forEach(s=>s&&io.observe(s));
 
+      // Scroll progress bar
       const progress = document.querySelector('.progress');
       const setProgress = () => {
         const h = document.documentElement;
@@ -366,12 +502,26 @@
       };
       setProgress(); addEventListener('scroll', setProgress, { passive:true }); addEventListener('resize', setProgress);
 
+      // Mobile menu logic
       const menuBtn = document.getElementById('menu-toggle');
       const panel = document.getElementById('mobile-menu');
-      function openMenu(){ panel.hidden = false; panel.classList.add('open'); menuBtn.setAttribute('aria-expanded','true'); const first = panel.querySelector('a'); first && first.focus(); setTimeout(()=>{ document.addEventListener('click', outsideClose, { capture:true, once:true }); }, 0); }
-      function closeMenu(){ panel.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); panel.hidden = true; menuBtn.focus(); }
-      function outsideClose(ev){ if(!panel.contains(ev.target) && ev.target !== menuBtn) closeMenu(); }
-      menuBtn.addEventListener('click', () => { const expanded = menuBtn.getAttribute('aria-expanded') === 'true'; expanded ? closeMenu() : openMenu(); });
+      function openMenu(){
+        panel.hidden = false; panel.classList.add('open');
+        menuBtn.setAttribute('aria-expanded','true');
+        const first = panel.querySelector('a'); first && first.focus();
+        setTimeout(()=>{ document.addEventListener('click', outsideClose, { capture:true, once:true }); }, 0);
+      }
+      function closeMenu(){
+        panel.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
+        panel.hidden = true; menuBtn.focus();
+      }
+      function outsideClose(ev){
+        if(!panel.contains(ev.target) && ev.target !== menuBtn) closeMenu();
+      }
+      menuBtn.addEventListener('click', () => {
+        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+        expanded ? closeMenu() : openMenu();
+      });
       panel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
       addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') closeMenu(); });
       addEventListener('resize', ()=>{ if(matchMedia('(min-width: 901px)').matches && menuBtn.getAttribute('aria-expanded') === 'true'){ closeMenu(); } });
@@ -379,3 +529,20 @@
   </script>
 </body>
 </html>
+"""
+
+out = Path("/mnt/data/index.html")
+out.write_text(html, encoding="utf-8")
+
+readme = """# How to add your photo
+- Put your image file next to index.html and name it **avatar.jpg** (or change the `src` of the `<img class="avatar">` to your URL).
+- Recommended size: square (e.g., 512x512). It will be cropped to a circle automatically.
+- Alt text is localized via `data-i18n-alt="avatar.alt"`.
+
+# Deploy (GitHub Pages)
+1) Repo `mahdisafe.github.io` → add `index.html` and `avatar.jpg` → push.
+2) Open https://mahdisafe.github.io/ (or your Pages URL).
+"""
+Path("/mnt/data/README.txt").write_text(readme, encoding="utf-8")
+
+"Saved with avatar slot"
