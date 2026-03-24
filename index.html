@@ -1,18 +1,13 @@
-# Write updated index.html with a personal photo slot (avatar.jpg) and i18n alt text
-from pathlib import Path
-import json
-
-html = r"""<!-- /index.html -->
 <!doctype html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>eng mahdi â€” Personal Page</title>
+  <title>eng mahdi — Personal Page</title>
   <meta name="description" content="Personal site with resume, projects, and contact. Arabic/English with a language selector." />
   <link rel="canonical" href="https://mahdisafe.github.io/" />
-  <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="0.9em" font-size="90">ğŸš€</text></svg>' />
-  <meta property="og:title" content="eng mahdi â€” Personal Page" />
+  <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="0.9em" font-size="90">??</text></svg>' />
+  <meta property="og:title" content="eng mahdi — Personal Page" />
   <meta property="og:description" content="Quick bio, skills, resume, projects, and how to reach me. EN/AR with a language selector." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mahdisafe.github.io/" />
@@ -222,7 +217,7 @@ html = r"""<!-- /index.html -->
 
       <!-- Right actions -->
       <div class="actions">
-        <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">â˜°</button>
+        <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">?</button>
 
         <!-- Language selector -->
         <label for="lang-select" class="sr-only">Language</label>
@@ -231,10 +226,10 @@ html = r"""<!-- /index.html -->
           <option value="ar">AR</option>
         </select>
 
-        <button id="theme-toggle" class="btn" type="button" aria-label="Toggle theme">ğŸŒ—</button>
+        <button id="theme-toggle" class="btn" type="button" aria-label="Toggle theme">??</button>
         <a class="btn primary" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer noopener">GitHub</a>
         <a class="btn" href="https://www.linkedin.com/in/mahdi-safealdeen-896836108/" target="_blank" rel="noreferrer noopener">LinkedIn</a>
-        <button id="print-resume" class="btn" type="button" title="Save as PDF">ğŸ–¨ï¸ Save PDF</button>
+        <button id="print-resume" class="btn" type="button" title="Save as PDF">??? Save PDF</button>
       </div>
     </div>
 
@@ -255,7 +250,7 @@ html = r"""<!-- /index.html -->
       <div>
         <span class="badge" data-i18n="hero.badge">Open to collaborate</span>
         <h1 data-i18n="hero.title">Senior .NET Full Stack Developer</h1>
-        <p class="muted" data-i18n="hero.desc">Based in Hidd, Bahrain & Dammam, Saudi Arabia. I build scalable, high-quality web, mobile, and cloud solutions.</p>
+        <p class="muted" data-i18n="hero.desc">Based in Hidd, Bahrain & Dammam, Saudi Arabia with 15+ years delivering scalable, high-performance web, mobile, and cloud solutions.</p>
         <div class="actions" style="margin-top:14px">
           <a class="btn primary" href="#resume" data-i18n="hero.btn.resume">View resume</a>
           <a class="btn" href="#contact" data-i18n="hero.btn.contact">Get in touch</a>
@@ -263,14 +258,13 @@ html = r"""<!-- /index.html -->
       </div>
       <div>
         <div class="avatar-wrap">
-          <!-- Replace avatar.jpg with your image file name or external URL -->
           <img class="avatar" src="avatar.jpg" alt="eng mahdi portrait" loading="lazy" decoding="async" data-i18n-alt="avatar.alt" />
         </div>
         <div class="card">
           <div class="grid cols-2">
             <div>
               <h3 style="margin:0 0 6px" data-i18n="quick.title">Quick summary</h3>
-              <p class="muted" style="margin:0" data-i18n="quick.text">10+ years across Microsoft stack, cloud, APIs, and data. Strong in architecture, performance, and reporting.</p>
+              <p class="muted" style="margin:0" data-i18n="quick.text">15+ years across Microsoft stack, cloud migrations, enterprise APIs, and reporting excellence.</p>
             </div>
             <div>
               <h3 style="margin:0 0 6px" data-i18n="stack.title">Favorite stack</h3>
@@ -283,7 +277,7 @@ html = r"""<!-- /index.html -->
 
     <section id="about">
       <h2 data-i18n="about.title">About</h2>
-      <p class="muted" data-i18n="about.text">Experienced Full Stack .NET developer delivering reliable products, leading teams, and driving digital transformation with measurable results.</p>
+      <p class="muted" data-i18n="about.text">Senior .NET Full Stack Developer modernizing legacy platforms, automating operations, and leading high-performing teams for banking and medical insurance organizations.</p>
     </section>
 
     <section id="skills">
@@ -294,7 +288,7 @@ html = r"""<!-- /index.html -->
         <span class="chip">Bootstrap</span><span class="chip">SQL Server</span><span class="chip">Azure</span><span class="chip">GCP</span><span class="chip">AWS</span>
         <span class="chip">Kendo UI</span><span class="chip">DevExpress</span><span class="chip">Crystal Reports</span>
         <span class="chip">Git</span><span class="chip">GitHub</span>
-        <span class="chip" data-i18n="skill.arch">System Architecture</span><span class="chip" data-i18n="skill.agile">Agile</span><span class="chip" data-i18n="skill.lead">Team Leadership</span>
+        <span class="chip" data-i18n="skill.arch">Clean Architecture</span><span class="chip" data-i18n="skill.agile">Agile</span><span class="chip" data-i18n="skill.lead">Team Leadership</span>
       </div>
     </section>
 
@@ -302,26 +296,26 @@ html = r"""<!-- /index.html -->
       <h2 data-i18n="projects.title">Projects</h2>
       <div class="grid cols-3">
         <article class="card project">
-          <h3>Awesome API</h3>
-          <p class="muted" data-i18n="projects.api.desc">REST service with CI pipeline and thorough tests. Low latency and clear design.</p>
+          <h3>Cloud Migration &amp; Reliability Program</h3>
+          <p class="muted" data-i18n="projects.api.desc">Azure + GCP landing zones, automated deployments, and observability raised availability by 25% for regulated banking and insurance workloads.</p>
           <div class="actions">
-            <a class="btn" href="https://github.com/mahdisafe/awesome-api" target="_blank" rel="noreferrer noopener" data-i18n="projects.repo">Repository</a>
+            <a class="btn" href="https://github.com/mahdisafe/mahdisafe.github.io" target="_blank" rel="noreferrer noopener" data-i18n="projects.repo">Repository</a>
             <a class="btn" href="#" aria-disabled="true" data-i18n="projects.demo">Demo</a>
           </div>
         </article>
         <article class="card project">
-          <h3>UI Kit</h3>
-          <p class="muted" data-i18n="projects.uikit.desc">Lightweight React components with examples and Storybook.</p>
+          <h3>Banking &amp; Medical Insurance Platforms</h3>
+          <p class="muted" data-i18n="projects.uikit.desc">Modular enrollment, billing, and claims solutions with secure REST APIs, partner onboarding, and modernized UX across Kendo UI and DevExpress.</p>
           <div class="actions">
-            <a class="btn" href="https://github.com/mahdisafe/ui-kit" target="_blank" rel="noreferrer noopener" data-i18n="projects.repo">Repository</a>
+            <a class="btn" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer noopener" data-i18n="projects.repo">Repository</a>
             <a class="btn" href="#" aria-disabled="true" data-i18n="projects.docs">Docs</a>
           </div>
         </article>
         <article class="card project">
-          <h3>Data Tools</h3>
-          <p class="muted" data-i18n="projects.tools.desc">CLI tools for data processing and a simplified ETL workflow.</p>
+          <h3>Business Intelligence &amp; Reporting Suite</h3>
+          <p class="muted" data-i18n="projects.tools.desc">Crystal Reports, DevExpress dashboards, and optimized SQL powering executives with on-demand insights and automated distribution.</p>
           <div class="actions">
-            <a class="btn" href="https://github.com/mahdisafe/data-tools" target="_blank" rel="noreferrer noopener" data-i18n="projects.repo">Repository</a>
+            <a class="btn" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer noopener" data-i18n="projects.repo">Repository</a>
             <a class="btn" href="#" aria-disabled="true" data-i18n="projects.packages">Packages</a>
           </div>
         </article>
@@ -333,43 +327,46 @@ html = r"""<!-- /index.html -->
       <div class="resume-grid">
         <div class="card">
           <h3 data-i18n="summary.title">Professional Summary</h3>
-          <p data-i18n="summary.text">Experienced Full Stack .NET developer (10+ years) delivering scalable, high-quality web, mobile, and cloud solutions. Adept at leading teams, optimizing performance, and driving digital transformation. Strong in Microsoft technologies, cloud platforms, API integration, and database optimization.</p>
+          <p data-i18n="summary.text">Senior .NET Full Stack Developer with 15+ years delivering scalable, high-performance web, mobile, and cloud solutions. Proven leader in modernizing legacy systems, guiding teams, and driving digital transformation with clean architecture and business-driven outcomes.</p>
 
           <h3 data-i18n="exp.title">Professional Experience</h3>
           <div class="job">
-            <h4 data-i18n="exp.efifty.title">Senior Software Developer â€” Efifty Online, Bahrain (Nov 2019 â€“ Present)</h4>
+            <h4 data-i18n="exp.efifty.title">Senior Software Developer — Efifty Online, Bahrain (Nov 2019 – Present)</h4>
             <ul>
-              <li data-i18n="exp.efifty.li1">Led cloud migration on Google Cloud and Azure, increasing reliability by 25%.</li>
-              <li data-i18n="exp.efifty.li2">Built banking and medical insurance modules using Kendo UI and DevExpress with advanced reporting.</li>
-              <li data-i18n="exp.efifty.li3">Designed and maintained secure enterprise APIs for external partners.</li>
-              <li data-i18n="exp.efifty.li4">Developed dashboards and BI reports with Crystal Reports.</li>
-              <li data-i18n="exp.efifty.li5">Mentored junior developers and improved team collaboration.</li>
+              <li data-i18n="exp.efifty.li1">Led cloud migration and digital transformation on Azure and GCP, increasing reliability by 25%.</li>
+              <li data-i18n="exp.efifty.li2">Designed and developed scalable banking and medical insurance systems.</li>
+              <li data-i18n="exp.efifty.li3">Built secure RESTful APIs for enterprise integrations and third-party partners.</li>
+              <li data-i18n="exp.efifty.li4">Delivered interactive dashboards and advanced reporting with Crystal Reports, DevExpress, and Kendo UI.</li>
+              <li data-i18n="exp.efifty.li5">Mentored junior developers and improved productivity through reviews and best practices.</li>
             </ul>
           </div>
           <div class="job">
-            <h4 data-i18n="exp.gulf.title">Senior Programmer â€” Gulf University, Bahrain (Nov 2018 â€“ Oct 2019)</h4>
+            <h4 data-i18n="exp.gulf.title">Senior Programmer — Gulf University, Bahrain (Nov 2018 – Oct 2019)</h4>
             <ul>
               <li data-i18n="exp.gulf.li1">Automated academic and financial workflows.</li>
               <li data-i18n="exp.gulf.li2">Migrated legacy systems to cloud-based web platforms with modern UI and reporting.</li>
+              <li data-i18n="exp.gulf.li3">Implemented analytics and reporting solutions that supported university leadership decisions.</li>
             </ul>
           </div>
           <div class="job">
-            <h4 data-i18n="exp.mls.title">Senior Programmer â€” MLS Bahrain, Bahrain (Apr 2016 â€“ Nov 2018)</h4>
+            <h4 data-i18n="exp.mls.title">Senior Programmer — MLS Bahrain, Bahrain (Apr 2016 – Nov 2018)</h4>
             <ul>
               <li data-i18n="exp.mls.li1">Improved integration and reporting for enterprise clients in finance and healthcare.</li>
               <li data-i18n="exp.mls.li2">Optimized queries and delivered dynamic reports with DevExpress/Crystal Reports.</li>
+              <li data-i18n="exp.mls.li3">Aligned product backlogs with compliance needs and business priorities.</li>
             </ul>
           </div>
           <div class="job">
-            <h4 data-i18n="exp.nhif.title">Application Developer â€” National Health Insurance Fund, Sudan (Apr 2013 â€“ Apr 2015)</h4>
+            <h4 data-i18n="exp.nhif.title">Application Developer — National Health Insurance Fund, Sudan (Apr 2013 – Apr 2015)</h4>
             <ul>
-              <li data-i18n="exp.nhif.li1">Delivered health insurance systems serving 50,000+ users.</li>
-              <li data-i18n="exp.nhif.li2">Built claims management modules and custom reporting with Crystal Reports.</li>
+              <li data-i18n="exp.nhif.li1">Developed insurance management systems serving 50,000+ users.</li>
+              <li data-i18n="exp.nhif.li2">Designed claims processing modules and custom reporting tools.</li>
+              <li data-i18n="exp.nhif.li3">Improved system stability and scalability for regional rollouts.</li>
             </ul>
           </div>
 
           <h3 data-i18n="edu.title">Education</h3>
-          <p data-i18n="edu.text">B.Sc. in Information Technology â€” Sudan University of Science and Technology (2014)</p>
+          <p data-i18n="edu.text">B.Sc. in Information Technology — Sudan University of Science and Technology (2014)</p>
 
           <h3 data-i18n="ref.title">References</h3>
           <p data-i18n="ref.text">Available upon request.</p>
@@ -383,16 +380,16 @@ html = r"""<!-- /index.html -->
             <li><strong data-i18n="core.db.k">Database:</strong> <span data-i18n="core.db.v">SQL Server</span></li>
             <li><strong data-i18n="core.cloud.k">Cloud:</strong> <span data-i18n="core.cloud.v">GCP, Azure, AWS</span></li>
             <li><strong data-i18n="core.tools.k">Tools:</strong> <span data-i18n="core.tools.v">Kendo UI, DevExpress, Crystal Reports, Git, GitHub</span></li>
-            <li><strong data-i18n="core.prof.k">Professional:</strong> <span data-i18n="core.prof.v">System Architecture & Code Quality, Agile, Team Leadership</span></li>
+            <li><strong data-i18n="core.prof.k">Professional:</strong> <span data-i18n="core.prof.v">Clean Architecture &amp; Code Quality, Agile, Team Leadership</span></li>
           </ul>
 
           <h3 data-i18n="domain.title">Domain Expertise</h3>
           <ul>
-            <li data-i18n="domain.bank">Banking Systems</li>
-            <li data-i18n="domain.med">Medical Insurance Systems</li>
-            <li data-i18n="domain.cloudpm">Cloud Project Management</li>
-            <li data-i18n="domain.integr">Enterprise System Integration</li>
-            <li data-i18n="domain.reports">Reporting Solutions</li>
+            <li data-i18n="domain.bank">Banking Systems &amp; Financial Solutions</li>
+            <li data-i18n="domain.med">Medical Insurance Systems &amp; Claims Processing</li>
+            <li data-i18n="domain.cloudpm">Cloud Migration &amp; Modernization</li>
+            <li data-i18n="domain.integr">Enterprise API Integration</li>
+            <li data-i18n="domain.reports">Business Intelligence &amp; Reporting Solutions</li>
           </ul>
         </aside>
       </div>
@@ -426,13 +423,15 @@ html = r"""<!-- /index.html -->
           <a class="btn" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer noopener">GitHub</a>
           <a class="btn" href="https://www.linkedin.com/in/mahdi-safealdeen-896836108/" target="_blank" rel="noreferrer noopener">LinkedIn</a>
         </div>
+
+        <p class="muted" style="margin:12px 0 0" data-i18n="contact.note">Available for relocation and remote opportunities.</p>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="container">
-      <small>Â© <span id="year"></span> eng mahdi â€” <span data-i18n="footer.rights">All rights reserved.</span></small>
+      <small>© <span id="year"></span> eng mahdi — <span data-i18n="footer.rights">All rights reserved.</span></small>
     </div>
   </footer>
 
@@ -446,8 +445,8 @@ html = r"""<!-- /index.html -->
       const langSelect = document.getElementById('lang-select');
 
       const translations = {
-        "en":{"skip":"Skip to resume","nav.about":"About","nav.skills":"Skills","nav.projects":"Projects","nav.resume":"Resume","nav.contact":"Contact","hero.badge":"Open to collaborate","hero.title":"Senior .NET Full Stack Developer","hero.desc":"Based in Hidd, Bahrain & Dammam, Saudi Arabia. I build scalable, high-quality web, mobile, and cloud solutions.","hero.btn.resume":"View resume","hero.btn.contact":"Get in touch","quick.title":"Quick summary","quick.text":"10+ years across Microsoft stack, cloud, APIs, and data. Strong in architecture, performance, and reporting.","stack.title":"Favorite stack","stack.text":"ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.","about.title":"About","about.text":"Experienced Full Stack .NET developer delivering reliable products, leading teams, and driving digital transformation with measurable results.","skills.title":"Selected skills","skill.arch":"System Architecture","skill.agile":"Agile","skill.lead":"Team Leadership","projects.title":"Projects","projects.repo":"Repository","projects.demo":"Demo","projects.docs":"Docs","projects.packages":"Packages","projects.api.desc":"REST service with CI pipeline and thorough tests. Low latency and clear design.","projects.uikit.desc":"Lightweight React components with examples and Storybook.","projects.tools.desc":"CLI tools for data processing and a simplified ETL workflow.","resume.title":"Resume","summary.title":"Professional Summary","summary.text":"Experienced Full Stack .NET developer (10+ years) delivering scalable, high-quality web, mobile, and cloud solutions. Adept at leading teams, optimizing performance, and driving digital transformation. Strong in Microsoft technologies, cloud platforms, API integration, and database optimization.","exp.title":"Professional Experience","exp.efifty.title":"Senior Software Developer â€” Efifty Online, Bahrain (Nov 2019 â€“ Present)","exp.efifty.li1":"Led cloud migration on Google Cloud and Azure, increasing reliability by 25%.","exp.efifty.li2":"Built banking and medical insurance modules using Kendo UI and DevExpress with advanced reporting.","exp.efifty.li3":"Designed and maintained secure enterprise APIs for external partners.","exp.efifty.li4":"Developed dashboards and BI reports with Crystal Reports.","exp.efifty.li5":"Mentored junior developers and improved team collaboration.","exp.gulf.title":"Senior Programmer â€” Gulf University, Bahrain (Nov 2018 â€“ Oct 2019)","exp.gulf.li1":"Automated academic and financial workflows.","exp.gulf.li2":"Migrated legacy systems to cloud-based web platforms with modern UI and reporting.","exp.mls.title":"Senior Programmer â€” MLS Bahrain, Bahrain (Apr 2016 â€“ Nov 2018)","exp.mls.li1":"Improved integration and reporting for enterprise clients in finance and healthcare.","exp.mls.li2":"Optimized queries and delivered dynamic reports with DevExpress/Crystal Reports.","exp.nhif.title":"Application Developer â€” National Health Insurance Fund, Sudan (Apr 2013 â€“ Apr 2015)","exp.nhif.li1":"Delivered health insurance systems serving 50,000+ users.","exp.nhif.li2":"Built claims management modules and custom reporting with Crystal Reports.","edu.title":"Education","edu.text":"B.Sc. in Information Technology â€” Sudan University of Science and Technology (2014)","ref.title":"References","ref.text":"Available upon request.","core.title":"Core Competencies","core.prog.k":"Programming:","core.prog.v":"C#, JavaScript","core.fw.k":"Frameworks:","core.fw.v":"ASP.NET Core, MVC, Web API, .NET MAUI","core.fe.k":"Front-End:","core.fe.v":"HTML5, CSS3, Bootstrap","core.db.k":"Database:","core.db.v":"SQL Server","core.cloud.k":"Cloud:","core.cloud.v":"GCP, Azure, AWS","core.tools.k":"Tools:","core.tools.v":"Kendo UI, DevExpress, Crystal Reports, Git, GitHub","core.prof.k":"Professional:","core.prof.v":"System Architecture & Code Quality, Agile, Team Leadership","domain.title":"Domain Expertise","domain.bank":"Banking Systems","domain.med":"Medical Insurance Systems","domain.cloudpm":"Cloud Project Management","domain.integr":"Enterprise System Integration","domain.reports":"Reporting Solutions","contact.title":"Contact","contact.desc":"Best ways to reach me. Calls, WhatsApp, and email are welcome.","contact.call":"Call","contact.bh.label":"Bahrain","contact.sa.label":"Saudi Arabia","footer.rights":"All rights reserved.","avatar.alt":"Portrait of eng mahdi"},
-        "ar":{"skip":"ØªØ®Ø·Ù‘Ù Ø¥Ù„Ù‰ Ø§Ù„Ø³ÙŠØ±Ø© Ø§Ù„Ø°Ø§ØªÙŠØ©","nav.about":"Ù†Ø¨Ø°Ø©","nav.skills":"Ù…Ù‡Ø§Ø±Ø§Øª","nav.projects":"Ù…Ø´Ø§Ø±ÙŠØ¹","nav.resume":"Ø§Ù„Ø³ÙŠØ±Ø© Ø§Ù„Ø°Ø§ØªÙŠØ©","nav.contact":"ØªÙˆØ§ØµÙ„","hero.badge":"Ù…ØªØ§Ø­ Ù„Ù„ØªØ¹Ø§ÙˆÙ†","hero.title":"Ù…Ø·ÙˆÙ‘Ø± .NET Ù…ØªÙƒØ§Ù…Ù„ â€” Senior","hero.desc":"Ù…Ù‚ÙŠÙ… ÙÙŠ Ø§Ù„Ø­Ø¯ â€“ Ø§Ù„Ø¨Ø­Ø±ÙŠÙ† ÙˆØ§Ù„Ø¯Ù…Ø§Ù… â€“ Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ©. Ø£Ø¨Ù†ÙŠ Ø­Ù„ÙˆÙ„ ÙˆÙŠØ¨ ÙˆØ¬ÙˆØ§Ù„ ÙˆØ³Ø­Ø§Ø¨Ø© Ù‚Ø§Ø¨Ù„Ø© Ù„Ù„ØªÙˆØ³Ù‘Ø¹ ÙˆØ¨Ø¬ÙˆØ¯Ø© Ø¹Ø§Ù„ÙŠØ©.","hero.btn.resume":"Ø¹Ø±Ø¶ Ø§Ù„Ø³ÙŠØ±Ø© Ø§Ù„Ø°Ø§ØªÙŠØ©","hero.btn.contact":"Ù„Ù„ØªÙˆØ§ØµÙ„","quick.title":"Ù…Ù„Ø®Øµ Ø³Ø±ÙŠØ¹","quick.text":"Ø£ÙƒØ«Ø± Ù…Ù† 10 Ø³Ù†ÙˆØ§Øª Ø¹Ø¨Ø± ØªÙ‚Ù†ÙŠØ§Øª Ù…Ø§ÙŠÙƒØ±ÙˆØ³ÙˆÙØª ÙˆØ§Ù„Ø³Ø­Ø§Ø¨Ø© ÙˆÙˆØ§Ø¬Ù‡Ø§Øª Ø§Ù„Ø¨Ø±Ù…Ø¬Ø© ÙˆØ§Ù„Ø¨ÙŠØ§Ù†Ø§Øª. Ù…ØªÙ…ÙƒÙ‘Ù† Ù…Ù† Ø§Ù„Ù…Ø¹Ù…Ø§Ø±ÙŠØ© ÙˆØ§Ù„Ø£Ø¯Ø§Ø¡ ÙˆØ§Ù„ØªÙ‚Ø§Ø±ÙŠØ±.","stack.title":"Ø§Ù„ØªÙ‚Ù†ÙŠØ§Øª Ø§Ù„Ù…ÙØ¶Ù‘Ù„Ø©","stack.text":"ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.","about.title":"Ù†Ø¨Ø°Ø©","about.text":"Ù…Ø·ÙˆÙ‘Ø± .NET Ù…ØªÙƒØ§Ù…Ù„ ÙŠÙ‚Ø¯Ù‘Ù… Ù…Ù†ØªØ¬Ø§Øª Ù…ÙˆØ«ÙˆÙ‚Ø©ØŒ ÙŠÙ‚ÙˆØ¯ Ø§Ù„ÙØ±Ù‚ØŒ ÙˆÙŠØ¯ÙØ¹ Ø§Ù„ØªØ­ÙˆÙ„ Ø§Ù„Ø±Ù‚Ù…ÙŠ Ø¨Ù†ØªØ§Ø¦Ø¬ Ù…Ù„Ù…ÙˆØ³Ø©.","skills.title":"Ù…Ù‡Ø§Ø±Ø§Øª Ù…Ø®ØªØ§Ø±Ø©","skill.arch":"Ù…Ø¹Ù…Ø§Ø±ÙŠØ© Ø§Ù„Ø£Ù†Ø¸Ù…Ø©","skill.agile":"Ø£Ø¬Ø§ÙŠÙ„","skill.lead":"Ù‚ÙŠØ§Ø¯Ø© Ø§Ù„ÙØ±Ù‚","projects.title":"Ù…Ø´Ø§Ø±ÙŠØ¹","projects.repo":"Ø§Ù„Ù…Ø³ØªÙˆØ¯Ø¹","projects.demo":"ØªØ¬Ø±ÙŠØ¨ÙŠ","projects.docs":"Ø§Ù„ØªÙˆØ«ÙŠÙ‚","projects.packages":"Ø§Ù„Ø­ÙØ²Ù…","projects.api.desc":"Ø®Ø¯Ù…Ø© REST Ù…Ø¹ Ø®Ø· CI ÙˆØ§Ø®ØªØ¨Ø§Ø±Ø§Øª Ø´Ø§Ù…Ù„Ø©. Ø²Ù…Ù† Ø§Ø³ØªØ¬Ø§Ø¨Ø© Ù…Ù†Ø®ÙØ¶ ÙˆØªØµÙ…ÙŠÙ… ÙˆØ§Ø¶Ø­.","projects.uikit.desc":"Ù…ÙƒÙˆÙ‘Ù†Ø§Øª React Ø®ÙÙŠÙØ© Ù…Ø¹ Ø£Ù…Ø«Ù„Ø© ÙˆStorybook.","projects.tools.desc":"Ø£Ø¯ÙˆØ§Øª Ø³Ø·Ø± Ø£ÙˆØ§Ù…Ø± Ù„Ù…Ø¹Ø§Ù„Ø¬Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª ÙˆØªØ¨Ø³ÙŠØ· Ø³ÙŠØ± ETL.","resume.title":"Ø§Ù„Ø³ÙŠØ±Ø© Ø§Ù„Ø°Ø§ØªÙŠØ©","summary.title":"Ø§Ù„Ù…Ù„Ø®Øµ Ø§Ù„Ù…Ù‡Ù†ÙŠ","summary.text":"Ù…Ø·ÙˆÙ‘Ø± .NET Ù…ØªÙƒØ§Ù…Ù„ Ø¨Ø®Ø¨Ø±Ø© ØªØªØ¬Ø§ÙˆØ² 10 Ø³Ù†ÙˆØ§Øª ÙÙŠ Ø­Ù„ÙˆÙ„ Ø§Ù„ÙˆÙŠØ¨ ÙˆØ§Ù„Ø¬ÙˆØ§Ù„ ÙˆØ§Ù„Ø³Ø­Ø§Ø¨Ø©. Ø¨Ø§Ø±Ø¹ ÙÙŠ Ù‚ÙŠØ§Ø¯Ø© Ø§Ù„ÙØ±Ù‚ØŒ ØªØ­Ø³ÙŠÙ† Ø§Ù„Ø£Ø¯Ø§Ø¡ØŒ ÙˆØ§Ù„ØªØ­ÙˆÙ‘Ù„ Ø§Ù„Ø±Ù‚Ù…ÙŠ. Ù…ØªÙ…Ø±Ø³ ÙÙŠ ØªÙ‚Ù†ÙŠØ§Øª Ù…Ø§ÙŠÙƒØ±ÙˆØ³ÙˆÙØªØŒ Ø§Ù„Ø³Ø­Ø§Ø¨Ø©ØŒ ØªÙƒØ§Ù…Ù„ Ø§Ù„Ù€ APIØŒ ÙˆØªØ­Ø³ÙŠÙ† Ù‚ÙˆØ§Ø¹Ø¯ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª.","exp.title":"Ø§Ù„Ø®Ø¨Ø±Ø§Øª Ø§Ù„Ø¹Ù…Ù„ÙŠØ©","exp.efifty.title":"Ù…Ø·ÙˆÙ‘Ø± Ø¨Ø±Ù…Ø¬ÙŠØ§Øª Ø£ÙˆÙ„ â€” Efifty OnlineØŒ Ø§Ù„Ø¨Ø­Ø±ÙŠÙ† (Ù†ÙˆÙÙ…Ø¨Ø± 2019 â€“ Ø­ØªÙ‰ Ø§Ù„Ø¢Ù†)","exp.efifty.li1":"Ù‚Ø§Ø¦Ø¯ Ù‡Ø¬Ø±Ø© Ø§Ù„Ø£Ù†Ø¸Ù…Ø© Ø¥Ù„Ù‰ Google Cloud ÙˆAzure Ù…Ù…Ø§ Ø±ÙØ¹ Ø§Ù„Ø§Ø¹ØªÙ…Ø§Ø¯ÙŠØ© 25%.","exp.efifty.li2":"ØªØ·ÙˆÙŠØ± ÙˆØ­Ø¯Ø§Øª Ø¨Ù†ÙƒÙŠØ© ÙˆØªØ£Ù…ÙŠÙ† Ø·Ø¨ÙŠ Ø¨Ø§Ø³ØªØ®Ø¯Ø§Ù… Kendo UI ÙˆDevExpress Ø¨ØªÙ‚Ø§Ø±ÙŠØ± Ù…ØªÙ‚Ø¯Ù…Ø©.","exp.efifty.li3":"ØªØµÙ…ÙŠÙ… ÙˆØµÙŠØ§Ù†Ø© ÙˆØ§Ø¬Ù‡Ø§Øª APIs Ù…Ø¤Ø³Ø³ÙŠØ© Ø¢Ù…Ù†Ø© Ù„Ù„Ø´Ø±ÙƒØ§Ø¡.","exp.efifty.li4":"Ø¨Ù†Ø§Ø¡ Ù„ÙˆØ­Ø§Øª Ù…Ø¹Ù„ÙˆÙ…Ø§Øª ÙˆØªÙ‚Ø§Ø±ÙŠØ± Ø°ÙƒØ§Ø¡ Ø£Ø¹Ù…Ø§Ù„ Ø¹Ø¨Ø± Crystal Reports.","exp.efifty.li5":"Ø¥Ø±Ø´Ø§Ø¯ Ø§Ù„Ù…Ø·ÙˆØ±ÙŠÙ† Ø§Ù„Ø¬Ø¯Ø¯ ÙˆØªØ¹Ø²ÙŠØ² Ø§Ù„ØªØ¹Ø§ÙˆÙ†.","exp.gulf.title":"Ù…Ø¨Ø±Ù…Ø¬ Ø£ÙˆÙ„ â€” Ø¬Ø§Ù…Ø¹Ø© Ø§Ù„Ø®Ù„ÙŠØ¬ØŒ Ø§Ù„Ø¨Ø­Ø±ÙŠÙ† (Ù†ÙˆÙÙ…Ø¨Ø± 2018 â€“ Ø£ÙƒØªÙˆØ¨Ø± 2019)","exp.gulf.li1":"Ø£ØªÙ…ØªØ© Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª Ø§Ù„Ø£ÙƒØ§Ø¯ÙŠÙ…ÙŠØ© ÙˆØ§Ù„Ù…Ø§Ù„ÙŠØ©.","exp.gulf.li2":"ØªØ±Ø­ÙŠÙ„ Ø§Ù„Ø£Ù†Ø¸Ù…Ø© Ø§Ù„Ù‚Ø¯ÙŠÙ…Ø© Ø¥Ù„Ù‰ Ù…Ù†ØµØ§Øª ÙˆÙŠØ¨ Ø³Ø­Ø§Ø¨ÙŠØ© Ø¨ÙˆØ§Ø¬Ù‡Ø§Øª ÙˆØªÙ‚Ø§Ø±ÙŠØ± Ø­Ø¯ÙŠØ«Ø©.","exp.mls.title":"Ù…Ø¨Ø±Ù…Ø¬ Ø£ÙˆÙ„ â€” MLS BahrainØŒ Ø§Ù„Ø¨Ø­Ø±ÙŠÙ† (Ø£Ø¨Ø±ÙŠÙ„ 2016 â€“ Ù†ÙˆÙÙ…Ø¨Ø± 2018)","exp.mls.li1":"ØªØ­Ø³ÙŠÙ† Ø§Ù„ØªÙƒØ§Ù…Ù„ ÙˆØ§Ù„ØªÙ‚Ø§Ø±ÙŠØ± Ù„Ø¹Ù…Ù„Ø§Ø¡ Ù‚Ø·Ø§Ø¹Ø§Øª Ø§Ù„Ù…Ø§Ù„ÙŠØ© ÙˆØ§Ù„Ø±Ø¹Ø§ÙŠØ© Ø§Ù„ØµØ­ÙŠØ©.","exp.mls.li2":"ØªØ­Ø³ÙŠÙ† Ø§Ù„Ø§Ø³ØªØ¹Ù„Ø§Ù…Ø§Øª ÙˆØ¨Ù†Ø§Ø¡ ØªÙ‚Ø§Ø±ÙŠØ± Ø¯ÙŠÙ†Ø§Ù…ÙŠÙƒÙŠØ© Ø¹Ø¨Ø± DevExpress/Crystal Reports.","exp.nhif.title":"Ù…Ø·ÙˆÙ‘Ø± ØªØ·Ø¨ÙŠÙ‚Ø§Øª â€” Ø§Ù„ØªØ£Ù…ÙŠÙ† Ø§Ù„ØµØ­ÙŠ Ø§Ù„Ù‚ÙˆÙ…ÙŠØŒ Ø§Ù„Ø³ÙˆØ¯Ø§Ù† (Ø£Ø¨Ø±ÙŠÙ„ 2013 â€“ Ø£Ø¨Ø±ÙŠÙ„ 2015)","exp.nhif.li1":"ØªØ·ÙˆÙŠØ± Ø£Ù†Ø¸Ù…Ø© ØªØ£Ù…ÙŠÙ† ØµØ­ÙŠ ØªØ®Ø¯Ù… 50,000+ Ù…Ø³ØªØ®Ø¯Ù….","exp.nhif.li2":"Ø¨Ù†Ø§Ø¡ ÙˆØ­Ø¯Ø§Øª Ù…Ø·Ø§Ù„Ø¨Ø§Øª ÙˆØªÙ‚Ø§Ø±ÙŠØ± Ù…Ø®ØµØµØ© Ø¨Ø§Ø³ØªØ®Ø¯Ø§Ù… Crystal Reports.","edu.title":"Ø§Ù„ØªØ¹Ù„ÙŠÙ…","edu.text":"Ø¨ÙƒØ§Ù„ÙˆØ±ÙŠÙˆØ³ ØªÙ‚Ù†ÙŠØ© Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª â€” Ø¬Ø§Ù…Ø¹Ø© Ø§Ù„Ø³ÙˆØ¯Ø§Ù† Ù„Ù„Ø¹Ù„ÙˆÙ… ÙˆØ§Ù„ØªÙƒÙ†ÙˆÙ„ÙˆØ¬ÙŠØ§ (2014)","ref.title":"Ø§Ù„Ù…Ø±Ø§Ø¬Ø¹","ref.text":"Ù…ØªØ§Ø­Ø© Ø¹Ù†Ø¯ Ø§Ù„Ø·Ù„Ø¨.","core.title":"Ø§Ù„ÙƒÙØ§Ø¡Ø§Øª Ø§Ù„Ø£Ø³Ø§Ø³ÙŠØ©","core.prog.k":"Ø§Ù„Ø¨Ø±Ù…Ø¬Ø©:","core.prog.v":"C#â€ØŒ JavaScript","core.fw.k":"Ø§Ù„Ø£Ø·Ø±:","core.fw.v":"ASP.NET CoreØŒ MVCØŒ Web APIØŒ â€.NET MAUI","core.fe.k":"Ø§Ù„ÙˆØ§Ø¬Ù‡Ø§Øª Ø§Ù„Ø£Ù…Ø§Ù…ÙŠØ©:","core.fe.v":"HTML5ØŒ CSS3ØŒ Bootstrap","core.db.k":"Ù‚ÙˆØ§Ø¹Ø¯ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª:","core.db.v":"SQL Server","core.cloud.k":"Ø§Ù„Ø³Ø­Ø§Ø¨Ø©:","core.cloud.v":"GCPØŒ AzureØŒ AWS","core.tools.k":"Ø§Ù„Ø£Ø¯ÙˆØ§Øª:","core.tools.v":"Kendo UIØŒ DevExpressØŒ Crystal ReportsØŒ GitØŒ GitHub","core.prof.k":"Ø§Ù„Ù…Ù‡Ù†ÙŠ:","core.prof.v":"Ù…Ø¹Ù…Ø§Ø±ÙŠØ© Ø§Ù„Ø´ÙŠÙØ±Ø© ÙˆØ¬ÙˆØ¯ØªÙ‡Ø§ØŒ Ø£Ø¬Ø§ÙŠÙ„ØŒ Ù‚ÙŠØ§Ø¯Ø© Ø§Ù„ÙØ±Ù‚","domain.title":"Ø®Ø¨Ø±Ø§Øª Ø§Ù„Ù†Ø·Ø§Ù‚","domain.bank":"Ø§Ù„Ø£Ù†Ø¸Ù…Ø© Ø§Ù„Ù…ØµØ±ÙÙŠØ©","domain.med":"Ø£Ù†Ø¸Ù…Ø© Ø§Ù„ØªØ£Ù…ÙŠÙ† Ø§Ù„Ø·Ø¨ÙŠ","domain.cloudpm":"Ø¥Ø¯Ø§Ø±Ø© Ù…Ø´Ø§Ø±ÙŠØ¹ Ø§Ù„Ø³Ø­Ø§Ø¨Ø©","domain.integr":"ØªÙƒØ§Ù…Ù„ Ø§Ù„Ø£Ù†Ø¸Ù…Ø© Ø§Ù„Ù…Ø¤Ø³Ø³ÙŠØ©","domain.reports":"Ø­Ù„ÙˆÙ„ Ø§Ù„ØªÙ‚Ø§Ø±ÙŠØ±","contact.title":"Ø§Ù„ØªÙˆØ§ØµÙ„","contact.desc":"Ø£ÙØ¶Ù„ Ø·Ø±Ù‚ Ø§Ù„ØªÙˆØ§ØµÙ„. Ù…ÙƒØ§Ù„Ù…Ø§ØªØŒ ÙˆØ§ØªØ³Ø§Ø¨ØŒ ÙˆØ¨Ø±ÙŠØ¯.","contact.call":"Ø§ØªØµØ§Ù„","contact.bh.label":"Ø§Ù„Ø¨Ø­Ø±ÙŠÙ†","contact.sa.label":"Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ©","footer.rights":"Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø­Ù‚ÙˆÙ‚ Ù…Ø­ÙÙˆØ¸Ø©.","avatar.alt":"ØµÙˆØ±Ø© Ø´Ø®ØµÙŠØ© Ù„Ù€ eng mahdi"}
+        "en":{"skip":"Skip to resume","nav.about":"About","nav.skills":"Skills","nav.projects":"Projects","nav.resume":"Resume","nav.contact":"Contact","hero.badge":"Open to collaborate","hero.title":"Senior .NET Full Stack Developer","hero.desc":"Based in Hidd, Bahrain & Dammam, Saudi Arabia with 15+ years delivering scalable, high-performance web, mobile, and cloud solutions.","hero.btn.resume":"View resume","hero.btn.contact":"Get in touch","quick.title":"Quick summary","quick.text":"15+ years across Microsoft stack, cloud migrations, enterprise APIs, and reporting excellence.","stack.title":"Favorite stack","stack.text":"ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.","about.title":"About","about.text":"Senior .NET Full Stack Developer modernizing legacy platforms, automating operations, and leading high-performing teams for banking and medical insurance organizations.","skills.title":"Selected skills","skill.arch":"Clean Architecture","skill.agile":"Agile","skill.lead":"Team Leadership","projects.title":"Projects","projects.repo":"Repository","projects.demo":"Demo","projects.docs":"Docs","projects.packages":"Packages","projects.api.desc":"Azure + GCP landing zones, automated deployments, and observability raised availability by 25% for regulated banking and insurance workloads.","projects.uikit.desc":"Modular enrollment, billing, and claims solutions with secure REST APIs, partner onboarding, and modernized UX across Kendo UI and DevExpress.","projects.tools.desc":"Crystal Reports, DevExpress dashboards, and optimized SQL powering executives with on-demand insights and automated distribution.","resume.title":"Resume","summary.title":"Professional Summary","summary.text":"Senior .NET Full Stack Developer with 15+ years delivering scalable, high-performance web, mobile, and cloud solutions. Proven leader in modernizing legacy systems, guiding teams, and driving digital transformation with clean architecture and business-driven outcomes.","exp.title":"Professional Experience","exp.efifty.title":"Senior Software Developer — Efifty Online, Bahrain (Nov 2019 – Present)","exp.efifty.li1":"Led cloud migration and digital transformation on Azure and GCP, increasing reliability by 25%.","exp.efifty.li2":"Designed and developed scalable banking and medical insurance systems.","exp.efifty.li3":"Built secure RESTful APIs for enterprise integrations and third-party partners.","exp.efifty.li4":"Delivered interactive dashboards and advanced reporting with Crystal Reports, DevExpress, and Kendo UI.","exp.efifty.li5":"Mentored junior developers and improved productivity through reviews and best practices.","exp.gulf.title":"Senior Programmer — Gulf University, Bahrain (Nov 2018 – Oct 2019)","exp.gulf.li1":"Automated academic and financial workflows.","exp.gulf.li2":"Migrated legacy systems to cloud-based web platforms with modern UI and reporting.","exp.gulf.li3":"Implemented analytics and reporting solutions that supported university leadership decisions.","exp.mls.title":"Senior Programmer — MLS Bahrain, Bahrain (Apr 2016 – Nov 2018)","exp.mls.li1":"Improved integration and reporting for enterprise clients in finance and healthcare.","exp.mls.li2":"Optimized queries and delivered dynamic reports with DevExpress/Crystal Reports.","exp.mls.li3":"Aligned product backlogs with compliance needs and business priorities.","exp.nhif.title":"Application Developer — National Health Insurance Fund, Sudan (Apr 2013 – Apr 2015)","exp.nhif.li1":"Developed insurance management systems serving 50,000+ users.","exp.nhif.li2":"Designed claims processing modules and custom reporting tools.","exp.nhif.li3":"Improved system stability and scalability for regional rollouts.","edu.title":"Education","edu.text":"B.Sc. in Information Technology — Sudan University of Science and Technology (2014)","ref.title":"References","ref.text":"Available upon request.","core.title":"Core Competencies","core.prog.k":"Programming:","core.prog.v":"C#, JavaScript","core.fw.k":"Frameworks:","core.fw.v":"ASP.NET Core, MVC, Web API, .NET MAUI","core.fe.k":"Front-End:","core.fe.v":"HTML5, CSS3, Bootstrap","core.db.k":"Database:","core.db.v":"SQL Server","core.cloud.k":"Cloud:","core.cloud.v":"GCP, Azure, AWS","core.tools.k":"Tools:","core.tools.v":"Kendo UI, DevExpress, Crystal Reports, Git, GitHub","core.prof.k":"Professional:","core.prof.v":"Clean Architecture & Code Quality, Agile, Team Leadership","domain.title":"Domain Expertise","domain.bank":"Banking Systems & Financial Solutions","domain.med":"Medical Insurance Systems & Claims Processing","domain.cloudpm":"Cloud Migration & Modernization","domain.integr":"Enterprise API Integration","domain.reports":"Business Intelligence & Reporting Solutions","contact.title":"Contact","contact.desc":"Best ways to reach me. Calls, WhatsApp, and email are welcome.","contact.call":"Call","contact.bh.label":"Bahrain","contact.sa.label":"Saudi Arabia","contact.note":"Available for relocation and remote opportunities.","footer.rights":"All rights reserved.","avatar.alt":"Portrait of eng mahdi"},
+        "ar":{"skip":"ÊÎØøó Åáì ÇáÓíÑÉ ÇáĞÇÊíÉ","nav.about":"äÈĞÉ","nav.skills":"ãåÇÑÇÊ","nav.projects":"ãÔÇÑíÚ","nav.resume":"ÇáÓíÑÉ ÇáĞÇÊíÉ","nav.contact":"ÊæÇÕá","hero.badge":"ãÊÇÍ ááÊÚÇæä","hero.title":"ãØæøÑ .NET ãÊßÇãá — Senior","hero.desc":"ãŞíã İí ÇáÍÏ – ÇáÈÍÑíä æÇáÏãÇã – ÇáÓÚæÏíÉ ãÚ ÎÈÑÉ ÊÊÌÇæÒ 15 ÓäÉ İí ÈäÇÁ Íáæá æíÈ æÌæÇá æÓÍÇÈÉ ŞÇÈáÉ ááÊæÓÚ æÚÇáíÉ ÇáÃÏÇÁ.","hero.btn.resume":"ÚÑÖ ÇáÓíÑÉ ÇáĞÇÊíÉ","hero.btn.contact":"ááÊæÇÕá","quick.title":"ãáÎÕ ÓÑíÚ","quick.text":"ÃßËÑ ãä 15 ÓäÉ ÚÈÑ ÊŞäíÇÊ ãÇíßÑæÓæİÊ¡ åÌÑÇÊ ÇáÓÍÇÈÉ¡ ÊßÇãá ÇáÜ API ÇáãÄÓÓí¡ æÍáæá ÇáÊŞÇÑíÑ.","stack.title":"ÇáÊŞäíÇÊ ÇáãİÖøáÉ","stack.text":"ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.","about.title":"äÈĞÉ","about.text":"ãØæøÑ ı.NETı ãÊßÇãá íŞæÏ ÊÍÏíË ÇáÃäÙãÉ ÇáŞÏíãÉ¡ ÃÊãÊÉ ÇáÚãáíÇÊ¡ æŞíÇÏÉ ÇáİÑŞ ÚÇáíÉ ÇáÃÏÇÁ áŞØÇÚÇÊ ÇáÈäæß æÇáÊÃãíä ÇáØÈí.","skills.title":"ãåÇÑÇÊ ãÎÊÇÑÉ","skill.arch":"ãÚãÇÑíÉ äÙíİÉ","skill.agile":"ÃÌÇíá","skill.lead":"ŞíÇÏÉ ÇáİÑŞ","projects.title":"ãÔÇÑíÚ","projects.repo":"ÇáãÓÊæÏÚ","projects.demo":"ÊÌÑíÈí","projects.docs":"ÇáÊæËíŞ","projects.packages":"ÇáÍöÒã","projects.api.desc":"ãäÇØŞ åÈæØ Azure æGCP ãÚ äÔÑÇÊ ãÄÊãÊÉ æÑÕÏ ãÓÊãÑ ÑİÚÊ ÇáÊæÇİÑíÉ 25% áÍáæá ÇáÈäæß æÇáÊÃãíä.","projects.uikit.desc":"ãäÕÇÊ ÊÓÌíá æİæÊÑÉ æãØÇáÈÇÊ ãÚíÇÑíÉ ÈæÇÌåÇÊ REST ÂãäÉ¡ æÅÏãÇÌ ÇáÔÑßÇÁ¡ æÊÌÇÑÈ ãÓÊÎÏã ãÍÏøËÉ ÚÈÑ Kendo UI æDevExpress.","projects.tools.desc":"ÊŞÇÑíÑ Crystal¡ áæÍÇÊ DevExpress¡ æÊÍÓíäÇÊ SQL ÊæİøÑ ÑÄì İæÑíÉ æÊæÒíÚÇğ ÂáíÇğ áÕÇäÚí ÇáŞÑÇÑ.","resume.title":"ÇáÓíÑÉ ÇáĞÇÊíÉ","summary.title":"ÇáãáÎÕ Çáãåäí","summary.text":"ãØæøÑ ı.NETı ãÊßÇãá ÈÎÈÑÉ ÊÊÌÇæÒ 15 ÓäÉ İí ÈäÇÁ Íáæá æíÈ æÌæÇá æÓÍÇÈÉ ÚÇáíÉ ÇáÃÏÇÁ. íŞæÏ ÊÍÏíË ÇáÃäÙãÉ¡ ŞíÇÏÉ ÇáİÑŞ¡ æÇáÊÍæá ÇáÑŞãí ÈãÚãÇÑíÉ äÙíİÉ æÍáæá ãæÌåÉ ááÃÚãÇá.","exp.title":"ÇáÎÈÑÇÊ ÇáÚãáíÉ","exp.efifty.title":"ãØæøÑ ÈÑãÌíÇÊ Ãæá — Efifty Online¡ ÇáÈÍÑíä (äæİãÈÑ 2019 – ÍÊì ÇáÂä)","exp.efifty.li1":"ŞíÇÏÉ åÌÑÇÊ Azure æGCP æÇáÊÍæá ÇáÑŞãí ããÇ ÑİÚ ÇáÇÚÊãÇÏíÉ 25%.","exp.efifty.li2":"ÊÕãíã æÊØæíÑ ÃäÙãÉ ãÕÑİíÉ æÊÃãíä ØÈí ŞÇÈáÉ ááÊæÓÚ.","exp.efifty.li3":"ÈäÇÁ æÇÌåÇÊ REST ÂãäÉ ááÊßÇãá ÇáãÄÓÓí æÇáÔÑßÇÁ ÇáÎÇÑÌííä.","exp.efifty.li4":"ÊÓáíã áæÍÇÊ æÊŞÇÑíÑ ÊİÇÚáíÉ ÚÈÑ Crystal Reports æDevExpress æKendo UI.","exp.efifty.li5":"ÅÑÔÇÏ ÇáİÑŞ æÊÍÓíä ÇáÅäÊÇÌíÉ ÚÈÑ ÇáãÑÇÌÚÇÊ æÃİÖá ÇáããÇÑÓÇÊ.","exp.gulf.title":"ãÈÑãÌ Ãæá — ÌÇãÚÉ ÇáÎáíÌ¡ ÇáÈÍÑíä (äæİãÈÑ 2018 – ÃßÊæÈÑ 2019)","exp.gulf.li1":"ÃÊãÊÉ ÇáÅÌÑÇÁÇÊ ÇáÃßÇÏíãíÉ æÇáãÇáíÉ.","exp.gulf.li2":"ÊÑÍíá ÇáÃäÙãÉ ÇáŞÏíãÉ Åáì ãäÕÇÊ æíÈ ÓÍÇÈíÉ ÈæÇÌåÇÊ ÍÏíËÉ.","exp.gulf.li3":"ÊäİíĞ Íáæá ÊÍáíáÇÊ æÊŞÇÑíÑ ÏÚãÊ ŞÑÇÑÇÊ ŞíÇÏÉ ÇáÌÇãÚÉ.","exp.mls.title":"ãÈÑãÌ Ãæá — MLS Bahrain¡ ÇáÈÍÑíä (ÃÈÑíá 2016 – äæİãÈÑ 2018)","exp.mls.li1":"ÊÍÓíä ÇáÊßÇãá æÇáÊŞÇÑíÑ áÚãáÇÁ ŞØÇÚÇÊ ÇáãÇáíÉ æÇáÑÚÇíÉ ÇáÕÍíÉ.","exp.mls.li2":"ÊÍÓíä ÇáÇÓÊÚáÇãÇÊ æÊŞÏíã ÊŞÇÑíÑ ÏíäÇãíßíÉ ÚÈÑ DevExpress/Crystal Reports.","exp.mls.li3":"ãæÇÁãÉ ÇáÃæáæíÇÊ ãÚ ÇáãÊØáÈÇÊ ÇáÊäÙíãíÉ æÇÍÊíÇÌÇÊ ÇáÚãá.","exp.nhif.title":"ãØæøÑ ÊØÈíŞÇÊ — ÇáÕäÏæŞ ÇáŞæãí ááÊÃãíä ÇáÕÍí¡ ÇáÓæÏÇä (ÃÈÑíá 2013 – ÃÈÑíá 2015)","exp.nhif.li1":"ÊØæíÑ ÃäÙãÉ ÊÃãíä ÊÎÏã ÃßËÑ ãä 50,000 ãÓÊİíÏ.","exp.nhif.li2":"ÊÕãíã æÍÏÇÊ ãÚÇáÌÉ ÇáãØÇáÈÇÊ æÃÏæÇÊ ÇáÊŞÇÑíÑ.","exp.nhif.li3":"ÊÚÒíÒ ÇÓÊŞÑÇÑ ÇáãäÙæãÉ æŞÇÈáíÉ ÇáÊæÓÚ Úáì ãÓÊæì ÇáÃŞÇáíã.","edu.title":"ÇáÊÚáíã","edu.text":"ÈßÇáæÑíæÓ ÊŞäíÉ ÇáãÚáæãÇÊ — ÌÇãÚÉ ÇáÓæÏÇä ááÚáæã æÇáÊßäæáæÌíÇ (2014)","ref.title":"ÇáãÑÇÌÚ","ref.text":"ãÊÇÍÉ ÚäÏ ÇáØáÈ.","core.title":"ÇáßİÇÁÇÊ ÇáÃÓÇÓíÉ","core.prog.k":"ÇáÈÑãÌÉ:","core.prog.v":"C#ı¡ JavaScript","core.fw.k":"ÇáÃØÑ:","core.fw.v":"ASP.NET Core¡ MVC¡ Web API¡ ı.NET MAUI","core.fe.k":"æÇÌåÇÊ ÇáãÓÊÎÏã:","core.fe.v":"HTML5¡ CSS3¡ Bootstrap","core.db.k":"ŞæÇÚÏ ÇáÈíÇäÇÊ:","core.db.v":"SQL Server","core.cloud.k":"ÇáÓÍÇÈÉ:","core.cloud.v":"GCP¡ Azure¡ AWS","core.tools.k":"ÇáÃÏæÇÊ:","core.tools.v":"Kendo UI¡ DevExpress¡ Crystal Reports¡ Git¡ GitHub","core.prof.k":"Çáãåäí:","core.prof.v":"ãÚãÇÑíÉ äÙíİÉ æÌæÏÉ ÇáÔíİÑÉ¡ ÃÌÇíá¡ ŞíÇÏÉ ÇáİÑŞ","domain.title":"ÎÈÑÇÊ ÇáãÌÇá","domain.bank":"ÃäÙãÉ ãÕÑİíÉ æÍáæá ãÇáíÉ","domain.med":"ÃäÙãÉ ÇáÊÃãíä ÇáØÈí æãÚÇáÌÉ ÇáãØÇáÈÇÊ","domain.cloudpm":"åÌÑÇÊ ÇáÓÍÇÈÉ æÊÍÏíË ÇáÃäÙãÉ","domain.integr":"ÊßÇãá æÇÌåÇÊ API ÇáãÄÓÓíÉ","domain.reports":"ĞßÇÁ ÇáÃÚãÇá æÍáæá ÇáÊŞÇÑíÑ","contact.title":"ÇáÊæÇÕá","contact.desc":"ÃİÖá ØÑŞ ááÊæÇÕá. ãßÇáãÇÊ¡ æÇÊÓÇÈ¡ æÈÑíÏ.","contact.call":"ÇÊÕÇá","contact.bh.label":"ÇáÈÍÑíä","contact.sa.label":"ÇáÓÚæÏíÉ","contact.note":"ãÊÇÍ ááÇäÊŞÇá æÇáÚãá Úä ÈÚÏ.","footer.rights":"ÌãíÚ ÇáÍŞæŞ ãÍİæÙÉ.","avatar.alt":"ÕæÑÉ ÔÎÕíÉ áÜ eng mahdi"}
       };
 
       function applyLang(lang){
@@ -455,20 +454,17 @@ html = r"""<!-- /index.html -->
         const rtl = (lang === 'ar');
         root.setAttribute('lang', lang);
         root.setAttribute('dir', rtl ? 'rtl' : 'ltr');
-        document.title = lang === 'ar' ? "eng mahdi â€” ØµÙØ­Ø© Ø´Ø®ØµÙŠØ©" : "eng mahdi â€” Personal Page";
-        // text nodes
+        document.title = lang === 'ar' ? "eng mahdi — ÕİÍÉ ÔÎÕíÉ" : "eng mahdi — Personal Page";
         $('[data-i18n]').forEach(el => {
           const key = el.getAttribute('data-i18n');
           const val = dict[key];
           if (typeof val === 'string') el.textContent = val;
         });
-        // alt attributes
         $('[data-i18n-alt]').forEach(el => {
           const key = el.getAttribute('data-i18n-alt');
           const val = dict[key];
           if (typeof val === 'string') el.setAttribute('alt', val);
         });
-        // sync selector
         langSelect.value = lang;
         localStorage.setItem(langKey, lang);
       }
@@ -488,12 +484,18 @@ html = r"""<!-- /index.html -->
       document.getElementById('print-resume').addEventListener('click', () => window.print());
       yearEl.textContent = new Date().getFullYear();
 
-      // Active link sync (desktop)
       const links=[...document.querySelectorAll('nav.site-nav a')], sections=links.map(a=>document.querySelector(a.getAttribute('href')));
-      const io=new IntersectionObserver((es)=>{ es.forEach(e=>{ const i=sections.indexOf(e.target); if(i>=0){ const l=links[i]; e.isIntersecting?l.classList.add('active'):l.classList.remove('active') } }); }, { rootMargin:'-40% 0px -50% 0px', threshold:0 });
-      sections.forEach(s=>s&&io.observe(s));
+      const io=new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          const idx=sections.indexOf(entry.target);
+          if(idx>=0){
+            const link=links[idx];
+            entry.isIntersecting ? link.classList.add('active') : link.classList.remove('active');
+          }
+        });
+      }, { rootMargin:'-40% 0px -50% 0px', threshold:0 });
+      sections.forEach(section=>section&&io.observe(section));
 
-      // Scroll progress bar
       const progress = document.querySelector('.progress');
       const setProgress = () => {
         const h = document.documentElement;
@@ -502,7 +504,6 @@ html = r"""<!-- /index.html -->
       };
       setProgress(); addEventListener('scroll', setProgress, { passive:true }); addEventListener('resize', setProgress);
 
-      // Mobile menu logic
       const menuBtn = document.getElementById('menu-toggle');
       const panel = document.getElementById('mobile-menu');
       function openMenu(){
@@ -523,26 +524,15 @@ html = r"""<!-- /index.html -->
         expanded ? closeMenu() : openMenu();
       });
       panel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-      addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') closeMenu(); });
-      addEventListener('resize', ()=>{ if(matchMedia('(min-width: 901px)').matches && menuBtn.getAttribute('aria-expanded') === 'true'){ closeMenu(); } });
+      addEventListener('keydown', (e)=>{
+        if(e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') closeMenu();
+      });
+      addEventListener('resize', ()=>{
+        if(matchMedia('(min-width: 901px)').matches && menuBtn.getAttribute('aria-expanded') === 'true'){
+          closeMenu();
+        }
+      });
     })();
   </script>
 </body>
 </html>
-"""
-
-out = Path("/mnt/data/index.html")
-out.write_text(html, encoding="utf-8")
-
-readme = """# How to add your photo
-- Put your image file next to index.html and name it **avatar.jpg** (or change the `src` of the `<img class="avatar">` to your URL).
-- Recommended size: square (e.g., 512x512). It will be cropped to a circle automatically.
-- Alt text is localized via `data-i18n-alt="avatar.alt"`.
-
-# Deploy (GitHub Pages)
-1) Repo `mahdisafe.github.io` â†’ add `index.html` and `avatar.jpg` â†’ push.
-2) Open https://mahdisafe.github.io/ (or your Pages URL).
-"""
-Path("/mnt/data/README.txt").write_text(readme, encoding="utf-8")
-
-"Saved with avatar slot"
