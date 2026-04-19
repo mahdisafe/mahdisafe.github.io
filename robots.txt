@@ -1,0 +1,5 @@
+# https://mahdisafe.github.io/
+User-agent: *
+Allow: /
+
+Sitemap: https://mahdisafe.github.io/sitemap.xml
