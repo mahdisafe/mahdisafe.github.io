@@ -3,15 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>eng mahdi — Personal Page</title>
-  <meta name="description" content="Personal site with resume, projects, and contact. Arabic/English with a language selector." />
+  <title>Mahdi Safealdeen | Senior .NET Full Stack Developer | Bahrain</title>
+  <meta name="description" content="Mahdi Safealdeen (eng mahdi) — Senior .NET Full Stack Developer in Hidd, Bahrain. ASP.NET Core, Web API, Azure, GCP, banking &amp; medical insurance systems. CV, projects, and contact." />
+  <meta name="author" content="Mahdi Safealdeen" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow" />
   <link rel="canonical" href="https://mahdisafe.github.io/" />
   <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="0.9em" font-size="78">M</text></svg>' />
-  <meta property="og:title" content="eng mahdi — Personal Page" />
-  <meta property="og:description" content="Quick bio, skills, resume, projects, and how to reach me. EN/AR with a language selector." />
-  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mahdi Safealdeen | Senior .NET Full Stack Developer" />
+  <meta property="og:description" content="Senior .NET developer in Bahrain: Azure &amp; GCP, banking &amp; medical insurance platforms, Web API, clean architecture. Resume &amp; contact." />
+  <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://mahdisafe.github.io/" />
+  <meta property="og:site_name" content="Mahdi Safealdeen" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ar_AR" />
+  <meta property="og:image" content="https://mahdisafe.github.io/avatar.jpg" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
+  <meta property="og:image:alt" content="Mahdi Safealdeen — portrait" />
+  <meta property="profile:first_name" content="Mahdi" />
+  <meta property="profile:last_name" content="Safealdeen" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mahdi Safealdeen | Senior .NET Full Stack Developer" />
+  <meta name="twitter:description" content="Senior .NET developer in Bahrain — resume, skills, and projects." />
+  <meta name="twitter:image" content="https://mahdisafe.github.io/avatar.jpg" />
   <meta name="theme-color" content="#22d3ee" />
+  <link rel="me" href="https://github.com/mahdisafe" />
+  <link rel="me" href="https://www.linkedin.com/in/mahdi-safealdeen-896836108/" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"WebSite","@id":"https://mahdisafe.github.io/#website","url":"https://mahdisafe.github.io/","name":"Mahdi Safealdeen","description":"Personal website, resume, and portfolio for Mahdi Safealdeen — Senior .NET Full Stack Developer.","inLanguage":["en","ar"],"publisher":{"@id":"https://mahdisafe.github.io/#person"}},
+    {"@type":"ProfilePage","@id":"https://mahdisafe.github.io/#webpage","url":"https://mahdisafe.github.io/","name":"Mahdi Safealdeen — CV & Portfolio","isPartOf":{"@id":"https://mahdisafe.github.io/#website"},"mainEntity":{"@id":"https://mahdisafe.github.io/#person"}},
+    {"@type":"Person","@id":"https://mahdisafe.github.io/#person","name":"Mahdi Safealdeen","alternateName":["eng mahdi","مهدي صفى الدين"],"givenName":"Mahdi","familyName":"Safealdeen","jobTitle":"Senior .NET Full Stack Developer","description":"Senior .NET Full Stack Developer with 15+ years in web, mobile, and cloud solutions; banking and medical insurance domains.","url":"https://mahdisafe.github.io/","image":{"@type":"ImageObject","url":"https://mahdisafe.github.io/avatar.jpg","caption":"Mahdi Safealdeen"},"email":"mahdisafe@gmail.com","sameAs":["https://github.com/mahdisafe","https://www.linkedin.com/in/mahdi-safealdeen-896836108/"],"address":{"@type":"PostalAddress","addressLocality":"Hidd","addressCountry":"BH"},"knowsAbout":["C#","ASP.NET Core","Web API",".NET MAUI","Azure","Google Cloud Platform","SQL Server","REST APIs","Clean Architecture","Banking software","Medical insurance systems"],"worksFor":{"@type":"Organization","name":"Efifty Online","address":{"@type":"PostalAddress","addressCountry":"BH"}}}
+  ]}
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -51,6 +76,10 @@
     }
 
     *{ box-sizing:border-box }
+    ::selection{
+      background:color-mix(in oklab, var(--brand) 38%, transparent);
+      color:var(--text);
+    }
     html,body{ height:100% }
     body{
       margin:0;
@@ -360,6 +389,21 @@
       line-height:1.18;
       letter-spacing:.2px;
     }
+    main section > h2{
+      position:relative;
+      padding-bottom:12px;
+    }
+    main section > h2::after{
+      content:"";
+      position:absolute;
+      inset-inline-start:0;
+      bottom:0;
+      width:min(120px,28%);
+      height:3px;
+      border-radius:999px;
+      background:linear-gradient(90deg, var(--brand), color-mix(in oklab, var(--accent) 42%, var(--brand)));
+      opacity:.92;
+    }
     .muted{ color:var(--muted) }
 
     .skills{ display:flex; flex-wrap:wrap; gap:10px }
@@ -371,6 +415,13 @@
       font-size:13px;
       font-weight:600;
       letter-spacing:.2px;
+      transition:transform .18s ease, border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .chip:hover{
+      transform:translateY(-2px);
+      border-color:color-mix(in oklab, var(--brand) 52%, var(--border));
+      box-shadow:0 8px 20px color-mix(in oklab, var(--bg) 45%, transparent);
+      background:color-mix(in oklab,var(--brand) 10%, var(--bg-soft));
     }
 
     .project{
@@ -458,6 +509,11 @@
       border-radius:inherit;
       background:linear-gradient(90deg, var(--brand), color-mix(in oklab, var(--accent) 38%, var(--brand)));
       box-shadow:0 4px 12px color-mix(in oklab, var(--brand) 36%, transparent);
+      transition:filter .25s ease, box-shadow .25s ease;
+    }
+    .exp-row:hover .exp-fill{
+      filter:brightness(1.12) saturate(1.05);
+      box-shadow:0 4px 16px color-mix(in oklab, var(--brand) 48%, transparent);
     }
     .exp-chart-note{
       margin:4px 0 0;
@@ -470,6 +526,12 @@
       border-radius:16px;
       background:color-mix(in oklab,var(--bg-soft) 84%, transparent);
       overflow:hidden;
+      transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .job:hover{
+      transform:translateY(-3px);
+      border-color:color-mix(in oklab, var(--brand) 40%, var(--border));
+      box-shadow:0 16px 32px color-mix(in oklab, var(--bg) 50%, transparent);
     }
     .job::before{
       content:"";
@@ -478,6 +540,11 @@
       inset-inline-start:0;
       width:3px;
       background:linear-gradient(180deg, var(--brand), color-mix(in oklab, var(--brand) 30%, transparent));
+      transition:width .2s ease, filter .2s ease;
+    }
+    .job:hover::before{
+      width:4px;
+      filter:brightness(1.15);
     }
     .job h4{ margin:0 0 4px; font-size:18px }
     .job .where{ color:var(--muted); font-size:14px }
@@ -515,6 +582,14 @@
     }
     html[dir="rtl"] .exp-fill{
       margin-inline-start:auto;
+    }
+
+    .resume-toolbar{
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid color-mix(in oklab, var(--brand) 22%, var(--border));
+      background:color-mix(in oklab, var(--bg-soft) 88%, transparent);
+      box-shadow:0 10px 28px color-mix(in oklab, var(--bg) 42%, transparent);
     }
 
     @media (max-width: 560px){
@@ -853,10 +928,10 @@
         root.setAttribute('lang', rtl ? 'ar' : 'en');
         root.setAttribute('dir', rtl ? 'rtl' : 'ltr');
         document.title = normalizedLang === 'ar'
-          ? "eng mahdi — صفحة شخصية"
+          ? "مهدي صفى الدين | مطوّر .NET متكامل | البحرين"
           : isBilingual
-            ? "eng mahdi — Arabic/English CV"
-            : "eng mahdi — Personal Page";
+            ? "Mahdi Safealdeen | CV عربي/English | .NET Developer"
+            : "Mahdi Safealdeen | Senior .NET Full Stack Developer | Bahrain";
 
         $('[data-i18n]').forEach(el => {
           const key = el.getAttribute('data-i18n');
