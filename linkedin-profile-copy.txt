@@ -1,0 +1,132 @@
+================================================================================
+مزامنة لينكدإن مع الموقع (يدوياً)
+================================================================================
+
+لا يمكن تحديث ملف لينكدإن تلقائياً من هذا المستودع؛ انسخ الأقسام أدناه إلى حسابك
+وطابق التواريخ والعناوين مع https://mahdisafe.github.io/
+
+رابط الملف الشخصي للتحرير:
+https://www.linkedin.com/in/mahdi-safealdeen-896836108/
+
+اقتراح: اجعل اللغة الأساسية للوصف الوظيفي الإنجليزية (أو العربية بشكل متسق)،
+واحذف التكرار إذا دمجت دورين في Efifty في مدخل واحد.
+
+
+--------------------------------------------------------------------------------
+Headline (العنوان تحت الاسم)
+--------------------------------------------------------------------------------
+Senior .NET Full Stack Developer | ASP.NET Core, Web API, Cloud (Azure/GCP), .NET MAUI
+
+
+--------------------------------------------------------------------------------
+About (نبذة "عني")
+--------------------------------------------------------------------------------
+Senior .NET Full Stack Developer modernizing legacy platforms, automating operations,
+and leading high-performing teams for banking and medical insurance organizations.
+15+ years across Microsoft stack, cloud migrations, enterprise APIs, and reporting.
+
+Based in Hidd, Bahrain & Dammam, Saudi Arabia.
+Website: https://mahdisafe.github.io/
+
+
+--------------------------------------------------------------------------------
+Experience — Efifty Online, Bahrain (مدخلان منفصلان كما في الموقع)
+--------------------------------------------------------------------------------
+
+(1) Job title:
+Senior Software Developer
+
+Employment type: Full-time (عدّل حسب عقدك)
+
+Dates: Nov 2019 – Present
+
+Location: Bahrain
+
+Description (انسخ النقاط كفقرات أو أسطر في لينكدإن):
+• Led cloud migration and digital transformation on Azure and GCP, increasing reliability by 25%.
+• Designed and developed scalable banking and medical insurance systems.
+• Built secure RESTful APIs for enterprise integrations and third-party partners.
+• Delivered interactive dashboards and advanced reporting with Crystal Reports, DevExpress, and Kendo UI.
+• Mentored junior developers and improved productivity through reviews and best practices.
+
+
+(2) Job title:
+Specialist & Manager — Software Development Values
+
+Dates: Dec 2020 – Present
+
+Location: Bahrain
+
+Description:
+• Defined and promoted engineering values, coding standards, and review practices across delivery teams.
+• Led initiatives to improve code quality, consistency, and maintainability aligned with business goals.
+• Partnered with leadership to align development practices with organizational quality objectives.
+
+
+--------------------------------------------------------------------------------
+Experience — Gulf University, Bahrain
+--------------------------------------------------------------------------------
+Job title: Senior Programmer
+
+Dates: Nov 2018 – Oct 2019
+
+Description:
+• Automated academic and financial workflows.
+• Migrated legacy systems to cloud-based web platforms with modern UI and reporting.
+• Implemented analytics and reporting solutions that supported university leadership decisions.
+
+
+--------------------------------------------------------------------------------
+Experience — MLS Bahrain, Bahrain
+--------------------------------------------------------------------------------
+Job title: Senior Programmer
+
+Dates: Apr 2016 – Nov 2018
+
+Description:
+• Improved integration and reporting for enterprise clients in finance and healthcare.
+• Optimized queries and delivered dynamic reports with DevExpress/Crystal Reports.
+• Aligned product backlogs with compliance needs and business priorities.
+
+
+--------------------------------------------------------------------------------
+Experience — National Health Insurance Fund, Sudan
+--------------------------------------------------------------------------------
+Job title: Application Developer
+
+Dates: Apr 2013 – Apr 2015
+
+Description:
+• Developed insurance management systems serving 50,000+ users.
+• Designed claims processing modules and custom reporting tools.
+• Improved system stability and scalability for regional rollouts.
+
+
+--------------------------------------------------------------------------------
+Education
+--------------------------------------------------------------------------------
+Sudan University of Science and Technology
+Degree: B.Sc., Information Technology
+Year: 2014
+
+
+--------------------------------------------------------------------------------
+Skills (أضف يدوياً لتطابق الموقع)
+--------------------------------------------------------------------------------
+C#, ASP.NET Core, Web API, MVC, .NET MAUI, JavaScript, SQL Server, Azure, GCP, AWS,
+HTML5, CSS3, Bootstrap, Kendo UI, DevExpress, Crystal Reports, Git, GitHub,
+Agile, Clean Architecture, REST APIs, Reporting/BI
+
+
+================================================================================
+تحديث ملف PDF بعد تعديل السيرة في الموقع
+================================================================================
+
+1) عدّل النص في index.html و/أو resume-print.html ليبقى المصدر متطابقاً.
+
+2) أعد توليد resume.pdf (أي من):
+   - افتح resume-print.html في المتصفح ← طباعة ← حفظ كـ PDF؛ ثم استبدل الملف resume.pdf في المستودع، أو
+   - من سطر الأوامر (Chrome/Edge):
+     msedge --headless --print-to-pdf=resume.pdf file:///.../resume-print.html
+
+3) ادفع التغييرات إلى GitHub حتى يتحدث الرابط الثابت للتحميل.
