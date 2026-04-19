@@ -412,6 +412,57 @@
     .cv h3{ margin:18px 0 10px; font-size:20px; line-height:1.3 }
     .cv ul{ margin:8px 0 0 18px }
     .cv li{ margin:6px 0 }
+    .exp-chart{
+      margin:12px 0 18px;
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:color-mix(in oklab,var(--bg-soft) 82%, transparent);
+      display:grid;
+      gap:12px;
+    }
+    .exp-row{
+      display:grid;
+      gap:8px;
+    }
+    .exp-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      font-weight:600;
+      font-size:13px;
+    }
+    .exp-label{
+      color:var(--text);
+      font-weight:700;
+    }
+    .exp-years{
+      color:var(--muted);
+      font-weight:700;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.4px;
+      white-space:nowrap;
+    }
+    .exp-track{
+      height:10px;
+      border-radius:999px;
+      overflow:hidden;
+      background:color-mix(in oklab,var(--bg) 65%, var(--bg-soft));
+      border:1px solid color-mix(in oklab,var(--text) 10%, transparent);
+    }
+    .exp-fill{
+      height:100%;
+      width:var(--w,50%);
+      border-radius:inherit;
+      background:linear-gradient(90deg, var(--brand), color-mix(in oklab, var(--accent) 38%, var(--brand)));
+      box-shadow:0 4px 12px color-mix(in oklab, var(--brand) 36%, transparent);
+    }
+    .exp-chart-note{
+      margin:4px 0 0;
+      font-size:13px;
+    }
     .job{
       position:relative;
       padding:17px 16px 16px;
@@ -462,6 +513,9 @@
       inset-inline-start:auto;
       inset-inline-end:0;
     }
+    html[dir="rtl"] .exp-fill{
+      margin-inline-start:auto;
+    }
 
     @media (max-width: 560px){
       .container{ padding-inline:16px }
@@ -469,6 +523,11 @@
       .btn,.menu-toggle,.lang-select{ min-height:40px; padding-inline:12px }
       .card{ padding:18px }
       .hero h1{ font-size:clamp(28px,9vw,40px) }
+      .exp-head{
+        grid-template-columns:1fr;
+        align-items:flex-start;
+        display:grid;
+      }
     }
 
     @media print {
@@ -616,6 +675,39 @@
         <div class="card">
           <h3 data-i18n="summary.title">Professional Summary</h3>
           <p data-i18n="summary.text">Senior .NET Full Stack Developer with 15+ years delivering scalable, high-performance web, mobile, and cloud solutions. Proven leader in modernizing legacy systems, guiding teams, and driving digital transformation with clean architecture and business-driven outcomes.</p>
+
+          <h3>Experience Chart | شارت الخبرات</h3>
+          <div class="exp-chart" role="img" aria-label="Experience chart by focus area | شارت الخبرة حسب مجالات العمل">
+            <div class="exp-row">
+              <div class="exp-head">
+                <span class="exp-label">Backend &amp; APIs | الباك إند وواجهات API</span>
+                <span class="exp-years">15+ Years</span>
+              </div>
+              <div class="exp-track"><div class="exp-fill" style="--w:95%"></div></div>
+            </div>
+            <div class="exp-row">
+              <div class="exp-head">
+                <span class="exp-label">Cloud &amp; Modernization | السحابة وتحديث الأنظمة</span>
+                <span class="exp-years">7+ Years</span>
+              </div>
+              <div class="exp-track"><div class="exp-fill" style="--w:74%"></div></div>
+            </div>
+            <div class="exp-row">
+              <div class="exp-head">
+                <span class="exp-label">Reporting &amp; BI | التقارير وذكاء الأعمال</span>
+                <span class="exp-years">10+ Years</span>
+              </div>
+              <div class="exp-track"><div class="exp-fill" style="--w:82%"></div></div>
+            </div>
+            <div class="exp-row">
+              <div class="exp-head">
+                <span class="exp-label">Team Leadership | قيادة الفرق</span>
+                <span class="exp-years">6+ Years</span>
+              </div>
+              <div class="exp-track"><div class="exp-fill" style="--w:66%"></div></div>
+            </div>
+          </div>
+          <p class="muted exp-chart-note">Estimated experience depth by focus area | تقدير عمق الخبرة حسب مجالات العمل</p>
 
           <h3 data-i18n="exp.title">Professional Experience</h3>
           <div class="job">
