@@ -187,7 +187,7 @@
       justify-content:flex-end;
       gap:8px;
     }
-    .header-hire,.header-doc{ display:none; }
+    .header-hire,.header-doc{ display:none !important; }
     .nav-theme-btn{
       padding:10px 12px;
       font-size:12px;
@@ -900,8 +900,7 @@
         
         <a class="btn primary header-extra" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer noopener">GitHub</a>
         <a class="btn header-extra" href="https://www.linkedin.com/in/mahdi-safealdeen-896836108/" target="_blank" rel="noreferrer noopener">LinkedIn</a>
-        <a class="btn primary header-extra header-doc" href="resume.pdf" download="Mahdi-Safealdeen-Resume.pdf" data-i18n="resume.download">Download PDF</a>
-        <button id="print-resume" class="btn header-extra header-doc" type="button" data-i18n="resume.print">Print / Save as PDF</button>
+        
       </div>
     </div>
 
@@ -930,12 +929,12 @@
       <div>
         <span class="badge" data-i18n="hero.badge">Open to collaborate</span>
         <h1 data-i18n="hero.title">Senior .NET Full Stack Developer</h1>
-        <p class="name-sub" data-i18n="hero.name">Mahdi Safealdeen</p>
+        <p class="name-sub">Mahdi Safealdeen</p>
         <p class="muted" data-i18n="hero.desc">Based in Hidd, Bahrain & Dammam, Saudi Arabia with 15+ years delivering scalable, high-performance web, mobile, and cloud solutions.</p>
         <div class="actions hero-cta" style="margin-top:14px">
           <a class="btn primary" href="#resume" data-i18n="hero.btn.resume">View resume</a>
           <a class="btn" href="resume.pdf" download="Mahdi-Safealdeen-Resume.pdf" data-i18n="hero.btn.pdf">Download PDF</a>
-          <a class="btn primary" href="mailto:mahdisafe@gmail.com?subject=Interview%20Request%20-%20Programming%20Specialist" data-i18n="hero.btn.hire">Hire Me</a>
+          <a class="btn primary" href="mailto:mahdisafe@gmail.com?subject=Interview%20Request%20-%20Programming%20Specialist">Hire Me</a>
           <a class="btn" href="#contact" data-i18n="hero.btn.contact">Get in touch</a>
         </div>
       </div>
@@ -1454,11 +1453,15 @@
         expanded ? closeMenu() : openMenu();
       });
       panel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-      document.getElementById('print-resume').addEventListener('click', () => window.print());
-      document.getElementById('print-resume-mobile').addEventListener('click', () => {
-        window.print();
-        closeMenu();
-      });
+      const printResumeBtn = document.getElementById('print-resume');
+      const printResumeMobileBtn = document.getElementById('print-resume-mobile');
+      if (printResumeBtn) printResumeBtn.addEventListener('click', () => window.print());
+      if (printResumeMobileBtn) {
+        printResumeMobileBtn.addEventListener('click', () => {
+          window.print();
+          closeMenu();
+        });
+      }
       addEventListener('keydown', (e)=>{
         if(e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') closeMenu();
       });
