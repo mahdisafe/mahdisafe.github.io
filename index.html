@@ -144,8 +144,12 @@
       top:0;
       z-index:60;
       backdrop-filter:saturate(160%) blur(8px);
-      background:var(--glass);
-      border-bottom:1px solid color-mix(in oklab,var(--text) 14%,transparent);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--bg-soft) 88%, var(--brand) 8%) 0%,
+          color-mix(in oklab, var(--bg-soft) 94%, transparent) 100%);
+      border-bottom:1px solid color-mix(in oklab,var(--brand) 26%,var(--border));
+      box-shadow:0 8px 24px color-mix(in oklab, var(--bg) 34%, transparent);
     }
     .nav{
       min-height:76px;
