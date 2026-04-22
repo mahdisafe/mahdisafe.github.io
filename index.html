@@ -185,12 +185,19 @@
       flex-wrap:nowrap;
       flex-shrink:0;
       justify-content:flex-end;
-      gap:10px;
+      gap:8px;
+    }
+    .header-hire,.header-doc{
+      display:none;
     }
     .nav-theme-btn{
       padding:10px 12px;
       font-size:12px;
       letter-spacing:.35px;
+    }
+    @media (min-width:901px){
+      .header-hire{ display:inline-flex; }
+      .header-doc{ display:none !important; }
     }
     @media (max-width:900px){
       header .actions{ gap:8px }
@@ -889,15 +896,14 @@
         <select id="lang-select" class="lang-select" aria-label="Select language">
           <option value="en">EN</option>
           <option value="ar">AR</option>
-          <option value="bi">AR/EN</option>
         </select>
 
         <button id="theme-toggle" class="btn nav-theme-btn" type="button" aria-label="Toggle theme">Theme</button>
-        <a class="btn primary header-extra" href="mailto:mahdisafe@gmail.com?subject=Interview%20Request%20-%20Programming%20Specialist">Hire Me</a>
+        <a class="btn primary header-extra header-hire" href="mailto:mahdisafe@gmail.com?subject=Interview%20Request%20-%20Programming%20Specialist">Hire Me</a>
         <a class="btn primary header-extra" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer noopener">GitHub</a>
         <a class="btn header-extra" href="https://www.linkedin.com/in/mahdi-safealdeen-896836108/" target="_blank" rel="noreferrer noopener">LinkedIn</a>
-        <a class="btn primary header-extra" href="resume.pdf" download="Mahdi-Safealdeen-Resume.pdf" data-i18n="resume.download">Download PDF</a>
-        <button id="print-resume" class="btn header-extra" type="button" data-i18n="resume.print">Print / Save as PDF</button>
+        <a class="btn primary header-extra header-doc" href="resume.pdf" download="Mahdi-Safealdeen-Resume.pdf" data-i18n="resume.download">Download PDF</a>
+        <button id="print-resume" class="btn header-extra header-doc" type="button" data-i18n="resume.print">Print / Save as PDF</button>
       </div>
     </div>
 
@@ -1335,45 +1341,24 @@
       };
 
       function applyLang(lang){
-        const normalizedLang = ['en', 'ar', 'bi'].includes(lang) ? lang : 'en';
-        const isBilingual = normalizedLang === 'bi';
-        const dict = translations[isBilingual ? 'en' : normalizedLang] || translations.en;
+        const normalizedLang = ['en', 'ar'].includes(lang) ? lang : 'en';
+        const dict = translations[normalizedLang] || translations.en;
         const rtl = (normalizedLang === 'ar');
 
         root.setAttribute('lang', rtl ? 'ar' : 'en');
         root.setAttribute('dir', rtl ? 'rtl' : 'ltr');
         document.title = normalizedLang === 'ar'
           ? "مهدي صفى الدين | مطوّر .NET متكامل | البحرين"
-          : isBilingual
-            ? "Mahdi Safealdeen | CV عربي/English | .NET Developer"
-            : "Mahdi Safealdeen | Senior .NET Full Stack Developer | Bahrain";
+          : "Mahdi Safealdeen | Senior .NET Full Stack Developer | Bahrain";
 
         $('[data-i18n]').forEach(el => {
           const key = el.getAttribute('data-i18n');
-          if (isBilingual) {
-            const arVal = translations.ar[key];
-            const enVal = translations.en[key];
-            if (typeof arVal === 'string' && typeof enVal === 'string') {
-              el.textContent = `${arVal} / ${enVal}`;
-              return;
-            }
-          }
-
           const val = dict[key];
           if (typeof val === 'string') el.textContent = val;
         });
 
         $('[data-i18n-alt]').forEach(el => {
           const key = el.getAttribute('data-i18n-alt');
-          if (isBilingual) {
-            const arVal = translations.ar[key];
-            const enVal = translations.en[key];
-            if (typeof arVal === 'string' && typeof enVal === 'string') {
-              el.setAttribute('alt', `${arVal} / ${enVal}`);
-              return;
-            }
-          }
-
           const val = dict[key];
           if (typeof val === 'string') el.setAttribute('alt', val);
         });
@@ -1383,7 +1368,7 @@
       }
 
       const storedLang = localStorage.getItem(langKey);
-      const savedLang = ['en', 'ar', 'bi'].includes(storedLang || '') ? storedLang : 'bi';
+      const savedLang = ['en', 'ar'].includes(storedLang || '') ? storedLang : 'en';
       applyLang(savedLang);
 
       langSelect.addEventListener('change', (e)=> applyLang(e.target.value));
