@@ -187,16 +187,14 @@
       justify-content:flex-end;
       gap:8px;
     }
-    .header-hire,.header-doc{
-      display:none;
-    }
+    .header-hire,.header-doc{ display:none; }
     .nav-theme-btn{
       padding:10px 12px;
       font-size:12px;
       letter-spacing:.35px;
     }
     @media (min-width:901px){
-      .header-hire{ display:inline-flex; }
+      .header-hire{ display:none !important; }
       .header-doc{ display:none !important; }
     }
     @media (max-width:900px){
@@ -516,7 +514,7 @@
     .project a{ text-decoration:none; color:var(--brand) }
     .project .actions{ margin-top:auto }
     .name-sub{
-      margin:-4px 0 12px;
+      margin:-2px 0 10px;
       color:var(--muted);
       font-size:14px;
       font-weight:700;
@@ -899,7 +897,7 @@
         </select>
 
         <button id="theme-toggle" class="btn nav-theme-btn" type="button" aria-label="Toggle theme">Theme</button>
-        <a class="btn primary header-extra header-hire" href="mailto:mahdisafe@gmail.com?subject=Interview%20Request%20-%20Programming%20Specialist">Hire Me</a>
+        
         <a class="btn primary header-extra" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer noopener">GitHub</a>
         <a class="btn header-extra" href="https://www.linkedin.com/in/mahdi-safealdeen-896836108/" target="_blank" rel="noreferrer noopener">LinkedIn</a>
         <a class="btn primary header-extra header-doc" href="resume.pdf" download="Mahdi-Safealdeen-Resume.pdf" data-i18n="resume.download">Download PDF</a>
@@ -918,7 +916,7 @@
       </nav>
       <div class="menu-extras" role="group" aria-label="Quick links">
         <p class="menu-extras-h" data-i18n="nav.quicklinks">Quick links</p>
-        <a class="btn primary" href="mailto:mahdisafe@gmail.com?subject=Interview%20Request%20-%20Programming%20Specialist">Hire Me</a>
+        
         <a class="btn primary" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer noopener">GitHub</a>
         <a class="btn" href="https://www.linkedin.com/in/mahdi-safealdeen-896836108/" target="_blank" rel="noreferrer noopener">LinkedIn</a>
         <a class="btn primary" href="resume.pdf" download="Mahdi-Safealdeen-Resume.pdf" data-i18n="resume.download">Download PDF</a>
@@ -932,18 +930,12 @@
       <div>
         <span class="badge" data-i18n="hero.badge">Open to collaborate</span>
         <h1 data-i18n="hero.title">Senior .NET Full Stack Developer</h1>
-        <p class="name-sub">Mahdi Safealdeen | مهدي صفي الدين</p>
+        <p class="name-sub" data-i18n="hero.name">Mahdi Safealdeen</p>
         <p class="muted" data-i18n="hero.desc">Based in Hidd, Bahrain & Dammam, Saudi Arabia with 15+ years delivering scalable, high-performance web, mobile, and cloud solutions.</p>
-        <div class="trust-badges" aria-label="Trust badges">
-          <span>15+ Years</span>
-          <span>Banking &amp; Insurance</span>
-          <span>Cloud Migration</span>
-          <span>Team Leadership</span>
-        </div>
         <div class="actions hero-cta" style="margin-top:14px">
           <a class="btn primary" href="#resume" data-i18n="hero.btn.resume">View resume</a>
           <a class="btn" href="resume.pdf" download="Mahdi-Safealdeen-Resume.pdf" data-i18n="hero.btn.pdf">Download PDF</a>
-          <a class="btn primary" href="mailto:mahdisafe@gmail.com?subject=Interview%20Request%20-%20Programming%20Specialist">Hire Me / Book Interview</a>
+          <a class="btn primary" href="mailto:mahdisafe@gmail.com?subject=Interview%20Request%20-%20Programming%20Specialist" data-i18n="hero.btn.hire">Hire Me</a>
           <a class="btn" href="#contact" data-i18n="hero.btn.contact">Get in touch</a>
         </div>
       </div>
@@ -1024,7 +1016,7 @@
         </article>
       </div>
       <div class="delivered-wrap">
-        <h3 data-i18n="projects.done.title">Delivered Projects | مشاريع تم تنفيذها</h3>
+        <h3 data-i18n="projects.done.title">Delivered Projects</h3>
         <ul class="delivered-list">
           <li>
             <div>
@@ -1079,7 +1071,7 @@
     </section>
 
     <section id="case-studies">
-      <h2>Case Studies | دراسات حالة</h2>
+      <h2 data-i18n="case.title">Case Studies</h2>
       <div class="case-grid">
         <article class="card">
           <h3 class="mini-title">Cloud Migration &amp; Reliability</h3>
@@ -1106,7 +1098,7 @@
     </section>
 
     <section id="testimonials">
-      <h2>Testimonials | آراء العملاء</h2>
+      <h2 data-i18n="testi.title">Testimonials</h2>
       <div class="testi-grid">
         <article class="card testi">
           <p>"Mahdi consistently delivers stable, scalable solutions and improves team productivity."</p>
@@ -1134,38 +1126,38 @@
           <h3 data-i18n="summary.title">Professional Summary</h3>
           <p data-i18n="summary.text">Senior .NET Full Stack Developer with 15+ years delivering scalable, high-performance web, mobile, and cloud solutions. Proven leader in modernizing legacy systems, guiding teams, and driving digital transformation with clean architecture and business-driven outcomes.</p>
 
-          <h3>Experience Chart | شارت الخبرات</h3>
-          <div class="exp-chart" role="img" aria-label="Experience chart by focus area | شارت الخبرة حسب مجالات العمل">
+          <h3 data-i18n="exp.chart.title">Experience Chart</h3>
+          <div class="exp-chart" role="img" aria-label="Experience chart by focus area">
             <div class="exp-row">
               <div class="exp-head">
-                <span class="exp-label">Backend &amp; APIs | الباك إند وواجهات API</span>
+                <span class="exp-label" data-i18n="exp.chart.backend">Backend &amp; APIs</span>
                 <span class="exp-years">15+ Years</span>
               </div>
               <div class="exp-track"><div class="exp-fill" style="--w:95%"></div></div>
             </div>
             <div class="exp-row">
               <div class="exp-head">
-                <span class="exp-label">Cloud &amp; Modernization | السحابة وتحديث الأنظمة</span>
+                <span class="exp-label" data-i18n="exp.chart.cloud">Cloud &amp; Modernization</span>
                 <span class="exp-years">7+ Years</span>
               </div>
               <div class="exp-track"><div class="exp-fill" style="--w:74%"></div></div>
             </div>
             <div class="exp-row">
               <div class="exp-head">
-                <span class="exp-label">Reporting &amp; BI | التقارير وذكاء الأعمال</span>
+                <span class="exp-label" data-i18n="exp.chart.reporting">Reporting &amp; BI</span>
                 <span class="exp-years">10+ Years</span>
               </div>
               <div class="exp-track"><div class="exp-fill" style="--w:82%"></div></div>
             </div>
             <div class="exp-row">
               <div class="exp-head">
-                <span class="exp-label">Team Leadership | قيادة الفرق</span>
+                <span class="exp-label" data-i18n="exp.chart.team">Team Leadership</span>
                 <span class="exp-years">6+ Years</span>
               </div>
               <div class="exp-track"><div class="exp-fill" style="--w:66%"></div></div>
             </div>
           </div>
-          <p class="muted exp-chart-note">Estimated experience depth by focus area | تقدير عمق الخبرة حسب مجالات العمل</p>
+          <p class="muted exp-chart-note" data-i18n="exp.chart.note">Estimated experience depth by focus area</p>
 
           <h3 data-i18n="exp.title">Professional Experience</h3>
           <div class="job">
@@ -1282,7 +1274,7 @@
     </section>
 
     <section id="downloadables">
-      <h2>Downloadables | ملفات التحميل</h2>
+      <h2 data-i18n="downloads.title">Downloadables</h2>
       <div class="download-grid">
         <article class="card">
           <h3 class="mini-title">CV PDF (English)</h3>
@@ -1298,7 +1290,7 @@
     </section>
 
     <section id="faq">
-      <h2>FAQ | أسئلة شائعة</h2>
+      <h2 data-i18n="faq.title">FAQ</h2>
       <div class="faq-list">
         <article class="faq-item">
           <button class="faq-q" type="button">Availability / التوفر</button>
