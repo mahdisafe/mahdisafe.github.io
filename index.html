@@ -168,8 +168,7 @@
       font-size:17px;
       letter-spacing:.5px;
       text-transform:uppercase;
-      flex:1;
-      min-width:0;
+      flex:0 0 auto;
       white-space:nowrap;
     }
     .brand .dot{
@@ -286,7 +285,14 @@
     .lang-select:focus-visible{ outline:2px solid var(--brand); outline-offset:2px }
 
     /* Desktop nav */
-    nav.site-nav { display:flex; gap:4px; align-items:center }
+    nav.site-nav {
+      display:flex;
+      gap:4px;
+      align-items:center;
+      justify-content:center;
+      flex:1 1 auto;
+      min-width:0;
+    }
     nav.site-nav a{
       position:relative;
       color:var(--muted);
