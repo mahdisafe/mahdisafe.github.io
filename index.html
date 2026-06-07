@@ -108,8 +108,9 @@
       border-radius:999px;
       inset-inline-start:-160px;
       top:18%;
-      background:radial-gradient(circle, color-mix(in oklab, var(--brand) 28%, transparent) 0%, transparent 68%);
-      filter:blur(6px);
+      background:radial-gradient(circle, color-mix(in oklab, var(--brand) 22%, transparent) 0%, transparent 68%);
+      filter:blur(40px);
+      animation: float-before 20s infinite alternate ease-in-out;
     }
     body::after{
       width:420px;
@@ -117,8 +118,35 @@
       border-radius:999px;
       inset-inline-end:-150px;
       bottom:10%;
-      background:radial-gradient(circle, color-mix(in oklab, var(--accent) 24%, transparent) 0%, transparent 70%);
-      filter:blur(8px);
+      background:radial-gradient(circle, color-mix(in oklab, var(--accent) 18%, transparent) 0%, transparent 70%);
+      filter:blur(50px);
+      animation: float-after 25s infinite alternate ease-in-out;
+    }
+
+    @keyframes float-before {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(60px, 80px) scale(1.1); }
+    }
+    @keyframes float-after {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-80px, -50px) scale(1.15); }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: color-mix(in oklab, var(--brand) 25%, transparent);
+      border-radius: 999px;
+      border: 2px solid var(--bg);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--brand);
     }
 
     .container{
@@ -438,13 +466,165 @@
       border-radius:22px;
       padding:24px;
       box-shadow:var(--shadow);
-      backdrop-filter: blur(8px);
-      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s cubic-bezier(0.165, 0.84, 0.44, 1), border-color .3s ease, box-shadow .3s ease;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: radial-gradient(
+        250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+        color-mix(in oklab, var(--brand) 45%, transparent),
+        transparent 50%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .card:hover::before {
+      opacity: 1;
     }
     .card:hover{
-      transform: translateY(-4px);
-      border-color: color-mix(in oklab,var(--brand) 44%, var(--border));
+      transform: translateY(-5px);
+      border-color: transparent;
       box-shadow:0 22px 40px color-mix(in oklab, var(--bg) 54%, transparent);
+    }
+
+    /* Typewriter Cursor */
+    .cursor {
+      color: var(--brand);
+      animation: blink 0.8s infinite;
+      margin-inline-start: 4px;
+      font-weight: 300;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(40px);
+      z-index: 100;
+      padding: 12px 24px;
+      border-radius: 16px;
+      background: color-mix(in oklab, var(--card) 92%, transparent);
+      border: 1px solid color-mix(in oklab, var(--brand) 30%, var(--border));
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Modal Dialog styling */
+    dialog::backdrop {
+      background: rgba(2, 10, 28, 0.7);
+      backdrop-filter: blur(8px);
+    }
+    dialog {
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: color-mix(in oklab, var(--card) 95%, transparent);
+      color: var(--text);
+      padding: 32px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: var(--shadow);
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.95);
+      opacity: 0;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease, display 0.3s allow-discrete;
+      backdrop-filter: blur(16px);
+      z-index: 90;
+    }
+    dialog[open] {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    @starting-style {
+      dialog[open] {
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 0;
+      }
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: 0;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.2s ease;
+    }
+    html[dir="rtl"] .modal-close {
+      right: auto;
+      left: 20px;
+    }
+    .modal-close:hover {
+      color: var(--text);
+    }
+    .modal-header h3 {
+      margin: 0 0 16px;
+      font-size: 24px;
+      padding-inline-end: 24px;
+      background: linear-gradient(120deg, var(--text), color-mix(in oklab, var(--brand) 46%, var(--text)));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .modal-body {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .modal-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    /* Scroll Reveal */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    .reveal-item.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-item {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
     }
 
     .grid{ display:grid; gap:18px }
@@ -928,7 +1108,7 @@
     <section class="hero">
       <div>
         <span class="badge" data-i18n="hero.badge">Open to collaborate</span>
-        <h1 data-i18n="hero.title">Senior .NET Full Stack Developer</h1>
+        <h1><span id="typewriter">Senior .NET Full Stack Developer</span><span class="cursor" aria-hidden="true">|</span></h1>
         <p class="name-sub">Mahdi Safealdeen</p>
         <p class="muted" data-i18n="hero.desc">Based in Hidd, Bahrain & Dammam, Saudi Arabia with 15+ years delivering scalable, high-performance web, mobile, and cloud solutions.</p>
         <div class="actions hero-cta" style="margin-top:14px">
@@ -994,7 +1174,7 @@
           <p class="muted" data-i18n="projects.api.desc">Azure + GCP landing zones, automated deployments, and observability raised availability by 25% for regulated banking and insurance workloads.</p>
           <div class="actions">
             <a class="btn" href="https://github.com/mahdisafe/mahdisafe.github.io" target="_blank" rel="noreferrer noopener" data-i18n="projects.repo">Repository</a>
-            <a class="btn" href="#" aria-disabled="true" data-i18n="projects.demo">Demo</a>
+            <button class="btn primary open-details-btn" data-project-id="p1" data-i18n="projects.details">Details</button>
           </div>
         </article>
         <article class="card project" data-category="finance healthcare">
@@ -1002,7 +1182,7 @@
           <p class="muted" data-i18n="projects.uikit.desc">Modular enrollment, billing, and claims solutions with secure REST APIs, partner onboarding, and modernized UX across Kendo UI and DevExpress.</p>
           <div class="actions">
             <a class="btn" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer noopener" data-i18n="projects.repo">Repository</a>
-            <a class="btn" href="#" aria-disabled="true" data-i18n="projects.docs">Docs</a>
+            <button class="btn primary open-details-btn" data-project-id="p2" data-i18n="projects.details">Details</button>
           </div>
         </article>
         <article class="card project" data-category="finance education">
@@ -1010,7 +1190,7 @@
           <p class="muted" data-i18n="projects.tools.desc">Crystal Reports, DevExpress dashboards, and optimized SQL powering executives with on-demand insights and automated distribution.</p>
           <div class="actions">
             <a class="btn" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer noopener" data-i18n="projects.repo">Repository</a>
-            <a class="btn" href="#" aria-disabled="true" data-i18n="projects.packages">Packages</a>
+            <button class="btn primary open-details-btn" data-project-id="p3" data-i18n="projects.details">Details</button>
           </div>
         </article>
       </div>
@@ -1242,7 +1422,7 @@
             <div class="actions" style="margin-top:8px">
               <a class="btn primary" href="tel:+97334020096" aria-label="Call Bahrain number +973 3402 0096" data-i18n="contact.call">Call</a>
               <a class="btn" href="https://wa.me/97334020096" target="_blank" rel="noreferrer noopener" aria-label="WhatsApp Bahrain number">WhatsApp</a>
-              <span class="muted" style="align-self:center">+973 3402 0096</span>
+              <span class="muted copyable-phone" data-copy="+97334020096" style="align-self:center; cursor:pointer" title="Click to copy">+973 3402 0096</span>
             </div>
           </div>
           <div>
@@ -1250,13 +1430,14 @@
             <div class="actions" style="margin-top:8px">
               <a class="btn primary" href="tel:+966571855189" aria-label="Call Saudi number +966 57 185 5189" data-i18n="contact.call">Call</a>
               <a class="btn" href="https://wa.me/966571855189" target="_blank" rel="noreferrer noopener" aria-label="WhatsApp Saudi number">WhatsApp</a>
-              <span class="muted" style="align-self:center">+966 57 185 5189</span>
+              <span class="muted copyable-phone" data-copy="+966571855189" style="align-self:center; cursor:pointer" title="Click to copy">+966 57 185 5189</span>
             </div>
           </div>
         </div>
 
         <div class="actions" style="margin-top:14px">
           <a class="btn primary" href="resume.pdf" download="Mahdi-Safealdeen-Resume.pdf" data-i18n="resume.download">Download PDF</a>
+          <button class="btn copy-btn" data-copy="mahdisafe@gmail.com" type="button" data-i18n="contact.copyEmail">Copy Email</button>
           <a class="btn" href="mailto:mahdisafe@gmail.com" aria-label="Send email to mahdisafe@gmail.com">Email</a>
           <a class="btn" href="https://github.com/mahdisafe" target="_blank" rel="noreferrer noopener">GitHub</a>
           <a class="btn" href="https://www.linkedin.com/in/mahdi-safealdeen-896836108/" target="_blank" rel="noreferrer noopener">LinkedIn</a>
@@ -1311,6 +1492,30 @@
     </section>
   </main>
 
+  <!-- Project Details Dialog -->
+  <dialog id="project-dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" id="close-modal" aria-label="Close dialog" type="button">&times;</button>
+    <div class="modal-header">
+      <h3 id="modal-title">Project Title</h3>
+    </div>
+    <div class="modal-body">
+      <p id="modal-desc">Project description...</p>
+      <h4 id="modal-outcomes-title" style="margin: 18px 0 8px;">Key Outcomes:</h4>
+      <ul id="modal-bullets" style="margin: 0; padding-inline-start: 20px;">
+        <!-- Bullet points will be populated dynamically -->
+      </ul>
+      <h4 style="margin: 18px 0 8px;" data-i18n="projects.techUsed">Technologies Used:</h4>
+      <div id="modal-tech" class="modal-tech">
+        <!-- Tech chips will be populated dynamically -->
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" hidden>
+    <span id="toast-message">Copied to clipboard!</span>
+  </div>
+
   <footer>
     <div class="container">
       <small>© <span id="year"></span> eng mahdi — <span data-i18n="footer.rights">All rights reserved.</span></small>
@@ -1326,9 +1531,15 @@
       const langKey = 'lang';
       const langSelect = document.getElementById('lang-select');
 
+      let currentWordIdx = 0;
+      let currentLetterIdx = 0;
+      let isDeleting = false;
+      let currentLang = 'en';
+      let typewriterTimeout = null;
+
       const translations = {
-        "en":{"skip":"Skip to resume","nav.about":"About","nav.skills":"Skills","nav.projects":"Projects","nav.resume":"Resume","nav.contact":"Contact","nav.quicklinks":"Quick links","hero.badge":"Open to collaborate","hero.title":"Senior .NET Full Stack Developer","hero.desc":"Based in Hidd, Bahrain & Dammam, Saudi Arabia with 15+ years delivering scalable, high-performance web, mobile, and cloud solutions.","hero.btn.resume":"View resume","hero.btn.pdf":"Download PDF","hero.btn.contact":"Get in touch","quick.title":"Quick summary","quick.text":"15+ years across Microsoft stack, cloud migrations, enterprise APIs, and reporting excellence.","stack.title":"Favorite stack","stack.text":"ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.","about.title":"About","about.text":"Senior .NET Full Stack Developer modernizing legacy platforms, automating operations, and leading high-performing teams for banking and medical insurance organizations.","skills.title":"Selected skills","skill.arch":"Clean Architecture","skill.agile":"Agile","skill.lead":"Team Leadership","projects.title":"Projects","projects.p1.title":"Cloud Migration & Reliability Program","projects.p2.title":"Banking & Medical Insurance Platforms","projects.p3.title":"Business Intelligence & Reporting Suite","projects.repo":"Repository","projects.demo":"Demo","projects.docs":"Docs","projects.packages":"Packages","projects.api.desc":"Azure + GCP landing zones, automated deployments, and observability raised availability by 25% for regulated banking and insurance workloads.","projects.uikit.desc":"Modular enrollment, billing, and claims solutions with secure REST APIs, partner onboarding, and modernized UX across Kendo UI and DevExpress.","projects.tools.desc":"Crystal Reports, DevExpress dashboards, and optimized SQL powering executives with on-demand insights and automated distribution.","projects.done.title":"Delivered Projects","projects.done.gulf":"Gulf University","projects.done.ssi":"SSI Centers for Back and Neck Pain","projects.done.sudanknowledge":"Sudan Knowledge","projects.done.wasd":"World Association for Sustainable Development","projects.done.b50":"Bukhamsen Groups (B50 App)","projects.done.taqs":"Taqs Company","projects.done.embassy":"Sudan Embassy in Bahrain","projects.done.embassy.note":"Demo can be presented on-site.","projects.done.shop":"Bukhamsen Online Shop","resume.title":"Resume","resume.download":"Download PDF","resume.print":"Print / Save as PDF","resume.printPage":"Open print-friendly page","summary.title":"Professional Summary","summary.text":"Senior .NET Full Stack Developer with 15+ years delivering scalable, high-performance web, mobile, and cloud solutions. Proven leader in modernizing legacy systems, guiding teams, and driving digital transformation with clean architecture and business-driven outcomes.","exp.title":"Professional Experience","exp.efifty.title":"Senior Software Developer — Efifty Online, Bahrain (Nov 2019 – Present)","exp.efifty.li1":"Led cloud migration and digital transformation on Azure and GCP, increasing reliability by 25%.","exp.efifty.li2":"Designed and developed scalable banking and medical insurance systems.","exp.efifty.li3":"Built secure RESTful APIs for enterprise integrations and third-party partners.","exp.efifty.li4":"Delivered interactive dashboards and advanced reporting with Crystal Reports, DevExpress, and Kendo UI.","exp.efifty.li5":"Mentored junior developers and improved productivity through reviews and best practices.","exp.efifty.sdv.title":"Specialist & Manager — Software Development Values — Efifty Online, Bahrain (Dec 2020 – Present)","exp.efifty.sdv.li1":"Defined and promoted engineering values, coding standards, and review practices across delivery teams.","exp.efifty.sdv.li2":"Led initiatives to improve code quality, consistency, and maintainability aligned with business goals.","exp.efifty.sdv.li3":"Partnered with leadership to align development practices with organizational quality objectives.","exp.gulf.title":"Senior Programmer — Gulf University, Bahrain (Nov 2018 – Oct 2019)","exp.gulf.li1":"Automated academic and financial workflows.","exp.gulf.li2":"Migrated legacy systems to cloud-based web platforms with modern UI and reporting.","exp.gulf.li3":"Implemented analytics and reporting solutions that supported university leadership decisions.","exp.mls.title":"Senior Programmer — MLS Bahrain, Bahrain (Apr 2016 – Nov 2018)","exp.mls.li1":"Improved integration and reporting for enterprise clients in finance and healthcare.","exp.mls.li2":"Optimized queries and delivered dynamic reports with DevExpress/Crystal Reports.","exp.mls.li3":"Aligned product backlogs with compliance needs and business priorities.","exp.nhif.title":"Application Developer — National Health Insurance Fund, Sudan (Apr 2013 – Apr 2015)","exp.nhif.li1":"Developed insurance management systems serving 50,000+ users.","exp.nhif.li2":"Designed claims processing modules and custom reporting tools.","exp.nhif.li3":"Improved system stability and scalability for regional rollouts.","edu.title":"Education","edu.text":"B.Sc. in Information Technology — Sudan University of Science and Technology (2014)","ref.title":"References","ref.text":"Available upon request.","core.title":"Core Competencies","core.prog.k":"Programming:","core.prog.v":"C#, JavaScript","core.fw.k":"Frameworks:","core.fw.v":"ASP.NET Core, MVC, Web API, .NET MAUI","core.fe.k":"Front-End:","core.fe.v":"HTML5, CSS3, Bootstrap","core.db.k":"Database:","core.db.v":"SQL Server","core.cloud.k":"Cloud:","core.cloud.v":"GCP, Azure, AWS","core.tools.k":"Tools:","core.tools.v":"Kendo UI, DevExpress, Crystal Reports, Git, GitHub","core.prof.k":"Professional:","core.prof.v":"Clean Architecture & Code Quality, Agile, Team Leadership","domain.title":"Domain Expertise","domain.bank":"Banking Systems & Financial Solutions","domain.med":"Medical Insurance Systems & Claims Processing","domain.cloudpm":"Cloud Migration & Modernization","domain.integr":"Enterprise API Integration","domain.reports":"Business Intelligence & Reporting Solutions","contact.title":"Contact","contact.desc":"Best ways to reach me. Calls, WhatsApp, and email are welcome.","contact.call":"Call","contact.bh.label":"Bahrain","contact.sa.label":"Saudi Arabia","contact.note":"Available for relocation and remote opportunities.","footer.rights":"All rights reserved.","avatar.alt":"Portrait of eng mahdi"},
-        "ar":{"skip":"تخطَّ إلى السيرة الذاتية","nav.about":"نبذة","nav.skills":"مهارات","nav.projects":"مشاريع","nav.resume":"السيرة الذاتية","nav.contact":"تواصل","nav.quicklinks":"روابط سريعة","hero.badge":"متاح للتعاون","hero.title":"مطوّر .NET متكامل — Senior","hero.desc":"مقيم في الحد – البحرين والدمام – السعودية مع خبرة تتجاوز 15 سنة في بناء حلول ويب وجوال وسحابة قابلة للتوسع وعالية الأداء.","hero.btn.resume":"عرض السيرة الذاتية","hero.btn.pdf":"تحميل PDF","hero.btn.contact":"للتواصل","quick.title":"ملخص سريع","quick.text":"أكثر من 15 سنة عبر تقنيات مايكروسوفت، هجرات السحابة، تكامل الـ API المؤسسي، وحلول التقارير.","stack.title":"التقنيات المفضّلة","stack.text":"ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.","about.title":"نبذة","about.text":"مطوّر ‎.NET‎ متكامل يقود تحديث الأنظمة القديمة، أتمتة العمليات، وقيادة الفرق عالية الأداء لقطاعات البنوك والتأمين الطبي.","skills.title":"مهارات مختارة","skill.arch":"معمارية نظيفة","skill.agile":"أجايل","skill.lead":"قيادة الفرق","projects.title":"مشاريع","projects.p1.title":"برنامج ترحيل السحابة والاعتمادية","projects.p2.title":"منصات البنوك والتأمين الطبي","projects.p3.title":"منظومة ذكاء الأعمال والتقارير","projects.repo":"المستودع","projects.demo":"تجريبي","projects.docs":"التوثيق","projects.packages":"الحِزم","projects.api.desc":"مناطق هبوط Azure وGCP مع نشرات مؤتمتة ورصد مستمر رفعت التوافرية 25% لحلول البنوك والتأمين.","projects.uikit.desc":"منصات تسجيل وفوترة ومطالبات معيارية بواجهات REST آمنة، وإدماج الشركاء، وتجارب مستخدم محدّثة عبر Kendo UI وDevExpress.","projects.tools.desc":"تقارير Crystal، لوحات DevExpress، وتحسينات SQL توفّر رؤى فورية وتوزيعاً آلياً لصانعي القرار.","projects.done.title":"مشاريع تم تنفيذها","projects.done.gulf":"جامعة الخليج","projects.done.ssi":"مراكز SSI لآلام الظهر والرقبة","projects.done.sudanknowledge":"سودان نوليدج","projects.done.wasd":"الجمعية العالمية للتنمية المستدامة","projects.done.b50":"مجموعات بخمسين (تطبيق B50)","projects.done.taqs":"شركة طقس","projects.done.embassy":"سفارة السودان في البحرين","projects.done.embassy.note":"يمكن تقديم العرض داخل الموقع (On-site).","projects.done.shop":"متجر بخمسين الإلكتروني","resume.title":"السيرة الذاتية","resume.download":"تحميل PDF","resume.print":"طباعة / حفظ PDF","resume.printPage":"صفحة مناسبة للطباعة","summary.title":"الملخص المهني","summary.text":"مطوّر ‎.NET‎ متكامل بخبرة تتجاوز 15 سنة في بناء حلول ويب وجوال وسحابة عالية الأداء. يقود تحديث الأنظمة، قيادة الفرق، والتحول الرقمي بمعمارية نظيفة وحلول موجهة للأعمال.","exp.title":"الخبرات العملية","exp.efifty.title":"مطوّر برمجيات أول — Efifty Online، البحرين (نوفمبر 2019 – حتى الآن)","exp.efifty.li1":"قيادة هجرات Azure وGCP والتحول الرقمي مما رفع الاعتمادية 25%.","exp.efifty.li2":"تصميم وتطوير أنظمة مصرفية وتأمين طبي قابلة للتوسع.","exp.efifty.li3":"بناء واجهات REST آمنة للتكامل المؤسسي والشركاء الخارجيين.","exp.efifty.li4":"تسليم لوحات وتقارير تفاعلية عبر Crystal Reports وDevExpress وKendo UI.","exp.efifty.li5":"إرشاد الفرق وتحسين الإنتاجية عبر المراجعات وأفضل الممارسات.","exp.efifty.sdv.title":"أخصائي ومدير — قيم التطوير البرمجي — Efifty Online، البحرين (ديسمبر 2020 – حتى الآن)","exp.efifty.sdv.li1":"وضع وتعزيز قيم الهندسة ومعايير الشيفرة وممارسات المراجعة عبر فرق التسليم.","exp.efifty.sdv.li2":"قيادة مبادرات لتحسين جودة الشيفرة واتساقها وقابلية صيانتها بما يتوافق مع أهداف العمل.","exp.efifty.sdv.li3":"التعاون مع الإدارة لمواءمة ممارسات التطوير مع أهداف الجودة المؤسسية.","exp.gulf.title":"مبرمج أول — جامعة الخليج، البحرين (نوفمبر 2018 – أكتوبر 2019)","exp.gulf.li1":"أتمتة الإجراءات الأكاديمية والمالية.","exp.gulf.li2":"ترحيل الأنظمة القديمة إلى منصات ويب سحابية بواجهات حديثة.","exp.gulf.li3":"تنفيذ حلول تحليلات وتقارير دعمت قرارات قيادة الجامعة.","exp.mls.title":"مبرمج أول — MLS Bahrain، البحرين (أبريل 2016 – نوفمبر 2018)","exp.mls.li1":"تحسين التكامل والتقارير لعملاء قطاعات المالية والرعاية الصحية.","exp.mls.li2":"تحسين الاستعلامات وتقديم تقارير ديناميكية عبر DevExpress/Crystal Reports.","exp.mls.li3":"مواءمة الأولويات مع المتطلبات التنظيمية واحتياجات العمل.","exp.nhif.title":"مطوّر تطبيقات — الصندوق القومي للتأمين الصحي، السودان (أبريل 2013 – أبريل 2015)","exp.nhif.li1":"تطوير أنظمة تأمين تخدم أكثر من 50,000 مستفيد.","exp.nhif.li2":"تصميم وحدات معالجة المطالبات وأدوات التقارير.","exp.nhif.li3":"تعزيز استقرار المنظومة وقابلية التوسع على مستوى الأقاليم.","edu.title":"التعليم","edu.text":"بكالوريوس تقنية المعلومات — جامعة السودان للعلوم والتكنولوجيا (2014)","ref.title":"المراجع","ref.text":"متاحة عند الطلب.","core.title":"الكفاءات الأساسية","core.prog.k":"البرمجة:","core.prog.v":"C#‎، JavaScript","core.fw.k":"الأطر:","core.fw.v":"ASP.NET Core، MVC، Web API، ‎.NET MAUI","core.fe.k":"واجهات المستخدم:","core.fe.v":"HTML5، CSS3، Bootstrap","core.db.k":"قواعد البيانات:","core.db.v":"SQL Server","core.cloud.k":"السحابة:","core.cloud.v":"GCP، Azure، AWS","core.tools.k":"الأدوات:","core.tools.v":"Kendo UI، DevExpress، Crystal Reports، Git، GitHub","core.prof.k":"المهني:","core.prof.v":"معمارية نظيفة وجودة الشيفرة، أجايل، قيادة الفرق","domain.title":"خبرات المجال","domain.bank":"أنظمة مصرفية وحلول مالية","domain.med":"أنظمة التأمين الطبي ومعالجة المطالبات","domain.cloudpm":"هجرات السحابة وتحديث الأنظمة","domain.integr":"تكامل واجهات API المؤسسية","domain.reports":"ذكاء الأعمال وحلول التقارير","contact.title":"التواصل","contact.desc":"أفضل طرق للتواصل. مكالمات، واتساب، وبريد.","contact.call":"اتصال","contact.bh.label":"البحرين","contact.sa.label":"السعودية","contact.note":"متاح للانتقال والعمل عن بعد.","footer.rights":"جميع الحقوق محفوظة.","avatar.alt":"صورة شخصية لـ eng mahdi"}
+        "en":{"skip":"Skip to resume","nav.about":"About","nav.skills":"Skills","nav.projects":"Projects","nav.resume":"Resume","nav.contact":"Contact","nav.quicklinks":"Quick links","hero.badge":"Open to collaborate","hero.title":"Senior .NET Full Stack Developer","hero.desc":"Based in Hidd, Bahrain & Dammam, Saudi Arabia with 15+ years delivering scalable, high-performance web, mobile, and cloud solutions.","hero.btn.resume":"View resume","hero.btn.pdf":"Download PDF","hero.btn.contact":"Get in touch","quick.title":"Quick summary","quick.text":"15+ years across Microsoft stack, cloud migrations, enterprise APIs, and reporting excellence.","stack.title":"Favorite stack","stack.text":"ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.","about.title":"About","about.text":"Senior .NET Full Stack Developer modernizing legacy platforms, automating operations, and leading high-performing teams for banking and medical insurance organizations.","skills.title":"Selected skills","skill.arch":"Clean Architecture","skill.agile":"Agile","skill.lead":"Team Leadership","projects.title":"Projects","projects.p1.title":"Cloud Migration & Reliability Program","projects.p2.title":"Banking & Medical Insurance Platforms","projects.p3.title":"Business Intelligence & Reporting Suite","projects.repo":"Repository","projects.demo":"Demo","projects.docs":"Docs","projects.packages":"Packages","projects.api.desc":"Azure + GCP landing zones, automated deployments, and observability raised availability by 25% for regulated banking and insurance workloads.","projects.uikit.desc":"Modular enrollment, billing, and claims solutions with secure REST APIs, partner onboarding, and modernized UX across Kendo UI and DevExpress.","projects.tools.desc":"Crystal Reports, DevExpress dashboards, and optimized SQL powering executives with on-demand insights and automated distribution.","projects.done.title":"Delivered Projects","projects.done.gulf":"Gulf University","projects.done.ssi":"SSI Centers for Back and Neck Pain","projects.done.sudanknowledge":"Sudan Knowledge","projects.done.wasd":"World Association for Sustainable Development","projects.done.b50":"Bukhamsen Groups (B50 App)","projects.done.taqs":"Taqs Company","projects.done.embassy":"Sudan Embassy in Bahrain","projects.done.embassy.note":"Demo can be presented on-site.","projects.done.shop":"Bukhamsen Online Shop","resume.title":"Resume","resume.download":"Download PDF","resume.print":"Print / Save as PDF","resume.printPage":"Open print-friendly page","summary.title":"Professional Summary","summary.text":"Senior .NET Full Stack Developer with 15+ years delivering scalable, high-performance web, mobile, and cloud solutions. Proven leader in modernizing legacy systems, guiding teams, and driving digital transformation with clean architecture and business-driven outcomes.","exp.title":"Professional Experience","exp.efifty.title":"Senior Software Developer — Efifty Online, Bahrain (Nov 2019 – Present)","exp.efifty.li1":"Led cloud migration and digital transformation on Azure and GCP, increasing reliability by 25%.","exp.efifty.li2":"Designed and developed scalable banking and medical insurance systems.","exp.efifty.li3":"Built secure RESTful APIs for enterprise integrations and third-party partners.","exp.efifty.li4":"Delivered interactive dashboards and advanced reporting with Crystal Reports, DevExpress, and Kendo UI.","exp.efifty.li5":"Mentored junior developers and improved productivity through reviews and best practices.","exp.efifty.sdv.title":"Specialist & Manager — Software Development Values — Efifty Online, Bahrain (Dec 2020 – Present)","exp.efifty.sdv.li1":"Defined and promoted engineering values, coding standards, and review practices across delivery teams.","exp.efifty.sdv.li2":"Led initiatives to improve code quality, consistency, and maintainability aligned with business goals.","exp.efifty.sdv.li3":"Partnered with leadership to align development practices with organizational quality objectives.","exp.gulf.title":"Senior Programmer — Gulf University, Bahrain (Nov 2018 – Oct 2019)","exp.gulf.li1":"Automated academic and financial workflows.","exp.gulf.li2":"Migrated legacy systems to cloud-based web platforms with modern UI and reporting.","exp.gulf.li3":"Implemented analytics and reporting solutions that supported university leadership decisions.","exp.mls.title":"Senior Programmer — MLS Bahrain, Bahrain (Apr 2016 – Nov 2018)","exp.mls.li1":"Improved integration and reporting for enterprise clients in finance and healthcare.","exp.mls.li2":"Optimized queries and delivered dynamic reports with DevExpress/Crystal Reports.","exp.mls.li3":"Aligned product backlogs with compliance needs and business priorities.","exp.nhif.title":"Application Developer — National Health Insurance Fund, Sudan (Apr 2013 – Apr 2015)","exp.nhif.li1":"Developed insurance management systems serving 50,000+ users.","exp.nhif.li2":"Designed claims processing modules and custom reporting tools.","exp.nhif.li3":"Improved system stability and scalability for regional rollouts.","edu.title":"Education","edu.text":"B.Sc. in Information Technology — Sudan University of Science and Technology (2014)","ref.title":"References","ref.text":"Available upon request.","core.title":"Core Competencies","core.prog.k":"Programming:","core.prog.v":"C#, JavaScript","core.fw.k":"Frameworks:","core.fw.v":"ASP.NET Core, MVC, Web API, .NET MAUI","core.fe.k":"Front-End:","core.fe.v":"HTML5, CSS3, Bootstrap","core.db.k":"Database:","core.db.v":"SQL Server","core.cloud.k":"Cloud:","core.cloud.v":"GCP, Azure, AWS","core.tools.k":"Tools:","core.tools.v":"Kendo UI, DevExpress, Crystal Reports, Git, GitHub","core.prof.k":"Professional:","core.prof.v":"Clean Architecture & Code Quality, Agile, Team Leadership","domain.title":"Domain Expertise","domain.bank":"Banking Systems & Financial Solutions","domain.med":"Medical Insurance Systems & Claims Processing","domain.cloudpm":"Cloud Migration & Modernization","domain.integr":"Enterprise API Integration","domain.reports":"Business Intelligence & Reporting Solutions","contact.title":"Contact","contact.desc":"Best ways to reach me. Calls, WhatsApp, and email are welcome.","contact.call":"Call","contact.bh.label":"Bahrain","contact.sa.label":"Saudi Arabia","contact.note":"Available for relocation and remote opportunities.","footer.rights":"All rights reserved.","avatar.alt":"Portrait of eng mahdi","projects.details":"Details","projects.techUsed":"Technologies Used","contact.copyEmail":"Copy Email"},
+        "ar":{"skip":"تخطَّ إلى السيرة الذاتية","nav.about":"نبذة","nav.skills":"مهارات","nav.projects":"مشاريع","nav.resume":"السيرة الذاتية","nav.contact":"تواصل","nav.quicklinks":"روابط سريعة","hero.badge":"متاح للتعاون","hero.title":"مطوّر .NET متكامل — Senior","hero.desc":"مقيم في الحد – البحرين والدمام – السعودية مع خبرة تتجاوز 15 سنة في بناء حلول ويب وجوال وسحابة قابلة للتوسع وعالية الأداء.","hero.btn.resume":"عرض السيرة الذاتية","hero.btn.pdf":"تحميل PDF","hero.btn.contact":"للتواصل","quick.title":"ملخص سريع","quick.text":"أكثر من 15 سنة عبر تقنيات مايكروسوفت، هجرات السحابة، تكامل الـ API المؤسسي، وحلول التقارير.","stack.title":"التقنيات المفضّلة","stack.text":"ASP.NET Core, Web API, .NET MAUI, TypeScript, React, SQL Server, Azure/GCP.","about.title":"نبذة","about.text":"مطوّر ‎.NET‎ متكامل يقود تحديث الأنظمة القديمة، أتمتة العمليات، وقيادة الفرق عالية الأداء لقطاعات البنوك والتأمين الطبي.","skills.title":"مهارات مختارة","skill.arch":"معمارية نظيفة","skill.agile":"أجايل","skill.lead":"قيادة الفرق","projects.title":"مشاريع","projects.p1.title":"برنامج ترحيل السحابة والاعتمادية","projects.p2.title":"منصات البنوك والتأمين الطبي","projects.p3.title":"منظومة ذكاء الأعمال والتقارير","projects.repo":"المستودع","projects.demo":"تجريبي","projects.docs":"التوثيق","projects.packages":"الحِزم","projects.api.desc":"مناطق هبوط Azure وGCP مع نشرات مؤتمتة ورصد مستمر رفعت التوافرية 25% لحلول البنوك والتأمين.","projects.uikit.desc":"منصات تسجيل وفوترة ومطالبات معيارية بواجهات REST آمنة، وإدماج الشركاء، وتجارب مستخدم محدّثة عبر Kendo UI وDevExpress.","projects.tools.desc":"تقارير Crystal، لوحات DevExpress، وتحسينات SQL توفّر رؤى فورية وتوزيعاً آلياً لصانعي القرار.","projects.done.title":"مشاريع تم تنفيذها","projects.done.gulf":"جامعة الخليج","projects.done.ssi":"مراكز SSI لآلام الظهر والرقبة","projects.done.sudanknowledge":"سودان نوليدج","projects.done.wasd":"الجمعية العالمية للتنمية المستدامة","projects.done.b50":"مجموعات بخمسين (تطبيق B50)","projects.done.taqs":"شركة طقس","projects.done.embassy":"سفارة السودان في البحرين","projects.done.embassy.note":"يمكن تقديم العرض داخل الموقع (On-site).","projects.done.shop":"متجر بخمسين الإلكتروني","resume.title":"السيرة الذاتية","resume.download":"تحميل PDF","resume.print":"طباعة / حفظ PDF","resume.printPage":"صفحة مناسبة للطباعة","summary.title":"الملخص المهني","summary.text":"مطوّر ‎.NET‎ متكامل بخبرة تتجاوز 15 سنة في بناء حلول ويب وجوال وسحابة عالية الأداء. يقود تحديث الأنظمة، قيادة الفرق، والتحول الرقمي بمعمارية نظيفة وحلول موجهة للأعمال.","exp.title":"الخبرات العملية","exp.efifty.title":"مطوّر برمجيات أول — Efifty Online، البحرين (نوفمبر 2019 – حتى الآن)","exp.efifty.li1":"قيادة هجرات Azure وGCP والتحول الرقمي مما رفع الاعتمادية 25%.","exp.efifty.li2":"تصميم وتطوير أنظمة مصرفية وتأمين طبي قابلة للتوسع.","exp.efifty.li3":"بناء واجهات REST آمنة للتكامل المؤسسي والشركاء الخارجيين.","exp.efifty.li4":"تسليم لوحات وتقارير تفاعلية عبر Crystal Reports وDevExpress وKendo UI.","exp.efifty.li5":"إرشاد الفرق وتحسين الإنتاجية عبر المراجعات وأفضل الممارسات.","exp.efifty.sdv.title":"أخصائي ومدير — قيم التطوير البرمجي — Efifty Online، البحرين (ديسمبر 2020 – حتى الآن)","exp.efifty.sdv.li1":"وضع وتعزيز قيم الهندسة ومعايير الشيفرة وممارسات المراجعة عبر فرق التسليم.","exp.efifty.sdv.li2":"قيادة مبادرات لتحسين جودة الشيفرة واتساقها وقابلية صيانتها بما يتوافق مع أهداف العمل.","exp.efifty.sdv.li3":"التعاون مع الإدارة لمواءمة ممارسات التطوير مع أهداف الجودة المؤسسية.","exp.gulf.title":"مبرمج أول — جامعة الخليج، البحرين (نوفمبر 2018 – أكتوبر 2019)","exp.gulf.li1":"أتمتة الإجراءات الأكاديمية والمالية.","exp.gulf.li2":"ترحيل الأنظمة القديمة إلى منصات ويب سحابية بواجهات حديثة.","exp.gulf.li3":"تنفيذ حلول تحليلات وتقارير دعمت قرارات قيادة الجامعة.","exp.mls.title":"مبرمج أول — MLS Bahrain، البحرين (أبريل 2016 – نوفمبر 2018)","exp.mls.li1":"تحسين التكامل والتقارير لعملاء قطاعات المالية والرعاية الصحية.","exp.mls.li2":"تحسين الاستعلامات وتقديم تقارير ديناميكية عبر DevExpress/Crystal Reports.","exp.mls.li3":"مواءمة الأولويات مع المتتبعات التنظيمية واحتياجات العمل.","exp.nhif.title":"مطوّر تطبيقات — الصندوق القومي للتأمين الصحي، السودان (أبريل 2013 – أبريل 2015)","exp.nhif.li1":"تطوير أنظمة تأمين تخدم أكثر من 50,000 مستفيد.","exp.nhif.li2":"تصميم وحدات معالجة المطالبات وأدوات التقارير.","exp.nhif.li3":"تعزيز استقرار المنظومة وقابلية التوسع على مستوى الأقاليم.","edu.title":"التعليم","edu.text":"بكالوريوس تقنية المعلومات — جامعة السودان للعلوم والتكنولوجيا (2014)","ref.title":"المراجع","ref.text":"متاحة عند الطلب.","core.title":"الكفاءات الأساسية","core.prog.k":"البرمجة:","core.prog.v":"C#‎، JavaScript","core.fw.k":"الأطر:","core.fw.v":"ASP.NET Core، MVC، Web API، ‎.NET MAUI","core.fe.k":"واجهات المستخدم:","core.fe.v":"HTML5، CSS3، Bootstrap","core.db.k":"قواعد البيانات:","core.db.v":"SQL Server","core.cloud.k":"السحابة:","core.cloud.v":"GCP، Azure، AWS","core.tools.k":"الأدوات:","core.tools.v":"Kendo UI، DevExpress، Crystal Reports، Git، GitHub","core.prof.k":"المهني:","core.prof.v":"معمارية نظيفة وجودة الشيفرة، أجايل، قيادة الفرق","domain.title":"خبرات المجال","domain.bank":"أنظمة مصرفية وحلول مالية","domain.med":"أنظمة التأمين الطبي ومعالجة المطالبات","domain.cloudpm":"هجرات السحابة وتحديث الأنظمة","domain.integr":"تكامل واجهات API المؤسسية","domain.reports":"ذكاء الأعمال وحلول التقارير","contact.title":"التواصل","contact.desc":"أفضل طرق للتواصل. مكالمات، واتساب، وبريد.","contact.call":"اتصال","contact.bh.label":"البحرين","contact.sa.label":"السعودية","contact.note":"متاح للانتقال والعمل عن بعد.","footer.rights":"جميع الحقوق محفوظة.","avatar.alt":"صورة شخصية لـ eng mahdi","projects.details":"التفاصيل","projects.techUsed":"التقنيات المستخدمة","contact.copyEmail":"نسخ البريد الإلكتروني"}
       };
 
       function applyLang(lang){
@@ -1356,6 +1567,15 @@
 
         langSelect.value = normalizedLang;
         localStorage.setItem(langKey, normalizedLang);
+
+        // Reset and trigger typewriter
+        currentLang = normalizedLang;
+        currentWordIdx = 0;
+        currentLetterIdx = 0;
+        isDeleting = false;
+        if (typeof runTypewriter === 'function') {
+          runTypewriter();
+        }
       }
 
       const storedLang = localStorage.getItem(langKey);
@@ -1470,6 +1690,236 @@
           closeMenu();
         }
       });
+      // --- Card Mouse Glow Effect ---
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+
+      // --- Bilingual Typewriter Effect ---
+      const typewriterWords = {
+        en: [
+          "Senior .NET Full Stack Developer",
+          "Cloud & Modernization Leader",
+          "Enterprise API Architect",
+          "Database & Reports Specialist"
+        ],
+        ar: [
+          "مطوّر .NET متكامل — Senior",
+          "قائد هجرات وتحديث السحابة",
+          "مهندس معماري لواجهات الـ APIs",
+          "خبير تقارير وذكاء أعمال"
+        ]
+      };
+
+
+      function runTypewriter() {
+        if (typewriterTimeout) clearTimeout(typewriterTimeout);
+        const el = document.getElementById('typewriter');
+        if (!el) return;
+
+        const words = typewriterWords[currentLang] || typewriterWords.en;
+        const currentFullWord = words[currentWordIdx % words.length];
+
+        if (isDeleting) {
+          el.textContent = currentFullWord.substring(0, currentLetterIdx - 1);
+          currentLetterIdx--;
+        } else {
+          el.textContent = currentFullWord.substring(0, currentLetterIdx + 1);
+          currentLetterIdx++;
+        }
+
+        let typingSpeed = isDeleting ? 35 : 70;
+
+        if (!isDeleting && currentLetterIdx === currentFullWord.length) {
+          typingSpeed = 2000;
+          isDeleting = true;
+        } else if (isDeleting && currentLetterIdx === 0) {
+          isDeleting = false;
+          currentWordIdx++;
+          typingSpeed = 500;
+        }
+
+        typewriterTimeout = setTimeout(runTypewriter, typingSpeed);
+      }
+      runTypewriter();
+
+      // --- Clipboard Copy & Toast ---
+      function showToast(message) {
+        const toast = document.getElementById('toast');
+        const msgEl = document.getElementById('toast-message');
+        if (!toast || !msgEl) return;
+        msgEl.textContent = message;
+        toast.hidden = false;
+        setTimeout(() => toast.classList.add('show'), 10);
+        
+        setTimeout(() => {
+          toast.classList.remove('show');
+          setTimeout(() => { toast.hidden = true; }, 300);
+        }, 3000);
+      }
+
+      document.querySelectorAll('[data-copy]').forEach(el => {
+        el.addEventListener('click', () => {
+          const text = el.getAttribute('data-copy');
+          navigator.clipboard.writeText(text).then(() => {
+            const isAr = root.getAttribute('lang') === 'ar';
+            const msg = isAr ? 'تم النسخ إلى الحافظة!' : 'Copied to clipboard!';
+            showToast(msg);
+          }).catch(err => {
+            console.error('Failed to copy: ', err);
+          });
+        });
+      });
+
+      // --- Project Details Modal Dialog ---
+      const projectDetails = {
+        en: {
+          p1: {
+            title: "Cloud Migration & Reliability Program",
+            desc: "Designed and implemented robust multi-cloud landing zones across Microsoft Azure and Google Cloud Platform. Automated infrastructure provisioning using Terraform and CI/CD pipelines. Integrated comprehensive APM and distributed tracing for full observability.",
+            bullets: [
+              "Raised application availability by 25% for regulated banking workloads.",
+              "Reduced deployment time from days to minutes through automated blue-green pipelines.",
+              "Implemented disaster recovery drills reducing RTO by 40%."
+            ],
+            tech: ["Azure", "GCP", "Terraform", "Docker", "GitHub Actions", "Prometheus", "Grafana"]
+          },
+          p2: {
+            title: "Banking & Medical Insurance Platforms",
+            desc: "Built scalable core enrollment, claims, and monthly billing engines. Used Clean Architecture principles to keep the code modular and easily testable. Developed secure partner onboarding APIs.",
+            bullets: [
+              "Integrated with national health insurance databases and banking gateways.",
+              "Modernized user interfaces using Kendo UI and DevExpress components.",
+              "Handled 50,000+ monthly active users and millions of financial records."
+            ],
+            tech: ["C#", "ASP.NET Core", "SQL Server", "DevExpress", "Kendo UI", "Clean Architecture"]
+          },
+          p3: {
+            title: "Business Intelligence & Reporting Suite",
+            desc: "Engineered automated reporting solutions utilizing Crystal Reports and DevExpress dashboards. Optimized complex relational database schema and stored procedures to handle high-volume reporting query requests.",
+            bullets: [
+              "Created scheduled report distribution systems using background workers.",
+              "Reduced dashboard query response time by 60% through SQL indexing.",
+              "Provided executive leadership with real-time analytics dashboards."
+            ],
+            tech: ["SQL Server", "Crystal Reports", "DevExpress", "ASP.NET Core", "C#", "SQL Profiler"]
+          }
+        },
+        ar: {
+          p1: {
+            title: "برنامج ترحيل السحابة والاعتمادية",
+            desc: "تصميم وتنفيذ مناطق هبوط سحابية قوية ومتعددة عبر منصات Microsoft Azure و Google Cloud Platform. أتمتة تهيئة البنية التحتية باستخدام Terraform ومسارات التطوير المستمر (CI/CD)، ودمج نظام رصد شامل ومراقبة الأداء.",
+            bullets: [
+              "رفع نسبة توافرية التطبيقات بنسبة 25% للأنظمة البنكية الخاضعة للوائح التنظيمية.",
+              "تقليل وقت النشر من أيام إلى دقائق عبر مسارات النشر التلقائي (Blue-Green).",
+              "تنفيذ اختبارات استعادة البيانات بعد الكوارث وتقليل وقت استعادة العمليات (RTO) بنسبة 40%."
+            ],
+            tech: ["Azure", "GCP", "Terraform", "Docker", "GitHub Actions", "Prometheus", "Grafana"]
+          },
+          p2: {
+            title: "منصات البنوك والتأمين الطبي",
+            desc: "بناء أنظمة معالجة التسجيل، المطالبات، والفوترة الشهرية. استخدام مبادئ هندسة البرمجيات النظيفة (Clean Architecture) لضمان سهولة الفحص وتعديل الكود البرمجي، مع واجهات برمجية آمنة لربط الشركاء.",
+            bullets: [
+              "الربط الكامل والتكامل مع قواعد بيانات التأمين الصحي الوطنية وبوابات الدفع البنكية.",
+              "تحديث واجهات المستخدم باستخدام عناصر ومكتبات Kendo UI و DevExpress.",
+              "خدمة أكثر من 50,000 مستخدم نشط شهرياً والتعامل مع ملايين السجلات المالية."
+            ],
+            tech: ["C#", "ASP.NET Core", "SQL Server", "DevExpress", "Kendo UI", "Clean Architecture"]
+          },
+          p3: {
+            title: "منظومة ذكاء الأعمال والتقارير",
+            desc: "تتطور حلول تقارير مؤتمتة باستخدام Crystal Reports ولوحات معلومات DevExpress. تحسين هياكل قواعد البيانات المعقدة والإجراءات المخزنة (Stored Procedures) لتلبية استعلامات التقارير الضخمة.",
+            bullets: [
+              "إنشاء أنظمة توزيع تقارير مجدولة آلياً عبر خوادم خلفية مخصصة.",
+              "تقليل زمن استجابة لوحات البيانات بنسبة 60% بفضل الفهرسة الذكية لاستعلامات SQL.",
+              "توفير لوحات معلومات فورية لإدارة الجامعة والشركاء لاتخاذ القرارات."
+            ],
+            tech: ["SQL Server", "Crystal Reports", "DevExpress", "ASP.NET Core", "C#", "SQL Profiler"]
+          }
+        }
+      };
+
+      const pDialog = document.getElementById('project-dialog');
+      const pCloseBtn = document.getElementById('close-modal');
+      const pModalTitle = document.getElementById('modal-title');
+      const pModalDesc = document.getElementById('modal-desc');
+      const pModalBullets = document.getElementById('modal-bullets');
+      const pModalTech = document.getElementById('modal-tech');
+      const pOutcomesTitle = document.getElementById('modal-outcomes-title');
+
+      function openProjectDetails(projectId) {
+        if (!pDialog) return;
+        const lang = root.getAttribute('lang') || 'en';
+        const details = projectDetails[lang]?.[projectId] || projectDetails.en[projectId];
+        if (!details) return;
+
+        pModalTitle.textContent = details.title;
+        pModalDesc.textContent = details.desc;
+        pOutcomesTitle.textContent = lang === 'ar' ? 'النتائج الرئيسية:' : 'Key Outcomes:';
+
+        pModalBullets.innerHTML = '';
+        details.bullets.forEach(bullet => {
+          const li = document.createElement('li');
+          li.textContent = bullet;
+          pModalBullets.appendChild(li);
+        });
+
+        pModalTech.innerHTML = '';
+        details.tech.forEach(t => {
+          const chip = document.createElement('span');
+          chip.className = 'chip';
+          chip.textContent = t;
+          pModalTech.appendChild(chip);
+        });
+
+        pDialog.showModal();
+      }
+
+      document.querySelectorAll('.open-details-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-project-id');
+          openProjectDetails(id);
+        });
+      });
+
+      if (pCloseBtn) {
+        pCloseBtn.addEventListener('click', () => pDialog.close());
+      }
+      if (pDialog) {
+        pDialog.addEventListener('click', (e) => {
+          const rect = pDialog.getBoundingClientRect();
+          const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height
+            && rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+          if (!isInDialog) {
+            pDialog.close();
+          }
+        });
+      }
+
+      // --- Scroll Reveal Animation ---
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('main section, .card').forEach(el => {
+        if (!el.closest('.hero')) {
+          el.classList.add('reveal-item');
+          revealObserver.observe(el);
+        }
+      });
+
     })();
   </script>
 </body>
